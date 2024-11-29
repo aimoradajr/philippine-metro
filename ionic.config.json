@@ -1,0 +1,7 @@
+{
+  "name": "Philippine Metro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
