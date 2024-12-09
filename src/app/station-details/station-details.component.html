@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ station?.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img
+    [src]="station?.image"
+    style="max-height: 50%; object-fit: cover; width: 100%"
+  ></ion-img>
+  <p>{{ station?.description }}</p>
+  <ion-button expand="full" (click)="getDirections(station)">
+    Get Directions
+  </ion-button>
+  <!-- Additional content and buttons -->
+</ion-content>

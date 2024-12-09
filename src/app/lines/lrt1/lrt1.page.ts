@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular/standalone';
 import {
   IonContent,
   IonHeader,
@@ -14,6 +15,7 @@ import {
   IonItem,
   IonMenuButton,
 } from '@ionic/angular/standalone';
+import { StationDetailsComponent } from '../../station-details/station-details.component';
 
 @Component({
   selector: 'app-lrt1',
@@ -247,4 +249,16 @@ export class LRT1Page {
         'Planned as the final station of the LRT-1 extension, located in Bacoor, Cavite.',
     },
   ];
+
+  constructor(private modalController: ModalController) {}
+
+  async openStationDetails(station: any) {
+    const modal = await this.modalController.create({
+      component: StationDetailsComponent,
+      componentProps: { station },
+      // enterAnimation: this.slideInAnimation,
+      // leaveAnimation: this.slideOutAnimation,
+    });
+    await modal.present();
+  }
 }

@@ -14,7 +14,10 @@
     </ion-list-header>
 
     <!-- Display Each Station -->
-    <ion-item *ngFor="let station of stations">
+    <ion-item
+      *ngFor="let station of stations"
+      (click)="openStationDetails(station)"
+    >
       <ion-thumbnail slot="start">
         <img [src]="station.image" alt="{{ station.name }}" />
       </ion-thumbnail>
