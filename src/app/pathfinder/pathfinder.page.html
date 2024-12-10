@@ -74,8 +74,8 @@
     Find Best Path
   </ion-button>
 
-  <div *ngIf="calculatedPath.length > 0">
+  <div *ngIf="calculatedPath">
     <h3>Best Path:</h3>
-    <p>{{ calculatedPath.join(' -> ') }}</p>
+    <p>{{ calculatedPath | json }}</p>
   </div>
 </ion-content>

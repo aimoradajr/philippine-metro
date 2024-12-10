@@ -1,436 +1,1069 @@
-export const TRANSIT_LINES = [
+interface Edge {
+  from?: string;
+  to: string;
+  weight: number;
+  transferType?: 'inter-station' | 'inter-line' | 'inter-modal';
+  isOperational: boolean;
+  transferDescription?: string;
+  transferDistance?: string;
+  accessibility?: string;
+  additionalCost?: string;
+  direction?: string; // northbound, southbound, eastbound, westbound, clockwise, counterclockwise
+}
+
+interface Station {
+  id: number;
+  code: string;
+  name: string;
+  isOperational: boolean;
+  image?: string;
+  description?: string;
+  edges?: Edge[];
+}
+
+interface TransitLine {
+  name: string;
+  code: string;
+  stations: Station[];
+}
+
+export const TRANSIT_LINES: TransitLine[] = [
   {
     name: 'LRT 1',
-    code: 'lrt1',
+    code: 'LRT1',
     stations: [
-      // LRT-1 Stations
       {
         id: 1,
-        code: 'lrt1_roosevelt',
+        code: 'LRT1_FPJ',
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
         isOperational: true,
-        image: 'assets/stations/fernando-poe-jr.jpg',
+        image: 'assets/stations/fernando_poe_jr.jpg',
         description:
           'Northern terminus of LRT-1, serving the Muñoz area in Quezon City.',
+        edges: [{ to: 'LRT1_BALINTAWAK', weight: 5, isOperational: true }],
       },
       {
         id: 2,
+        code: 'LRT1_BALINTAWAK',
         name: 'Balintawak',
         isOperational: true,
         image: 'assets/stations/balintawak.jpg',
-        description: 'Provides access to the Balintawak Market and EDSA.',
+        description: 'Located in Quezon City, near Balintawak Market.',
+        edges: [
+          { to: 'LRT1_FPJ', weight: 5, isOperational: true },
+          { to: 'LRT1_MONUMENTO', weight: 4, isOperational: true },
+        ],
       },
       {
         id: 3,
+        code: 'LRT1_MONUMENTO',
         name: 'Monumento',
         isOperational: true,
         image: 'assets/stations/monumento.jpg',
-        description: 'Major hub near the Bonifacio Monument in Caloocan.',
+        description:
+          'A major station in Caloocan City, near the Bonifacio Monument.',
+        edges: [
+          { to: 'LRT1_BALINTAWAK', weight: 4, isOperational: true },
+          { to: 'LRT1_5TH_AVENUE', weight: 3, isOperational: true },
+        ],
       },
       {
         id: 4,
+        code: 'LRT1_5TH_AVENUE',
         name: '5th Avenue',
         isOperational: true,
-        image: 'assets/stations/5th-avenue.jpg',
-        description: 'Serves the Grace Park area in Caloocan.',
+        image: 'assets/stations/5th_avenue.jpg',
+        description: 'Located in Caloocan City, near 5th Avenue.',
+        edges: [
+          { to: 'LRT1_MONUMENTO', weight: 3, isOperational: true },
+          { to: 'LRT1_R_PAPA', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 5,
+        code: 'LRT1_R_PAPA',
         name: 'R. Papa',
         isOperational: true,
-        image: 'assets/stations/r-papa.jpg',
-        description: 'Located near the Philippine Cultural College in Manila.',
+        image: 'assets/stations/r_papa.jpg',
+        description: 'Situated in Manila, near R. Papa Street.',
+        edges: [
+          { to: 'LRT1_5TH_AVENUE', weight: 2, isOperational: true },
+          { to: 'LRT1_ABAD_SANTOS', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 6,
+        code: 'LRT1_ABAD_SANTOS',
         name: 'Abad Santos',
         isOperational: true,
-        image: 'assets/stations/abad-santos.jpg',
-        description: 'Close to the Manila Chinese Cemetery.',
+        image: 'assets/stations/abad_santos.jpg',
+        description: 'Located in Manila, near Abad Santos Avenue.',
+        edges: [
+          { to: 'LRT1_R_PAPA', weight: 2, isOperational: true },
+          { to: 'LRT1_BLUMENTRITT', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 7,
+        code: 'LRT1_BLUMENTRITT',
         name: 'Blumentritt',
         isOperational: true,
         image: 'assets/stations/blumentritt.jpg',
-        description: 'Near Blumentritt Market and PNR station.',
+        description: 'A station in Manila, near Blumentritt Road.',
+        edges: [
+          { to: 'LRT1_ABAD_SANTOS', weight: 2, isOperational: true },
+          { to: 'LRT1_TAYUMAN', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 8,
+        code: 'LRT1_TAYUMAN',
         name: 'Tayuman',
         isOperational: true,
         image: 'assets/stations/tayuman.jpg',
-        description: 'Serves the Tayuman area in Manila.',
+        description: 'Located in Manila, near Tayuman Street.',
+        edges: [
+          { to: 'LRT1_BLUMENTRITT', weight: 2, isOperational: true },
+          { to: 'LRT1_BAMBANG', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 9,
+        code: 'LRT1_BAMBANG',
         name: 'Bambang',
         isOperational: true,
         image: 'assets/stations/bambang.jpg',
-        description: 'Close to medical institutions in Manila.',
+        description: 'Situated in Manila, near Bambang Street.',
+        edges: [
+          { to: 'LRT1_TAYUMAN', weight: 2, isOperational: true },
+          { to: 'LRT1_DOROTEO_JOSE', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 10,
+        code: 'LRT1_DOROTEO_JOSE',
         name: 'Doroteo Jose',
         isOperational: true,
-        image: 'assets/stations/doroteo-jose.jpg',
-        description: 'Interchange station with LRT-2 Recto Station.',
+        image: 'assets/stations/doroteo_jose.jpg',
+        description: 'A major transfer point in Manila, connecting to LRT-2.',
+        edges: [
+          { to: 'LRT1_BAMBANG', weight: 2, isOperational: true },
+          { to: 'LRT1_CARRIEDO', weight: 2, isOperational: true },
+          {
+            from: 'LRT1_DOROTEO_JOSE',
+            to: 'LRT2_RECTO',
+            weight: 2,
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription: 'Connected via an elevated walkway.',
+            transferDistance: 'Approximately 2-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'Separate fare required',
+            direction: 'northbound', // Assuming Recto is northbound relative to LRT-1 Doroteo Jose
+          },
+        ],
       },
       {
         id: 11,
+        code: 'LRT1_CARRIEDO',
         name: 'Carriedo',
         isOperational: true,
         image: 'assets/stations/carriedo.jpg',
-        description: 'Near Quiapo Church and market.',
+        description: 'Located in Manila, near Carriedo Street.',
+        edges: [
+          { to: 'LRT1_DOROTEO_JOSE', weight: 2, isOperational: true },
+          { to: 'LRT1_CENTRAL_TERMINAL', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 12,
+        code: 'LRT1_CENTRAL_TERMINAL',
         name: 'Central Terminal',
         isOperational: true,
-        image: 'assets/stations/central-terminal.jpg',
-        description: 'Access to Manila City Hall and Mehan Garden.',
+        image: 'assets/stations/central_terminal.jpg',
+        description: 'Situated in Manila, near the Manila City Hall.',
+        edges: [
+          { to: 'LRT1_CARRIEDO', weight: 2, isOperational: true },
+          { to: 'LRT1_UN_AVENUE', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 13,
+        code: 'LRT1_UN_AVENUE',
         name: 'United Nations (UN) Avenue',
         isOperational: true,
-        image: 'assets/stations/un-avenue.jpg',
-        description: 'Close to the Supreme Court and Rizal Park.',
+        image: 'assets/stations/un_avenue.jpg',
+        description: 'Located in Manila, near the United Nations Avenue.',
+        edges: [
+          { to: 'LRT1_CENTRAL_TERMINAL', weight: 2, isOperational: true },
+          { to: 'LRT1_PEDRO_GIL', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 14,
+        code: 'LRT1_PEDRO_GIL',
         name: 'Pedro Gil',
         isOperational: true,
-        image: 'assets/stations/pedro-gil.jpg',
-        description: 'Near Robinsons Place Manila and UP Manila.',
+        image: 'assets/stations/pedro_gil.jpg',
+        description:
+          'Situated in Ermita, Manila, near Pedro Gil Street. Nearby landmarks include Robinsons Place Manila and the University of the Philippines Manila.',
+        edges: [
+          { to: 'LRT1_UN_AVENUE', weight: 2, isOperational: true }, // Northbound
+          { to: 'LRT1_QUIRINO', weight: 2, isOperational: true }, // Southbound
+        ],
       },
       {
         id: 15,
+        code: 'LRT1_QUIRINO',
         name: 'Quirino',
         isOperational: true,
         image: 'assets/stations/quirino.jpg',
-        description: 'Serves the Malate area in Manila.',
+        description: 'Located in Manila, near Quirino Avenue.',
+        edges: [
+          { to: 'LRT1_PEDRO_GIL', weight: 2, isOperational: true },
+          { to: 'LRT1_VITO_CRUZ', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 16,
+        code: 'LRT1_VITO_CRUZ',
         name: 'Vito Cruz',
         isOperational: true,
-        image: 'assets/stations/vito-cruz.jpg',
-        description:
-          'Near De La Salle University and Cultural Center of the Philippines.',
+        image: 'assets/stations/vito_cruz.jpg',
+        description: 'Situated in Manila, near Vito Cruz Street.',
+        edges: [
+          { to: 'LRT1_QUIRINO', weight: 2, isOperational: true },
+          { to: 'LRT1_GIL_PUYAT', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 17,
-        name: 'Gil Puyat (Buendia)',
+        code: 'LRT1_GIL_PUYAT',
+        name: 'Gil Puyat',
         isOperational: true,
-        image: 'assets/stations/gil-puyat.jpg',
-        description:
-          'Close to World Trade Center and Cartimar Shopping Center.',
+        image: 'assets/stations/gil_puyat.jpg',
+        description: 'Located in Pasay City, near Gil Puyat Avenue.',
+        edges: [
+          { to: 'LRT1_VITO_CRUZ', weight: 2, isOperational: true },
+          { to: 'LRT1_LIBERTAD', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 18,
+        code: 'LRT1_LIBERTAD',
         name: 'Libertad',
         isOperational: true,
         image: 'assets/stations/libertad.jpg',
-        description: 'Near Pasay City Hall and Pasay Public Market.',
+        description: 'Situated in Pasay City, near Libertad Street.',
+        edges: [
+          { to: 'LRT1_GIL_PUYAT', weight: 2, isOperational: true },
+          { to: 'LRT1_EDSA', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 19,
+        code: 'LRT1_EDSA',
         name: 'EDSA',
         isOperational: true,
         image: 'assets/stations/edsa.jpg',
-        description: 'Interchange with MRT-3 at Taft Avenue Station.',
+        description:
+          'Located in Pasay City, near the intersection of Taft Avenue and Epifanio de los Santos Avenue (EDSA).',
+        edges: [
+          { to: 'LRT1_LIBERTAD', weight: 2, isOperational: true },
+          { to: 'LRT1_BACLARAN', weight: 2, isOperational: true },
+          {
+            from: 'LRT1_EDSA',
+            to: 'MRT3_TAFT_AVENUE',
+            weight: 5, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription: 'Connected via a covered footbridge.',
+            transferDistance: 'Approximately a 5-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'Separate fare required',
+            direction: 'northbound', // Assuming MRT-3 Taft Avenue is northbound relative to LRT-1 EDSA
+          },
+        ],
       },
       {
         id: 20,
+        code: 'LRT1_BACLARAN',
         name: 'Baclaran',
         isOperational: true,
         image: 'assets/stations/baclaran.jpg',
         description:
-          'Southern terminus of LRT-1, near Baclaran Church and market.',
+          'Southern terminus of the original LRT-1 line, located in Parañaque City.',
+        edges: [
+          { to: 'LRT1_EDSA', weight: 2, isOperational: true },
+          { to: 'LRT1_REDEMPTORIST', weight: 3, isOperational: true },
+        ],
       },
-      // LRT-1 Extension Stations
+      // Newly operational stations from the Cavite Extension Phase 1
       {
         id: 21,
-        name: 'Redemptorist-Aseana',
+        code: 'LRT1_REDEMPTORIST',
+        name: 'Redemptorist',
         isOperational: true,
-        image: 'assets/stations/redemptorist-aseana.jpg',
-        description:
-          'Located in Parañaque City, this station serves the Aseana City complex and nearby areas.',
+        image: 'assets/stations/redemptorist.jpg',
+        description: 'Located in Parañaque City, near the Redemptorist Church.',
+        edges: [
+          { to: 'LRT1_BACLARAN', weight: 3, isOperational: true },
+          { to: 'LRT1_MIA', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 22,
-        name: 'MIA Road',
+        code: 'LRT1_MIA',
+        name: 'MIA',
         isOperational: true,
-        image: 'assets/stations/mia-road.jpg',
+        image: 'assets/stations/mia.jpg',
         description:
-          'Situated near the Ninoy Aquino International Airport, providing access to airport facilities.',
+          'Situated near the Ninoy Aquino International Airport (NAIA) complex.',
+        edges: [
+          { to: 'LRT1_REDEMPTORIST', weight: 2, isOperational: true },
+          { to: 'LRT1_ASIA_WORLD', weight: 3, isOperational: true },
+        ],
       },
       {
         id: 23,
-        name: 'Asia World (PITX)',
+        code: 'LRT1_ASIA_WORLD',
+        name: 'Asia World',
         isOperational: true,
-        image: 'assets/stations/asia-world.jpg',
+        image: 'assets/stations/asia_world.jpg',
         description:
-          'Connected to the Parañaque Integrated Terminal Exchange (PITX), facilitating seamless transfers between different modes of transportation.',
+          'Located in Parañaque City, near the Asia World City complex.',
+        edges: [
+          { to: 'LRT1_MIA', weight: 3, isOperational: true },
+          { to: 'LRT1_NINOY_AQUINO', weight: 2, isOperational: true },
+        ],
       },
       {
         id: 24,
+        code: 'LRT1_NINOY_AQUINO',
         name: 'Ninoy Aquino',
         isOperational: true,
-        image: 'assets/stations/ninoy-aquino.jpg',
-        description:
-          'Serves the Ninoy Aquino Avenue area, enhancing connectivity for commuters.',
+        image: 'assets/stations/ninoy_aquino.jpg',
+        description: 'Situated along Ninoy Aquino Avenue in Parañaque City.',
+        edges: [
+          { to: 'LRT1_ASIA_WORLD', weight: 2, isOperational: true },
+          { to: 'LRT1_DR_SANTOS', weight: 3, isOperational: true },
+        ],
       },
       {
         id: 25,
-        name: 'Dr. Santos (formerly Sucat)',
+        code: 'LRT1_DR_SANTOS',
+        name: 'Dr. Santos',
         isOperational: true,
-        image: 'assets/stations/dr-santos.jpg',
-        description:
-          'Located along Dr. Santos Avenue, providing access to the Sucat area in Parañaque City.',
+        image: 'assets/stations/dr_santos.jpg',
+        description: 'Located in Parañaque City, near Dr. Santos Avenue.',
+        edges: [
+          { to: 'LRT1_NINOY_AQUINO', weight: 3, isOperational: true },
+          // Future connection to LRT1_MANILA_CAVITE_TOLL
+        ],
       },
+      // Future stations (Cavite Extension Phases 2 and 3)
       {
         id: 26,
-        name: 'Las Piñas',
+        code: 'LRT1_MANILA_CAVITE_TOLL',
+        name: 'Manila-Cavite Toll',
         isOperational: false,
-        image: 'assets/stations/las-pinas.jpg',
-        description: 'Future station planned to serve the Las Piñas City area.',
+        image: 'assets/stations/manila_cavite_toll.jpg',
+        description: 'Planned station along the Manila-Cavite Toll Expressway.',
+        edges: [
+          { to: 'LRT1_DR_SANTOS', weight: 4, isOperational: true },
+          { to: 'LRT1_LAS_PINAS', weight: 3, isOperational: true },
+        ],
       },
       {
         id: 27,
+        code: 'LRT1_LAS_PINAS',
+        name: 'Las Piñas',
+        isOperational: false,
+        image: 'assets/stations/las_pinas.jpg',
+        description: 'Planned station in Las Piñas City.',
+        edges: [
+          { to: 'LRT1_MANILA_CAVITE_TOLL', weight: 3, isOperational: true },
+          { to: 'LRT1_ZAPOTE', weight: 3, isOperational: true },
+        ],
+      },
+      {
+        id: 28,
+        code: 'LRT1_ZAPOTE',
         name: 'Zapote',
         isOperational: false,
         image: 'assets/stations/zapote.jpg',
         description:
-          'Upcoming station intended to serve the Zapote district, enhancing connectivity to Bacoor, Cavite.',
+          'Planned station near the Zapote area, serving both Las Piñas and Bacoor.',
+        edges: [
+          { to: 'LRT1_LAS_PINAS', weight: 3, isOperational: true },
+          { to: 'LRT1_NIOG', weight: 4, isOperational: true },
+        ],
       },
       {
-        id: 28,
+        id: 29,
+        code: 'LRT1_NIOG',
         name: 'Niog',
         isOperational: false,
         image: 'assets/stations/niog.jpg',
         description:
-          'Planned as the final station of the LRT-1 extension, located in Bacoor, Cavite.',
+          'Planned southern terminus of the LRT-1 extension, located in Bacoor, Cavite.',
+        edges: [{ to: 'LRT1_ZAPOTE', weight: 4, isOperational: true }],
       },
     ],
   },
   {
     name: 'LRT 2',
-    code: 'lrt2',
+    code: 'LRT2',
     stations: [
       {
         id: 1,
-        name: 'Recto',
+        code: 'LRT2_ANTIPOLO',
+        name: 'Antipolo',
         isOperational: true,
-        image: 'assets/stations/recto.jpg',
-        description:
-          'Western terminus of LRT-2, located near the University Belt in Manila.',
+        image: 'assets/stations/antipolo.jpg',
+        description: 'Eastern terminus of LRT-2, located in Antipolo, Rizal.',
+        edges: [
+          {
+            from: 'LRT2_ANTIPOLO',
+            to: 'LRT2_MARIKINA',
+            weight: 4,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Marikina station.',
+            transferDistance: 'Approximately 4 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
       },
       {
         id: 2,
-        name: 'Legarda',
+        code: 'LRT2_MARIKINA',
+        name: 'Marikina',
         isOperational: true,
-        image: 'assets/stations/legarda.jpg',
-        description:
-          'Situated in Sampaloc, Manila, close to several educational institutions.',
+        image: 'assets/stations/marikina.jpg',
+        description: 'Located in Marikina City, near major commercial areas.',
+        edges: [
+          {
+            from: 'LRT2_MARIKINA',
+            to: 'LRT2_ANTIPOLO',
+            weight: 4,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Antipolo station.',
+            transferDistance: 'Approximately 4 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_MARIKINA',
+            to: 'LRT2_SANTOLAN',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Santolan station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
       },
       {
         id: 3,
-        name: 'Pureza',
-        isOperational: true,
-        image: 'assets/stations/pureza.jpg',
-        description:
-          'Located in Santa Mesa, Manila, near the Polytechnic University of the Philippines.',
-      },
-      {
-        id: 4,
-        name: 'V. Mapa',
-        isOperational: true,
-        image: 'assets/stations/v_mapa.jpg',
-        description:
-          'Found in Santa Mesa, Manila, providing access to various commercial establishments.',
-      },
-      {
-        id: 5,
-        name: 'J. Ruiz',
-        isOperational: true,
-        image: 'assets/stations/j_ruiz.jpg',
-        description:
-          'Located in San Juan City, serving the Pinaglabanan Shrine area.',
-      },
-      {
-        id: 6,
-        name: 'Gilmore',
-        isOperational: true,
-        image: 'assets/stations/gilmore.jpg',
-        description:
-          'Situated in Quezon City, known for its proximity to electronics shops.',
-      },
-      {
-        id: 7,
-        name: 'Betty Go-Belmonte',
-        isOperational: true,
-        image: 'assets/stations/betty_go_belmonte.jpg',
-        description: 'Located in Quezon City, near various residential areas.',
-      },
-      {
-        id: 8,
-        name: 'Araneta Center-Cubao',
-        isOperational: true,
-        image: 'assets/stations/araneta_center_cubao.jpg',
-        description:
-          'A major transfer point in Quezon City, connecting to LRT-2 and MRT-3.',
-      },
-      {
-        id: 9,
-        name: 'Anonas',
-        isOperational: true,
-        image: 'assets/stations/anonas.jpg',
-        description:
-          'Found in Quezon City, near several commercial establishments.',
-      },
-      {
-        id: 10,
-        name: 'Katipunan',
-        isOperational: true,
-        image: 'assets/stations/katipunan.jpg',
-        description:
-          'Located in Quezon City, serving the Ateneo de Manila University area.',
-      },
-      {
-        id: 11,
+        code: 'LRT2_SANTOLAN',
         name: 'Santolan',
         isOperational: true,
         image: 'assets/stations/santolan.jpg',
         description:
-          'Situated on the border of Pasig and Marikina, near SM Marikina.',
+          'Located along Marcos Highway, near the boundary of Marikina and Pasig.',
+        edges: [
+          {
+            from: 'LRT2_SANTOLAN',
+            to: 'LRT2_MARIKINA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Marikina station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_SANTOLAN',
+            to: 'LRT2_KATIPUNAN',
+            weight: 4,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Katipunan station.',
+            transferDistance: 'Approximately 4 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 4,
+        code: 'LRT2_KATIPUNAN',
+        name: 'Katipunan',
+        isOperational: true,
+        image: 'assets/stations/katipunan.jpg',
+        description:
+          'Underground station located along Katipunan Avenue, Quezon City.',
+        edges: [
+          {
+            from: 'LRT2_KATIPUNAN',
+            to: 'LRT2_SANTOLAN',
+            weight: 4,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Santolan station.',
+            transferDistance: 'Approximately 4 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_KATIPUNAN',
+            to: 'LRT2_ANONAS',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Anonas station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 5,
+        code: 'LRT2_ANONAS',
+        name: 'Anonas',
+        isOperational: true,
+        image: 'assets/stations/anonas.jpg',
+        description: 'Located in Project 3, Quezon City, near Anonas Street.',
+        edges: [
+          {
+            from: 'LRT2_ANONAS',
+            to: 'LRT2_KATIPUNAN',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Katipunan station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_ANONAS',
+            to: 'LRT2_CUBAO',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Cubao station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 6,
+        code: 'LRT2_CUBAO',
+        name: 'Cubao',
+        isOperational: true,
+        image: 'assets/stations/cubao.jpg',
+        description:
+          'Located in Quezon City, a major commercial hub with connections to MRT-3.',
+        edges: [
+          {
+            from: 'LRT2_CUBAO',
+            to: 'LRT2_ANONAS',
+            weight: 3, // Approximate travel time in minutes
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription:
+              'Direct train service from Cubao to Anonas station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_CUBAO',
+            to: 'LRT2_BETTY_GO_BELMONTE',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription:
+              'Direct train service to Betty Go-Belmonte station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+          {
+            from: 'LRT2_CUBAO',
+            to: 'MRT3_CUBAO',
+            weight: 5,
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription:
+              'Connected via walkway to MRT-3 Cubao station.',
+            transferDistance: 'Approximately 5-minute walk',
+            accessibility: 'Elevators and ramps available',
+            additionalCost: 'Separate fare required',
+            direction: 'northbound',
+          },
+        ],
+      },
+      {
+        id: 7,
+        code: 'LRT2_BETTY_GO_BELMONTE',
+        name: 'Betty Go-Belmonte',
+        isOperational: true,
+        image: 'assets/stations/betty_go_belmonte.jpg',
+        description: 'Situated in Quezon City, near New Manila.',
+        edges: [
+          {
+            from: 'LRT2_BETTY_GO_BELMONTE',
+            to: 'LRT2_CUBAO',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Cubao station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_BETTY_GO_BELMONTE',
+            to: 'LRT2_GILMORE',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Gilmore station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 8,
+        code: 'LRT2_GILMORE',
+        name: 'Gilmore',
+        isOperational: true,
+        image: 'assets/stations/gilmore.jpg',
+        description:
+          'Located in Quezon City, known for electronics shops along Gilmore Avenue.',
+        edges: [
+          {
+            from: 'LRT2_GILMORE',
+            to: 'LRT2_BETTY_GO_BELMONTE',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription:
+              'Direct train service to Betty Go-Belmonte station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_GILMORE',
+            to: 'LRT2_J_RUIZ',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to J. Ruiz station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 9,
+        code: 'LRT2_J_RUIZ',
+        name: 'J. Ruiz',
+        isOperational: true,
+        image: 'assets/stations/j_ruiz.jpg',
+        description:
+          'Located in San Juan City, near J. Ruiz Street and residential areas.',
+        edges: [
+          {
+            from: 'LRT2_J_RUIZ',
+            to: 'LRT2_GILMORE',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Gilmore station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_J_RUIZ',
+            to: 'LRT2_V_MAPA',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to V. Mapa station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 10,
+        code: 'LRT2_V_MAPA',
+        name: 'V. Mapa',
+        isOperational: true,
+        image: 'assets/stations/v_mapa.jpg',
+        description: 'Located in Santa Mesa, Manila, near V. Mapa High School.',
+        edges: [
+          {
+            from: 'LRT2_V_MAPA',
+            to: 'LRT2_J_RUIZ',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to J. Ruiz station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_V_MAPA',
+            to: 'LRT2_PUREZA',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Pureza station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
+      },
+      {
+        id: 11,
+        code: 'LRT2_PUREZA',
+        name: 'Pureza',
+        isOperational: true,
+        image: 'assets/stations/pureza.jpg',
+        description:
+          'Situated in Santa Mesa, Manila, near educational institutions.',
+        edges: [
+          {
+            from: 'LRT2_PUREZA',
+            to: 'LRT2_V_MAPA',
+            weight: 2,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to V. Mapa station.',
+            transferDistance: 'Approximately 2 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_PUREZA',
+            to: 'LRT2_LEGARDA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Legarda station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
       },
       {
         id: 12,
-        name: 'Marikina-Pasig',
+        code: 'LRT2_LEGARDA',
+        name: 'Legarda',
         isOperational: true,
-        image: 'assets/stations/marikina_pasig.jpg',
-        description:
-          'Located between Marikina and Pasig, near Sta. Lucia East Grand Mall.',
+        image: 'assets/stations/legarda.jpg',
+        description: 'Located in Sampaloc, Manila, near Legarda Street.',
+        edges: [
+          {
+            from: 'LRT2_LEGARDA',
+            to: 'LRT2_PUREZA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Pureza station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_LEGARDA',
+            to: 'LRT2_RECTO',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Recto station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+          },
+        ],
       },
       {
         id: 13,
-        name: 'Antipolo',
+        code: 'LRT2_RECTO',
+        name: 'Recto',
         isOperational: true,
-        image: 'assets/stations/antipolo.jpg',
+        image: 'assets/stations/recto.jpg',
         description:
-          'Eastern terminus of LRT-2, located in Antipolo City near SM City Masinag.',
+          'Western terminus of LRT-2, located in Manila, near University Belt.',
+        edges: [
+          {
+            from: 'LRT2_RECTO',
+            to: 'LRT2_LEGARDA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: true,
+            transferDescription: 'Direct train service to Legarda station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+          },
+          {
+            from: 'LRT2_RECTO',
+            to: 'LRT1_DOROTEO_JOSE',
+            weight: 5,
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription:
+              'Connected via elevated walkway to LRT-1 Doroteo Jose station.',
+            transferDistance: 'Approximately 5-minute walk',
+            accessibility: 'Elevators and ramps available',
+            additionalCost: 'Separate fare required',
+            direction: 'northbound',
+          },
+        ],
       },
     ],
   },
   {
     name: 'MRT 3',
-    code: 'mrt3',
+    code: 'MRT3',
     stations: [
       {
         id: 1,
+        code: 'MRT3_NORTH_AVENUE',
         name: 'North Avenue',
         isOperational: true,
         image: 'assets/stations/north_avenue.jpg',
         description:
-          'Northern terminus of MRT-3, located in Quezon City near Trinoma Mall and SM City North EDSA.',
+          'Northern terminus of MRT-3, adjacent to TriNoma Mall and near SM City North EDSA.',
+        edges: [{ to: 'MRT3_QUEZON_AVENUE', weight: 5, isOperational: true }],
       },
       {
         id: 2,
+        code: 'MRT3_QUEZON_AVENUE',
         name: 'Quezon Avenue',
         isOperational: true,
         image: 'assets/stations/quezon_avenue.jpg',
         description:
-          'Situated along Quezon Avenue in Quezon City, near the ABS-CBN Broadcasting Center and Eton Centris.',
+          'Located near the intersection of Quezon Avenue and EDSA, close to Eton Centris and various government offices.',
+        edges: [
+          { to: 'MRT3_NORTH_AVENUE', weight: 5, isOperational: true },
+          { to: 'MRT3_GMA_KAMUNING', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 3,
-        name: 'GMA Kamuning',
+        code: 'MRT3_GMA_KAMUNING',
+        name: 'GMA-Kamuning',
         isOperational: true,
         image: 'assets/stations/gma_kamuning.jpg',
         description:
-          'Located near GMA Network Center and Timog Avenue in Quezon City.',
+          'Situated near GMA Network Center and accessible to Kamuning Road.',
+        edges: [
+          { to: 'MRT3_QUEZON_AVENUE', weight: 5, isOperational: true },
+          { to: 'MRT3_CUBAO', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 4,
+        code: 'MRT3_CUBAO',
         name: 'Araneta Center-Cubao',
         isOperational: true,
-        image: 'assets/stations/araneta_center_cubao.jpg',
+        image: 'assets/stations/cubao.jpg',
         description:
-          'A major transfer point in Quezon City, connecting to LRT-2 and near Araneta City.',
+          'Integrated with Araneta City, providing connections to LRT Line 2 and access to shopping centers like Gateway Mall.',
+        edges: [
+          { to: 'MRT3_GMA_KAMUNING', weight: 5, isOperational: true },
+          { to: 'MRT3_SANTOLAN_ANNAPOLIS', weight: 5, isOperational: true },
+          {
+            from: 'MRT3_CUBAO',
+            to: 'LRT2_CUBAO',
+            weight: 5,
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription:
+              'Connected via a covered walkway inside the Araneta City complex.',
+            transferDistance: 'Approximately 5-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'Separate fare required',
+            direction: 'southbound', // Assuming LRT-2 Cubao is southbound relative to MRT-3 Cubao
+          },
+        ],
       },
       {
         id: 5,
+        code: 'MRT3_SANTOLAN_ANNAPOLIS',
         name: 'Santolan-Annapolis',
         isOperational: true,
         image: 'assets/stations/santolan_annapolis.jpg',
         description:
-          'Located in San Juan City, near Greenhills Shopping Center.',
+          'Positioned near Greenhills Shopping Center and various commercial establishments.',
+        edges: [
+          { to: 'MRT3_CUBAO', weight: 5, isOperational: true },
+          { to: 'MRT3_ORTIGAS', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 6,
+        code: 'MRT3_ORTIGAS',
         name: 'Ortigas',
         isOperational: true,
         image: 'assets/stations/ortigas.jpg',
         description:
-          'Situated in Mandaluyong City, near SM Megamall and Robinsons Galleria.',
+          'Serves the Ortigas Central Business District, with proximity to SM Megamall and Robinsons Galleria.',
+        edges: [
+          { to: 'MRT3_SANTOLAN_ANNAPOLIS', weight: 5, isOperational: true },
+          { to: 'MRT3_SHAW_BOULEVARD', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 7,
+        code: 'MRT3_SHAW_BOULEVARD',
         name: 'Shaw Boulevard',
         isOperational: true,
         image: 'assets/stations/shaw_boulevard.jpg',
         description:
-          'Located in Mandaluyong City, near Shangri-La Plaza and Starmall EDSA-Shaw.',
+          'Located near Shangri-La Plaza and Starmall EDSA-Shaw, serving as a major transfer point for commuters.',
+        edges: [
+          { to: 'MRT3_ORTIGAS', weight: 5, isOperational: true },
+          { to: 'MRT3_BONI', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 8,
+        code: 'MRT3_BONI',
         name: 'Boni',
         isOperational: true,
         image: 'assets/stations/boni.jpg',
         description:
-          'Situated in Mandaluyong City, near Robinsons Forum and Cybergate Complex.',
+          'Provides access to the Pioneer area and nearby commercial establishments.',
+        edges: [
+          { to: 'MRT3_SHAW_BOULEVARD', weight: 5, isOperational: true },
+          { to: 'MRT3_GUADALUPE', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 9,
+        code: 'MRT3_GUADALUPE',
         name: 'Guadalupe',
         isOperational: true,
         image: 'assets/stations/guadalupe.jpg',
         description:
-          'Located in Makati City, near Guadalupe Commercial Complex and Pasig River.',
+          'Situated near Guadalupe Nuevo and Guadalupe Viejo, with access to the Pasig River ferry service.',
+        edges: [
+          { to: 'MRT3_BONI', weight: 5, isOperational: true },
+          { to: 'MRT3_BUENDIA', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 10,
+        code: 'MRT3_BUENDIA',
         name: 'Buendia',
         isOperational: true,
         image: 'assets/stations/buendia.jpg',
         description:
-          'Situated in Makati City, near Makati Central Business District and RCBC Plaza.',
+          'Located near the Makati Central Business District, providing access to various offices and commercial centers.',
+        edges: [
+          { to: 'MRT3_GUADALUPE', weight: 5, isOperational: true },
+          { to: 'MRT3_AYALA', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 11,
+        code: 'MRT3_AYALA',
         name: 'Ayala',
         isOperational: true,
         image: 'assets/stations/ayala.jpg',
         description:
-          'Located in Makati City, directly connected to Ayala Center and Glorietta Mall.',
+          'Directly connected to Ayala Center, including Glorietta and Greenbelt malls, serving as a major hub for shoppers and professionals.',
+        edges: [
+          { to: 'MRT3_BUENDIA', weight: 5, isOperational: true },
+          { to: 'MRT3_MAGALLANES', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 12,
+        code: 'MRT3_MAGALLANES',
         name: 'Magallanes',
         isOperational: true,
         image: 'assets/stations/magallanes.jpg',
         description:
-          'Situated in Makati City, near Magallanes Village and Alphaland Southgate Mall.',
+          'Positioned near the Magallanes Village and provides access to the South Luzon Expressway (SLEX).',
+        edges: [
+          { to: 'MRT3_AYALA', weight: 5, isOperational: true },
+          { to: 'MRT3_TAFT_AVENUE', weight: 5, isOperational: true },
+        ],
       },
       {
         id: 13,
+        code: 'MRT3_TAFT_AVENUE',
         name: 'Taft Avenue',
         isOperational: true,
         image: 'assets/stations/taft_avenue.jpg',
         description:
-          'Southern terminus of MRT-3, located in Pasay City near Metropoint Mall and connected to LRT-1 EDSA Station.',
+          'Southern terminus of MRT-3, located at the intersection of EDSA and Taft Avenue in Pasay City. Provides a vital transfer point to LRT Line 1 via a connecting footbridge to EDSA Station, facilitating seamless north-south travel across Metro Manila.',
+        edges: [
+          { to: 'MRT3_MAGALLANES', weight: 5, isOperational: true },
+          {
+            from: 'MRT3_TAFT_AVENUE',
+            to: 'LRT1_EDSA',
+            weight: 5, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            isOperational: true,
+            transferDescription: 'Connected via a covered footbridge.',
+            transferDistance: 'Approximately a 5-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'Separate fare required',
+            direction: 'southbound', // Assuming LRT-1 EDSA is southbound relative to MRT-3 Taft Avenue
+          },
+        ],
       },
     ],
   },

@@ -59,7 +59,7 @@ export class PathFinderPage implements OnInit {
   selectedStartStationCode: string | null = null;
   selectedEndStationCode: string | null = null;
 
-  calculatedPath: string[] = [];
+  calculatedPath: any;
 
   constructor(
     private modalController: ModalController,
@@ -105,7 +105,9 @@ export class PathFinderPage implements OnInit {
     this.filterEndStations();
   }
 
-  onStartStationChange() {}
+  onStartStationChange() {
+    this.selectedStartStationCode;
+  }
 
   onEndStationChange() {}
 
@@ -149,16 +151,14 @@ export class PathFinderPage implements OnInit {
       return;
     }
 
-    const startStation = this.transitService.getStationByCode(
-      this.selectedStartStationCode
-    );
-    const endStation = this.transitService.getStationByCode(
-      this.selectedEndStationCode
-    );
-
-    if (startStation && endStation) {
-      this.calculatedPath = [startStation.name, endStation.name];
-      // Replace this with actual pathfinding logic
+    try {
+      this.calculatedPath = this.transitService.findShortestPath(
+        this.selectedStartStationCode,
+        this.selectedEndStationCode
+      );
+      console.log('Calculated Path:', this.calculatedPath);
+    } catch (error: any) {
+      console.error(error?.message);
     }
   }
 }
