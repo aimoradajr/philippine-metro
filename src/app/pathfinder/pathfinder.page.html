@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Transit Lines</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Select Start Line -->
+  <ion-item>
+    <ion-label>Start Line</ion-label>
+    <ion-select
+      [(ngModel)]="selectedStartLineCode"
+      (ionChange)="onStartLineChange()"
+      interface="popover"
+    >
+      <ion-select-option *ngFor="let line of allLines" [value]="line.code">
+        {{ line.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Select Start Station -->
+  <ion-item>
+    <ion-label>Start Station</ion-label>
+    <ion-select
+      [(ngModel)]="selectedStartStationCode"
+      (ionChange)="onStartStationChange()"
+      interface="popover"
+    >
+      <ion-select-option
+        *ngFor="let station of filteredStartStations"
+        [value]="station.code"
+      >
+        {{ station.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Select End Line -->
+  <ion-item>
+    <ion-label>End Line</ion-label>
+    <ion-select
+      [(ngModel)]="selectedEndLineCode"
+      (ionChange)="onEndLineChange()"
+      interface="popover"
+    >
+      <ion-select-option *ngFor="let line of allLines" [value]="line.code">
+        {{ line.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Select End Station -->
+  <ion-item>
+    <ion-label>End Station</ion-label>
+    <ion-select
+      [(ngModel)]="selectedEndStationCode"
+      (ionChange)="onEndStationChange()"
+      interface="popover"
+    >
+      <ion-select-option
+        *ngFor="let station of filteredEndStations"
+        [value]="station.code"
+      >
+        {{ station.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="calculatePath()">
+    Find Best Path
+  </ion-button>
+
+  <div *ngIf="calculatedPath.length > 0">
+    <h3>Best Path:</h3>
+    <p>{{ calculatedPath.join(' -> ') }}</p>
+  </div>
+</ion-content>

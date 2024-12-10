@@ -27,4 +27,9 @@ export const routes: Routes = [
         (m) => m.LineViewerPage
       ),
   },
+  {
+    path: 'pathfinder',
+    loadComponent: () =>
+      import('./pathfinder/pathfinder.page').then((m) => m.PathFinderPage),
+  },
 ];
