@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Transit Lines</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Select Transit Line</ion-label>
+    <ion-select
+      interface="popover"
+      [(ngModel)]="selectedLine"
+      (ionChange)="onLineChange($event)"
+    >
+      <ion-select-option *ngFor="let line of transitLines" [value]="line"
+        >{{ line.name }}</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+
+  <ion-list *ngIf="selectedLine">
+    <ion-list-header>
+      <ion-label>Stations</ion-label>
+    </ion-list-header>
+
+    <!-- Display Each Station -->
+    <ion-item
+      *ngFor="let station of selectedLine.stations"
+      (click)="openStationDetails(station)"
+    >
+      <ion-thumbnail slot="start">
+        <img [src]="station.image" alt="{{ station.name }}" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ station.name }}</h2>
+        <p>{{ station.description }}</p>
+        <p>
+          Status:
+          <span
+            [class.operational]="station.isOperational"
+            [class.non-operational]="!station.isOperational"
+          >
+            {{ station.isOperational ? 'Operational' : 'Not Operational' }}
+          </span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

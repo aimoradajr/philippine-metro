@@ -117,3 +117,8 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+.active-item {
+  --background: var(--ion-color-primary, #3880ff);
+  --color: var(--ion-color-light, #ffffff);
+}

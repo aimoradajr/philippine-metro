@@ -21,8 +21,10 @@ export const routes: Routes = [
       import('./credits/credits.page').then((m) => m.CreditsPage),
   },
   {
-    path: 'lines/lrt1',
+    path: 'lines/line-viewer/:line_code',
     loadComponent: () =>
-      import('./lines/lrt1/lrt1.page').then((m) => m.LRT1Page),
+      import('./lines/line-viewer/line-viewer.page').then(
+        (m) => m.LineViewerPage
+      ),
   },
 ];
