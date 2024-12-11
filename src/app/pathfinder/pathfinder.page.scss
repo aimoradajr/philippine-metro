@@ -27,3 +27,24 @@ ion-thumbnail {
     object-fit: cover;
   }
 }
+
+.route-summary {
+  display: flex;
+  justify-content: space-around; /* Distribute items evenly */
+  align-items: center; /* Align items vertically */
+  padding: 8px 0;
+}
+
+.summary-item {
+  text-align: center;
+  flex: 1; /* Ensures equal width for all items */
+}
+
+.inter-line-change {
+  color: red;
+  font-weight: bold;
+  margin-top: 4px;
+}
+.station-icon {
+  color: #007bff; // Example color
+}

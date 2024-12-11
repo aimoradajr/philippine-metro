@@ -64,18 +64,14 @@ export class TransitService {
     return result;
   }
 
-  findKShortestPaths(
-    startCode: string,
-    endCode: string,
-    k: number
-  ): { path: string[]; cost: number }[] | null {
+  findKShortestPaths(startCode: string, endCode: string, k: number): any[] {
     const paths: { path: string[]; cost: number }[] = [];
 
     if (!this.route.graph.has(startCode) || !this.route.graph.has(endCode)) {
       console.error(
         `Start station '${startCode}' or end station '${endCode}' does not exist in the graph.`
       );
-      return null;
+      return [];
     }
 
     try {
@@ -87,7 +83,7 @@ export class TransitService {
         console.error(
           `No path exists between '${startCode}' and '${endCode}'.`
         );
-        return null;
+        return [];
       }
 
       // Step 2: Find the next k-1 paths
@@ -191,7 +187,7 @@ export class TransitService {
           error instanceof Error ? error.message : error
         }`
       );
-      return null;
+      return [];
     }
 
     return paths;
@@ -199,6 +195,21 @@ export class TransitService {
 
   getAllLines() {
     return this.transitLines;
+  }
+
+  getAllStationsFlatObj() {
+    return this.transitLines.reduce((acc: Record<string, any>, line) => {
+      line.stations.forEach((station: any) => {
+        acc[station.code] = {
+          ...station,
+          lineCode: line.code,
+          lineColor: line.color,
+          lineBgColor: line.bgColor,
+          lineTextColor: line.textColor,
+        };
+      });
+      return acc;
+    }, {} as Record<string, any>);
   }
 
   getLineByCode(code: string) {

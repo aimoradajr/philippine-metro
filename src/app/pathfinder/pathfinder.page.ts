@@ -17,10 +17,16 @@ import {
   IonSelectOption,
   ModalController,
   IonButton,
+  IonSegment,
+  IonSegmentButton,
+  IonAvatar,
+  IonIcon,
+  IonChip,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TransitService } from '../core/transit.service';
+import { Edge, Station } from '../core/transit.config';
 
 @Component({
   selector: 'app-pathfinder',
@@ -33,11 +39,8 @@ import { TransitService } from '../core/transit.service';
     IonTitle,
     IonToolbar,
     IonList,
-    IonListHeader,
     IonLabel,
     IonButtons,
-    IonBackButton,
-    IonThumbnail,
     IonItem,
     CommonModule,
     IonMenuButton,
@@ -45,10 +48,16 @@ import { TransitService } from '../core/transit.service';
     IonSelectOption,
     FormsModule,
     IonButton,
+    IonSegment,
+    IonSegmentButton,
+    IonAvatar,
+    IonIcon,
+    IonChip,
   ],
 })
 export class PathFinderPage implements OnInit {
   allLines: any[] = [];
+  allStationsFlatObj: any = {};
 
   selectedStartLineCode: string | null = null;
   selectedEndLineCode: string | null = null;
@@ -61,12 +70,26 @@ export class PathFinderPage implements OnInit {
 
   calculatedPath: any;
 
+  selectedRoute: string = 'preferred';
+  currentRoute: any; // Holds the currently selected route
+  onRouteChange() {
+    const routeMap: { [key: string]: number } = {
+      preferred: 0,
+      alternate1: 1,
+      alternate2: 2,
+    };
+
+    const index = routeMap[this.selectedRoute] ?? 0;
+    this.currentRoute = this.calculatedPathsEnriched[index] || null;
+  }
+
   constructor(
     private modalController: ModalController,
     private route: ActivatedRoute,
     private transitService: TransitService
   ) {
     this.allLines = this.transitService.getAllLines();
+    this.allStationsFlatObj = this.transitService.getAllStationsFlatObj();
 
     // Set default values
     if (this.allLines.length > 0) {
@@ -93,11 +116,19 @@ export class PathFinderPage implements OnInit {
         this.calculatePath();
       }
     });
+
+    this.onRouteChange(); // Initialize the current route
   }
 
   onStartLineChange() {
     // Update the stations for the selected start line
     this.filterStartStations();
+
+    // Auto-select End Line if no end station is selected
+    if (!this.selectedEndStationCode) {
+      this.selectedEndLineCode = this.selectedStartLineCode;
+      this.onEndLineChange(); // Update filteredEndStations
+    }
   }
 
   onEndLineChange() {
@@ -106,10 +137,14 @@ export class PathFinderPage implements OnInit {
   }
 
   onStartStationChange() {
-    this.selectedStartStationCode;
+    // this.selectedStartStationCode;
+
+    this.calculateKPaths();
   }
 
-  onEndStationChange() {}
+  onEndStationChange() {
+    this.calculateKPaths();
+  }
 
   filterStartStations() {
     const startLine = this.transitService.getLineByCode(
@@ -162,7 +197,9 @@ export class PathFinderPage implements OnInit {
     }
   }
 
-  calculatedPaths: any;
+  calculatedPaths: any[] = [];
+  calculatedPathsEnriched: any[] = [];
+  isCalculationDone: boolean = false; // Tracks if calculation has been performed
   calculateKPaths() {
     if (!this.selectedStartStationCode || !this.selectedEndStationCode) {
       console.error('Both start and end stations must be selected');
@@ -175,9 +212,57 @@ export class PathFinderPage implements OnInit {
         this.selectedEndStationCode,
         3
       );
-      // console.log('Calculated Path:', this.calculatedPaths);
+
+      // enrich paths, using allStationsFlatObj
+      this.calculatedPathsEnriched = this.enrichPaths(this.calculatedPaths);
+
+      this.onRouteChange(); // Update currentRoute after new data
+
+      this.isCalculationDone = true; // Mark calculation as done
     } catch (error: any) {
       console.error(error?.message);
     }
+  }
+
+  enrichPaths(paths: { path: string[]; cost: number }[]): any[] {
+    return paths.map(({ path, cost }) => {
+      const enrichedPath = path.map((stationCode, index, arr) => {
+        const station = this.allStationsFlatObj?.[stationCode] || {};
+        const nextStationCode = index < arr.length - 1 ? arr[index + 1] : null;
+
+        // Find the edge from the current station to the next station
+        const activatedEdge = station.edges?.find(
+          (edge: Edge) => edge.to === nextStationCode
+        );
+
+        return {
+          ...station,
+          activatedEdge: activatedEdge || null,
+        };
+      });
+
+      // Calculate interline transfers
+      const transfers = enrichedPath.reduce(
+        (transferCount, station) =>
+          station.activatedEdge?.transferType === 'inter-line'
+            ? transferCount + 1
+            : transferCount,
+        0
+      );
+
+      // Calculate total duration (e.g., 2 minutes per station + 5 minutes per transfer)
+      const stationTravelTime = 2; // Minutes per station
+      const transferTime = 5; // Minutes per transfer
+      const totalDuration =
+        enrichedPath.length * stationTravelTime + transfers * transferTime;
+
+      // Return enriched path with additional details
+      return {
+        enrichedPath,
+        cost,
+        transfers,
+        totalDuration,
+      };
+    });
   }
 }

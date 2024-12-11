@@ -1,91 +1,149 @@
 <ion-header [translucent]="true">
+  <!-- Toolbar with Title -->
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Transit Lines</ion-title>
   </ion-toolbar>
+
+  <!-- Fixed Selectors -->
+  <ion-toolbar>
+    <!-- Start Line and Station -->
+    <ion-item>
+      <ion-label>Start</ion-label>
+      <ion-select
+        [(ngModel)]="selectedStartLineCode"
+        (ionChange)="onStartLineChange()"
+        interface="popover"
+      >
+        <ion-select-option *ngFor="let line of allLines" [value]="line.code">
+          {{ line.name }}
+        </ion-select-option>
+      </ion-select>
+      <ion-select
+        [(ngModel)]="selectedStartStationCode"
+        (ionChange)="onStartStationChange()"
+        interface="popover"
+      >
+        <ion-select-option
+          *ngFor="let station of filteredStartStations"
+          [value]="station.code"
+        >
+          {{ station.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- End Line and Station -->
+    <ion-item>
+      <ion-label>End</ion-label>
+      <ion-select
+        [(ngModel)]="selectedEndLineCode"
+        (ionChange)="onEndLineChange()"
+        interface="popover"
+      >
+        <ion-select-option *ngFor="let line of allLines" [value]="line.code">
+          {{ line.name }}
+        </ion-select-option>
+      </ion-select>
+      <ion-select
+        [(ngModel)]="selectedEndStationCode"
+        (ionChange)="onEndStationChange()"
+        interface="popover"
+      >
+        <ion-select-option
+          *ngFor="let station of filteredEndStations"
+          [value]="station.code"
+        >
+          {{ station.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- calculate -->
+    <!-- <ion-button expand="full" (click)="calculateKPaths()">
+      Find Best K Path
+    </ion-button> -->
+  </ion-toolbar>
+
+  <ng-container
+    *ngIf="calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
+  >
+    <!-- Tabs for Routes -->
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="selectedRoute" (ionChange)="onRouteChange()">
+        <ion-segment-button value="preferred">
+          Preferred Route
+        </ion-segment-button>
+        <ion-segment-button
+          value="alternate1"
+          *ngIf="calculatedPathsEnriched && calculatedPathsEnriched.length > 1"
+        >
+          Alternate Route 1
+        </ion-segment-button>
+        <ion-segment-button
+          value="alternate2"
+          *ngIf="calculatedPathsEnriched && calculatedPathsEnriched.length > 2"
+        >
+          Alternate Route 2
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+
+    <!-- Route Summary -->
+    <ion-toolbar>
+      <div class="route-summary">
+        <div class="summary-item">
+          <p><strong>Time:</strong> {{ currentRoute?.totalDuration }} mins</p>
+        </div>
+        <div class="summary-item">
+          <p>
+            <strong>Price:</strong>
+            <!-- {{ currentRoute?.cost }} -->
+          </p>
+        </div>
+        <div class="summary-item">
+          <p>
+            <strong>Stations:</strong> {{ currentRoute?.enrichedPath.length }}
+          </p>
+        </div>
+        <div class="summary-item">
+          <p><strong>Changes:</strong> {{ currentRoute?.transfers }}</p>
+        </div>
+      </div>
+    </ion-toolbar>
+  </ng-container>
 </ion-header>
 
 <ion-content>
-  <!-- Select Start Line -->
-  <ion-item>
-    <ion-label>Start Line</ion-label>
-    <ion-select
-      [(ngModel)]="selectedStartLineCode"
-      (ionChange)="onStartLineChange()"
-      interface="popover"
-    >
-      <ion-select-option *ngFor="let line of allLines" [value]="line.code">
-        {{ line.name }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <!-- Select Start Station -->
-  <ion-item>
-    <ion-label>Start Station</ion-label>
-    <ion-select
-      [(ngModel)]="selectedStartStationCode"
-      (ionChange)="onStartStationChange()"
-      interface="popover"
-    >
-      <ion-select-option
-        *ngFor="let station of filteredStartStations"
-        [value]="station.code"
-      >
-        {{ station.name }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <!-- Select End Line -->
-  <ion-item>
-    <ion-label>End Line</ion-label>
-    <ion-select
-      [(ngModel)]="selectedEndLineCode"
-      (ionChange)="onEndLineChange()"
-      interface="popover"
-    >
-      <ion-select-option *ngFor="let line of allLines" [value]="line.code">
-        {{ line.name }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <!-- Select End Station -->
-  <ion-item>
-    <ion-label>End Station</ion-label>
-    <ion-select
-      [(ngModel)]="selectedEndStationCode"
-      (ionChange)="onEndStationChange()"
-      interface="popover"
-    >
-      <ion-select-option
-        *ngFor="let station of filteredEndStations"
-        [value]="station.code"
-      >
-        {{ station.name }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <!-- <ion-button expand="full" (click)="calculatePath()">
-    Find Best Path
-  </ion-button>
-
-  <div *ngIf="calculatedPath">
-    <h3>Best Path:</h3>
-    <p>{{ calculatedPath | json }}</p>
-  </div> -->
-
-  <!-- yens algo -->
-  <ion-button expand="full" (click)="calculateKPaths()">
-    Find Best K Path
-  </ion-button>
-
-  <div *ngIf="calculatedPaths">
-    <h3>Best K Paths:</h3>
-    <p>{{ calculatedPaths | json }}</p>
-  </div>
+  <!-- Scrollable Station List -->
+  <ion-list>
+    <ion-item *ngFor="let station of currentRoute?.enrichedPath; let i = index">
+      <div class="station-number">{{ i + 1 }}</div>
+      <div class="station-details">
+        <ion-avatar slot="start">
+          <ion-icon name="ellipse" class="station-icon"></ion-icon>
+        </ion-avatar>
+        <div>
+          <h3>{{ station.name }}</h3>
+          <ion-chip
+            [style.background-color]="station.lineBgColor || '#CCC'"
+            [style.color]="station.lineTextColor || '#000'"
+          >
+            {{ station.lineCode }}
+          </ion-chip>
+          <!-- <p *ngIf="station.description">{{ station.description }}</p> -->
+          {{ station?.activatedEdge?.transferType |json }}
+          <p
+            *ngIf="station?.activatedEdge?.transferType === 'inter-line'"
+            class="inter-line-change"
+          >
+            Change from {{ station.activatedEdge.from }} to {{
+            station.activatedEdge.to }}
+          </p>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
