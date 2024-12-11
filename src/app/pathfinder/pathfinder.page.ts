@@ -22,6 +22,10 @@ import {
   IonAvatar,
   IonIcon,
   IonChip,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -53,6 +57,10 @@ import { Edge, Station } from '../core/transit.config';
     IonAvatar,
     IonIcon,
     IonChip,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
   ],
 })
 export class PathFinderPage implements OnInit {

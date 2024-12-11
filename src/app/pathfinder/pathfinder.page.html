@@ -68,7 +68,7 @@
   </ion-toolbar>
 
   <ng-container
-    *ngIf="calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
+    *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
   >
     <!-- Tabs for Routes -->
     <ion-toolbar>
@@ -116,34 +116,58 @@
   </ng-container>
 </ion-header>
 
-<ion-content>
-  <!-- Scrollable Station List -->
-  <ion-list>
-    <ion-item *ngFor="let station of currentRoute?.enrichedPath; let i = index">
-      <div class="station-number">{{ i + 1 }}</div>
-      <div class="station-details">
-        <ion-avatar slot="start">
-          <ion-icon name="ellipse" class="station-icon"></ion-icon>
-        </ion-avatar>
-        <div>
-          <h3>{{ station.name }}</h3>
-          <ion-chip
-            [style.background-color]="station.lineBgColor || '#CCC'"
-            [style.color]="station.lineTextColor || '#000'"
-          >
-            {{ station.lineCode }}
-          </ion-chip>
-          <!-- <p *ngIf="station.description">{{ station.description }}</p> -->
-          {{ station?.activatedEdge?.transferType |json }}
-          <p
-            *ngIf="station?.activatedEdge?.transferType === 'inter-line'"
-            class="inter-line-change"
-          >
-            Change from {{ station.activatedEdge.from }} to {{
-            station.activatedEdge.to }}
-          </p>
+<ng-container
+  *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
+>
+  <ion-content>
+    <!-- Scrollable Station List -->
+    <ion-list>
+      <ion-item
+        *ngFor="let station of currentRoute?.enrichedPath; let i = index"
+      >
+        <div class="station-number">{{ i + 1 }}</div>
+        <div class="station-details">
+          <ion-avatar slot="start">
+            <ion-icon name="ellipse" class="station-icon"></ion-icon>
+          </ion-avatar>
+          <div>
+            <h3>{{ station.name }}</h3>
+            <ion-chip
+              [style.background-color]="station.lineBgColor || '#CCC'"
+              [style.color]="station.lineTextColor || '#000'"
+            >
+              {{ station.lineCode }}
+            </ion-chip>
+            <!-- <p *ngIf="station.description">{{ station.description }}</p> -->
+            {{ station?.activatedEdge?.transferType |json }}
+            <p
+              *ngIf="station?.activatedEdge?.transferType === 'inter-line'"
+              class="inter-line-change"
+            >
+              Change from {{ station.activatedEdge.from }} to {{
+              station.activatedEdge.to }}
+            </p>
+          </div>
         </div>
-      </div>
-    </ion-item>
-  </ion-list>
-</ion-content>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ng-container>
+
+<ng-container
+  *ngIf="isCalculationDone && (!calculatedPathsEnriched || !calculatedPathsEnriched.length)"
+>
+  <ion-content>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>No Path Found</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          No path found between the selected stations. Please try changing the
+          stations or lines.
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ng-container>
