@@ -156,7 +156,26 @@ export class PathFinderPage implements OnInit {
         this.selectedStartStationCode,
         this.selectedEndStationCode
       );
-      console.log('Calculated Path:', this.calculatedPath);
+      // console.log('Calculated Path:', this.calculatedPath);
+    } catch (error: any) {
+      console.error(error?.message);
+    }
+  }
+
+  calculatedPaths: any;
+  calculateKPaths() {
+    if (!this.selectedStartStationCode || !this.selectedEndStationCode) {
+      console.error('Both start and end stations must be selected');
+      return;
+    }
+
+    try {
+      this.calculatedPaths = this.transitService.findKShortestPaths(
+        this.selectedStartStationCode,
+        this.selectedEndStationCode,
+        3
+      );
+      // console.log('Calculated Path:', this.calculatedPaths);
     } catch (error: any) {
       console.error(error?.message);
     }

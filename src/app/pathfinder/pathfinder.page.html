@@ -70,12 +70,22 @@
     </ion-select>
   </ion-item>
 
-  <ion-button expand="full" (click)="calculatePath()">
+  <!-- <ion-button expand="full" (click)="calculatePath()">
     Find Best Path
   </ion-button>
 
   <div *ngIf="calculatedPath">
     <h3>Best Path:</h3>
     <p>{{ calculatedPath | json }}</p>
+  </div> -->
+
+  <!-- yens algo -->
+  <ion-button expand="full" (click)="calculateKPaths()">
+    Find Best K Path
+  </ion-button>
+
+  <div *ngIf="calculatedPaths">
+    <h3>Best K Paths:</h3>
+    <p>{{ calculatedPaths | json }}</p>
   </div>
 </ion-content>
