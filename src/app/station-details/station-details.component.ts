@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular/standalone';
 import {
   IonContent,
@@ -10,6 +11,7 @@ import {
   IonIcon,
   IonImg,
 } from '@ionic/angular/standalone';
+import { AppConfig } from '../core/config'; // Adjust the path as needed
 
 @Component({
   selector: 'app-station-details',
@@ -30,14 +32,44 @@ import {
 export class StationDetailsComponent {
   @Input() station: any;
 
-  constructor(private modalController: ModalController) {}
+  defaultStationImage = AppConfig.defaultStationImage;
+
+  constructor(
+    private modalController: ModalController,
+    private router: Router
+  ) {}
 
   dismissModal() {
     this.modalController.dismiss();
   }
 
+  startHere(station: any) {
+    // Implement navigation logic
+    this.station = station;
+
+    // close the modal
+    this.dismissModal();
+
+    // navigate to pathfinder page route
+    this.router.navigate(['/pathfinder'], {
+      queryParams: {
+        startStationCode: this.station.code,
+      },
+    });
+  }
+
   getDirections(station: any) {
     // Implement navigation logic
     this.station = station;
+
+    // close the modal
+    this.dismissModal();
+
+    // navigate to pathfinder page route
+    this.router.navigate(['/pathfinder'], {
+      queryParams: {
+        endStationCode: this.station.code,
+      },
+    });
   }
 }

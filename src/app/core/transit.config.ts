@@ -43,7 +43,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_FPJ',
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
         isOperational: true,
-        image: 'assets/stations/fernando_poe_jr.jpg',
+        image: '',
         description:
           'Northern terminus of LRT-1, serving the Muñoz area in Quezon City.',
         edges: [
@@ -60,7 +60,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BALINTAWAK',
         name: 'Balintawak',
         isOperational: true,
-        image: 'assets/stations/balintawak.jpg',
+        image: '',
         description: 'Located in Quezon City, near Balintawak Market.',
         edges: [
           {
@@ -82,7 +82,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MONUMENTO',
         name: 'Monumento',
         isOperational: true,
-        image: 'assets/stations/monumento.jpg',
+        image: '',
         description:
           'A major station in Caloocan City, near the Bonifacio Monument.',
         edges: [
@@ -105,7 +105,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_5TH_AVENUE',
         name: '5th Avenue',
         isOperational: true,
-        image: 'assets/stations/5th_avenue.jpg',
+        image: '',
         description: 'Located in Caloocan City, near 5th Avenue.',
         edges: [
           {
@@ -127,7 +127,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_R_PAPA',
         name: 'R. Papa',
         isOperational: true,
-        image: 'assets/stations/r_papa.jpg',
+        image: '',
         description: 'Situated in Manila, near R. Papa Street.',
         edges: [
           {
@@ -149,7 +149,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ABAD_SANTOS',
         name: 'Abad Santos',
         isOperational: true,
-        image: 'assets/stations/abad_santos.jpg',
+        image: '',
         description: 'Located in Manila, near Abad Santos Avenue.',
         edges: [
           {
@@ -171,7 +171,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BLUMENTRITT',
         name: 'Blumentritt',
         isOperational: true,
-        image: 'assets/stations/blumentritt.jpg',
+        image: '',
         description: 'A station in Manila, near Blumentritt Road.',
         edges: [
           {
@@ -193,7 +193,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_TAYUMAN',
         name: 'Tayuman',
         isOperational: true,
-        image: 'assets/stations/tayuman.jpg',
+        image: '',
         description: 'Located in Manila, near Tayuman Street.',
         edges: [
           {
@@ -215,7 +215,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BAMBANG',
         name: 'Bambang',
         isOperational: true,
-        image: 'assets/stations/bambang.jpg',
+        image: '',
         description: 'Situated in Manila, near Bambang Street.',
         edges: [
           {
@@ -237,7 +237,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DOROTEO_JOSE',
         name: 'Doroteo Jose',
         isOperational: true,
-        image: 'assets/stations/doroteo_jose.jpg',
+        image: '',
         description: 'A major transfer point in Manila, connecting to LRT-2.',
         edges: [
           {
@@ -271,7 +271,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CARRIEDO',
         name: 'Carriedo',
         isOperational: true,
-        image: 'assets/stations/carriedo.jpg',
+        image: '',
         description: 'Located in Manila, near Carriedo Street.',
         edges: [
           {
@@ -293,7 +293,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CENTRAL_TERMINAL',
         name: 'Central Terminal',
         isOperational: true,
-        image: 'assets/stations/central_terminal.jpg',
+        image: '',
         description: 'Situated in Manila, near the Manila City Hall.',
         edges: [
           {
@@ -315,7 +315,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_UN_AVENUE',
         name: 'United Nations (UN) Avenue',
         isOperational: true,
-        image: 'assets/stations/un_avenue.jpg',
+        image: '',
         description: 'Located in Manila, near the United Nations Avenue.',
         edges: [
           {
@@ -337,7 +337,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_PEDRO_GIL',
         name: 'Pedro Gil',
         isOperational: true,
-        image: 'assets/stations/pedro_gil.jpg',
+        image: '',
         description:
           'Situated in Ermita, Manila, near Pedro Gil Street. Nearby landmarks include Robinsons Place Manila and the University of the Philippines Manila.',
         edges: [
@@ -360,7 +360,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_QUIRINO',
         name: 'Quirino',
         isOperational: true,
-        image: 'assets/stations/quirino.jpg',
+        image: '',
         description: 'Located in Manila, near Quirino Avenue.',
         edges: [
           {
@@ -382,7 +382,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_VITO_CRUZ',
         name: 'Vito Cruz',
         isOperational: true,
-        image: 'assets/stations/vito_cruz.jpg',
+        image: '',
         description: 'Situated in Manila, near Vito Cruz Street.',
         edges: [
           {
@@ -404,7 +404,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_GIL_PUYAT',
         name: 'Gil Puyat',
         isOperational: true,
-        image: 'assets/stations/gil_puyat.jpg',
+        image: '',
         description: 'Located in Pasay City, near Gil Puyat Avenue.',
         edges: [
           {
@@ -426,7 +426,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_LIBERTAD',
         name: 'Libertad',
         isOperational: true,
-        image: 'assets/stations/libertad.jpg',
+        image: '',
         description: 'Situated in Pasay City, near Libertad Street.',
         edges: [
           {
@@ -448,7 +448,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_EDSA',
         name: 'EDSA',
         isOperational: true,
-        image: 'assets/stations/edsa.jpg',
+        image: '',
         description:
           'Located in Pasay City, near the intersection of Taft Avenue and Epifanio de los Santos Avenue (EDSA).',
         edges: [
@@ -483,7 +483,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BACLARAN',
         name: 'Baclaran',
         isOperational: true,
-        image: 'assets/stations/baclaran.jpg',
+        image: '',
         description:
           'Southern terminus of the original LRT-1 line, located in Parañaque City.',
         edges: [
@@ -507,7 +507,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_REDEMPTORIST',
         name: 'Redemptorist',
         isOperational: true,
-        image: 'assets/stations/redemptorist.jpg',
+        image: '',
         description: 'Located in Parañaque City, near the Redemptorist Church.',
         edges: [
           {
@@ -529,7 +529,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MIA',
         name: 'MIA',
         isOperational: true,
-        image: 'assets/stations/mia.jpg',
+        image: '',
         description:
           'Situated near the Ninoy Aquino International Airport (NAIA) complex.',
         edges: [
@@ -552,7 +552,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ASIA_WORLD',
         name: 'Asia World',
         isOperational: true,
-        image: 'assets/stations/asia_world.jpg',
+        image: '',
         description:
           'Located in Parañaque City, near the Asia World City complex.',
         edges: [
@@ -575,7 +575,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_NINOY_AQUINO',
         name: 'Ninoy Aquino',
         isOperational: true,
-        image: 'assets/stations/ninoy_aquino.jpg',
+        image: '',
         description: 'Situated along Ninoy Aquino Avenue in Parañaque City.',
         edges: [
           {
@@ -597,7 +597,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DR_SANTOS',
         name: 'Dr. Santos',
         isOperational: true,
-        image: 'assets/stations/dr_santos.jpg',
+        image: '',
         description: 'Located in Parañaque City, near Dr. Santos Avenue.',
         edges: [
           {
@@ -615,7 +615,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MANILA_CAVITE_TOLL',
         name: 'Manila-Cavite Toll',
         isOperational: false,
-        image: 'assets/stations/manila_cavite_toll.jpg',
+        image: '',
         description: 'Planned station along the Manila-Cavite Toll Expressway.',
         edges: [
           {
@@ -637,7 +637,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_LAS_PINAS',
         name: 'Las Piñas',
         isOperational: false,
-        image: 'assets/stations/las_pinas.jpg',
+        image: '',
         description: 'Planned station in Las Piñas City.',
         edges: [
           {
@@ -659,7 +659,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ZAPOTE',
         name: 'Zapote',
         isOperational: false,
-        image: 'assets/stations/zapote.jpg',
+        image: '',
         description:
           'Planned station near the Zapote area, serving both Las Piñas and Bacoor.',
         edges: [
@@ -682,7 +682,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_NIOG',
         name: 'Niog',
         isOperational: false,
-        image: 'assets/stations/niog.jpg',
+        image: '',
         description:
           'Planned southern terminus of the LRT-1 extension, located in Bacoor, Cavite.',
         edges: [
@@ -708,7 +708,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_ANTIPOLO',
         name: 'Antipolo',
         isOperational: true,
-        image: 'assets/stations/antipolo.jpg',
+        image: '',
         description: 'Eastern terminus of LRT-2, located in Antipolo, Rizal.',
         edges: [
           {
@@ -730,7 +730,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_MARIKINA',
         name: 'Marikina',
         isOperational: true,
-        image: 'assets/stations/marikina.jpg',
+        image: '',
         description: 'Located in Marikina City, near major commercial areas.',
         edges: [
           {
@@ -764,7 +764,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_SANTOLAN',
         name: 'Santolan',
         isOperational: true,
-        image: 'assets/stations/santolan.jpg',
+        image: '',
         description:
           'Located along Marcos Highway, near the boundary of Marikina and Pasig.',
         edges: [
@@ -799,7 +799,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_KATIPUNAN',
         name: 'Katipunan',
         isOperational: true,
-        image: 'assets/stations/katipunan.jpg',
+        image: '',
         description:
           'Underground station located along Katipunan Avenue, Quezon City.',
         edges: [
@@ -834,7 +834,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_ANONAS',
         name: 'Anonas',
         isOperational: true,
-        image: 'assets/stations/anonas.jpg',
+        image: '',
         description: 'Located in Project 3, Quezon City, near Anonas Street.',
         edges: [
           {
@@ -868,7 +868,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_CUBAO',
         name: 'Cubao',
         isOperational: true,
-        image: 'assets/stations/cubao.jpg',
+        image: '',
         description:
           'Located in Quezon City, a major commercial hub with connections to MRT-3.',
         edges: [
@@ -918,7 +918,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_BETTY_GO_BELMONTE',
         name: 'Betty Go-Belmonte',
         isOperational: true,
-        image: 'assets/stations/betty_go_belmonte.jpg',
+        image: '',
         description: 'Situated in Quezon City, near New Manila.',
         edges: [
           {
@@ -952,7 +952,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_GILMORE',
         name: 'Gilmore',
         isOperational: true,
-        image: 'assets/stations/gilmore.jpg',
+        image: '',
         description:
           'Located in Quezon City, known for electronics shops along Gilmore Avenue.',
         edges: [
@@ -988,7 +988,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_J_RUIZ',
         name: 'J. Ruiz',
         isOperational: true,
-        image: 'assets/stations/j_ruiz.jpg',
+        image: '',
         description:
           'Located in San Juan City, near J. Ruiz Street and residential areas.',
         edges: [
@@ -1023,7 +1023,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_V_MAPA',
         name: 'V. Mapa',
         isOperational: true,
-        image: 'assets/stations/v_mapa.jpg',
+        image: '',
         description: 'Located in Santa Mesa, Manila, near V. Mapa High School.',
         edges: [
           {
@@ -1057,7 +1057,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_PUREZA',
         name: 'Pureza',
         isOperational: true,
-        image: 'assets/stations/pureza.jpg',
+        image: '',
         description:
           'Situated in Santa Mesa, Manila, near educational institutions.',
         edges: [
@@ -1092,7 +1092,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_LEGARDA',
         name: 'Legarda',
         isOperational: true,
-        image: 'assets/stations/legarda.jpg',
+        image: '',
         description: 'Located in Sampaloc, Manila, near Legarda Street.',
         edges: [
           {
@@ -1126,7 +1126,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_RECTO',
         name: 'Recto',
         isOperational: true,
-        image: 'assets/stations/recto.jpg',
+        image: '',
         description:
           'Western terminus of LRT-2, located in Manila, near University Belt.',
         edges: [
@@ -1171,7 +1171,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_NORTH_AVENUE',
         name: 'North Avenue',
         isOperational: true,
-        image: 'assets/stations/north_avenue.jpg',
+        image: '',
         description:
           'Northern terminus of MRT-3, adjacent to TriNoma Mall and near SM City North EDSA.',
         edges: [
@@ -1188,7 +1188,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_QUEZON_AVENUE',
         name: 'Quezon Avenue',
         isOperational: true,
-        image: 'assets/stations/quezon_avenue.jpg',
+        image: '',
         description:
           'Located near the intersection of Quezon Avenue and EDSA, close to Eton Centris and various government offices.',
         edges: [
@@ -1211,7 +1211,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_GMA_KAMUNING',
         name: 'GMA-Kamuning',
         isOperational: true,
-        image: 'assets/stations/gma_kamuning.jpg',
+        image: '',
         description:
           'Situated near GMA Network Center and accessible to Kamuning Road.',
         edges: [
@@ -1234,7 +1234,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_CUBAO',
         name: 'Araneta Center-Cubao',
         isOperational: true,
-        image: 'assets/stations/cubao.jpg',
+        image: '',
         description:
           'Integrated with Araneta City, providing connections to LRT Line 2 and access to shopping centers like Gateway Mall.',
         edges: [
@@ -1270,7 +1270,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_SANTOLAN_ANNAPOLIS',
         name: 'Santolan-Annapolis',
         isOperational: true,
-        image: 'assets/stations/santolan_annapolis.jpg',
+        image: '',
         description:
           'Positioned near Greenhills Shopping Center and various commercial establishments.',
         edges: [
@@ -1293,7 +1293,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_ORTIGAS',
         name: 'Ortigas',
         isOperational: true,
-        image: 'assets/stations/ortigas.jpg',
+        image: '',
         description:
           'Serves the Ortigas Central Business District, with proximity to SM Megamall and Robinsons Galleria.',
         edges: [
@@ -1316,7 +1316,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_SHAW_BOULEVARD',
         name: 'Shaw Boulevard',
         isOperational: true,
-        image: 'assets/stations/shaw_boulevard.jpg',
+        image: '',
         description:
           'Located near Shangri-La Plaza and Starmall EDSA-Shaw, serving as a major transfer point for commuters.',
         edges: [
@@ -1339,7 +1339,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_BONI',
         name: 'Boni',
         isOperational: true,
-        image: 'assets/stations/boni.jpg',
+        image: '',
         description:
           'Provides access to the Pioneer area and nearby commercial establishments.',
         edges: [
@@ -1362,7 +1362,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_GUADALUPE',
         name: 'Guadalupe',
         isOperational: true,
-        image: 'assets/stations/guadalupe.jpg',
+        image: '',
         description:
           'Situated near Guadalupe Nuevo and Guadalupe Viejo, with access to the Pasig River ferry service.',
         edges: [
@@ -1385,7 +1385,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_BUENDIA',
         name: 'Buendia',
         isOperational: true,
-        image: 'assets/stations/buendia.jpg',
+        image: '',
         description:
           'Located near the Makati Central Business District, providing access to various offices and commercial centers.',
         edges: [
@@ -1408,7 +1408,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_AYALA',
         name: 'Ayala',
         isOperational: true,
-        image: 'assets/stations/ayala.jpg',
+        image: '',
         description:
           'Directly connected to Ayala Center, including Glorietta and Greenbelt malls, serving as a major hub for shoppers and professionals.',
         edges: [
@@ -1431,7 +1431,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_MAGALLANES',
         name: 'Magallanes',
         isOperational: true,
-        image: 'assets/stations/magallanes.jpg',
+        image: '',
         description:
           'Positioned near the Magallanes Village and provides access to the South Luzon Expressway (SLEX).',
         edges: [
@@ -1454,7 +1454,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_TAFT_AVENUE',
         name: 'Taft Avenue',
         isOperational: true,
-        image: 'assets/stations/taft_avenue.jpg',
+        image: '',
         description:
           'Southern terminus of MRT-3, located at the intersection of EDSA and Taft Avenue in Pasay City. Provides a vital transfer point to LRT Line 1 via a connecting footbridge to EDSA Station, facilitating seamless north-south travel across Metro Manila.',
         edges: [

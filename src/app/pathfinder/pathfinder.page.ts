@@ -109,23 +109,61 @@ export class PathFinderPage implements OnInit {
     }
   }
 
-  startStation: any = null;
-  endStation: any = null;
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const startStationCode = params['startStationCode'];
-      const endStationCode = params['endStationCode'];
+      this.selectedStartStationCode = params['startStationCode'];
+      this.selectedEndStationCode = params['endStationCode'];
 
-      this.startStation =
-        this.transitService.getStationByCode(startStationCode);
-      this.endStation = this.transitService.getStationByCode(endStationCode);
+      if (this.selectedStartStationCode) {
+        this.preselectStartStation(this.selectedStartStationCode);
+      }
 
-      if (this.startStation && this.endStation) {
+      if (this.selectedEndStationCode) {
+        this.preselectEndStation(this.selectedEndStationCode);
+      }
+
+      if (this.selectedStartStationCode && this.selectedEndStationCode) {
         this.calculatePath();
       }
     });
 
     this.onRouteChange(); // Initialize the current route
+  }
+
+  // preselect the start line and station
+  preselectStartStation(stationCode: string) {
+    const station = this.allStationsFlatObj[stationCode];
+    if (!station) {
+      console.error('Invalid station code:', stationCode);
+      return;
+    }
+
+    // Set the selected start line
+    this.selectedStartLineCode = station.lineCode;
+
+    // Filter stations based on the selected start line
+    this.filterStartStations();
+
+    // Set the selected start station
+    this.selectedStartStationCode = stationCode;
+  }
+
+  // preselect the end line and station
+  preselectEndStation(stationCode: string) {
+    const station = this.allStationsFlatObj[stationCode];
+    if (!station) {
+      console.error('Invalid station code:', stationCode);
+      return;
+    }
+
+    // Set the selected end line
+    this.selectedEndLineCode = station.lineCode;
+
+    // Filter stations based on the selected end line
+    this.filterEndStations();
+
+    // Set the selected end station
+    this.selectedEndStationCode = stationCode;
   }
 
   onStartLineChange() {

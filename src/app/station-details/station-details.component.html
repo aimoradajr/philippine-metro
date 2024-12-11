@@ -11,12 +11,22 @@
 
 <ion-content>
   <ion-img
-    [src]="station?.image"
-    style="max-height: 50%; object-fit: cover; width: 100%"
+    [src]="station?.image || defaultStationImage"
+    style="
+      max-height: 200px;
+      max-width: 100%;
+      object-fit: cover;
+      overflow: hidden;
+    "
   ></ion-img>
+
   <p>{{ station?.description }}</p>
+
+  <ion-button expand="full" (click)="startHere(station)">
+    Start Here
+  </ion-button>
   <ion-button expand="full" (click)="getDirections(station)">
-    Get Directions
+    Go Here
   </ion-button>
   <!-- Additional content and buttons -->
 </ion-content>
