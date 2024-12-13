@@ -26,6 +26,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -61,6 +62,7 @@ import { Edge, Station } from '../core/transit.config';
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    IonBadge,
   ],
 })
 export class PathFinderPage implements OnInit {
@@ -274,15 +276,30 @@ export class PathFinderPage implements OnInit {
     return paths.map(({ path, cost }) => {
       const enrichedPath = path.map((stationCode, index, arr) => {
         const station = this.allStationsFlatObj?.[stationCode] || {};
+        const prevStationCode = index > 0 ? arr[index - 1] : null;
         const nextStationCode = index < arr.length - 1 ? arr[index + 1] : null;
+
+        // Find the edge from the previous station to the current station
+        const activatedEdgePrev = station.edges?.find(
+          (edge: Edge) => edge.to === prevStationCode
+        );
 
         // Find the edge from the current station to the next station
         const activatedEdge = station.edges?.find(
           (edge: Edge) => edge.to === nextStationCode
         );
 
+        // mark stations that are just in between inter-station transfers
+        if (
+          activatedEdgePrev?.transferType === 'inter-station' &&
+          activatedEdge?.transferType === 'inter-station'
+        ) {
+          station.isInBetweenStationTransfer = true;
+        }
+
         return {
           ...station,
+          activatedEdgePrev: activatedEdgePrev || null,
           activatedEdge: activatedEdge || null,
         };
       });
@@ -310,5 +327,10 @@ export class PathFinderPage implements OnInit {
         totalDuration,
       };
     });
+  }
+
+  isPathCollapsed: boolean = false;
+  togglePathCollapse() {
+    this.isPathCollapsed = !this.isPathCollapsed;
   }
 }

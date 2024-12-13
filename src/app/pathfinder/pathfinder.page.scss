@@ -48,3 +48,16 @@ ion-thumbnail {
 .station-icon {
   color: #007bff; // Example color
 }
+
+.collapsed-stations {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 5px 0;
+}
+
+.collapsed-stations ion-badge {
+  margin-right: 4px;
+  background-color: #ccc;
+  color: #000;
+}
