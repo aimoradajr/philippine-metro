@@ -93,7 +93,7 @@
 
     <!-- Route Summary -->
     <ion-toolbar>
-      <div class="route-summary">
+      <div class="route-summary" style="padding-left: 5px; padding-right: 5px">
         <div class="summary-item">
           <p><strong>Time:</strong> {{ currentRoute?.totalDuration }} mins</p>
         </div>
@@ -111,14 +111,15 @@
         <div class="summary-item">
           <p><strong>Changes:</strong> {{ currentRoute?.transfers }}</p>
         </div>
+        <!-- <div>
+          <ion-button (click)="togglePathCollapse()">
+            <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
+          </ion-button>
+        </div> -->
       </div>
     </ion-toolbar>
   </ng-container>
 </ion-header>
-
-<ion-button (click)="togglePathCollapse()">
-  {{ isPathCollapsed ? 'Expand' : 'Collapse' }} In-Between Stations
-</ion-button>
 
 <ng-container
   *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
@@ -132,38 +133,39 @@
         <ng-container
           *ngIf="isPathCollapsed && station.isInBetweenStationTransfer; else expandedView"
         >
-          <div class="collapsed-stations">
-            <ion-badge>{{ station.name }}</ion-badge>
-          </div>
+          <ion-item>
+            <!-- <ion-badge slot="start">{{ i + 1 }}</ion-badge> -->
+            <ion-label>{{ station.name }}</ion-label>
+            <!-- <ion-chip
+              [style.background-color]="station.lineBgColor || '#CCC'"
+              [style.color]="station.lineTextColor || '#000'"
+            >
+              {{ station.lineCode }}
+            </ion-chip> -->
+          </ion-item>
         </ng-container>
 
         <!-- Expanded View -->
         <ng-template #expandedView>
           <ion-item>
-            <div class="station-number">{{ i + 1 }}</div>
-            <div class="station-details">
-              <ion-avatar slot="start">
-                <ion-icon name="ellipse" class="station-icon"></ion-icon>
-              </ion-avatar>
-              <div>
-                <h3>{{ station.name }}</h3>
-                INTER: {{ station.isInBetweenStationTransfer }}
-                <ion-chip
-                  [style.background-color]="station.lineBgColor || '#CCC'"
-                  [style.color]="station.lineTextColor || '#000'"
-                >
-                  {{ station.lineCode }}
-                </ion-chip>
-                {{ station?.activatedEdge?.transferType | json }}
-                <p
-                  *ngIf="station?.activatedEdge?.transferType === 'inter-line'"
-                  class="inter-line-change"
-                >
-                  Change from {{ station.activatedEdge.from }} to {{
-                  station.activatedEdge.to }}
-                </p>
-              </div>
-            </div>
+            <ion-badge slot="start">{{ i + 1 }}</ion-badge>
+            <ion-label>{{ station.name }}</ion-label>
+            <ion-chip
+              [style.background-color]="station.lineBgColor || '#CCC'"
+              [style.color]="station.lineTextColor || '#000'"
+            >
+              {{ station.lineCode }}
+            </ion-chip>
+          </ion-item>
+
+          <ion-item
+            *ngIf="station?.activatedEdge?.transferType === 'inter-line'"
+          >
+            <!-- {{ station?.activatedEdge?.transferType | json }} -->
+            <p class="inter-line-change">
+              Change from {{ station.activatedEdge.from }} to {{
+              station.activatedEdge.to }}
+            </p>
           </ion-item>
         </ng-template>
       </ng-container>

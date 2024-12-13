@@ -32,6 +32,10 @@ import {
   warningSharp,
   bookmarkOutline,
   bookmarkSharp,
+  accessibilityOutline,
+  trainOutline,
+  arrowForwardCircleOutline,
+  mapOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -81,6 +85,10 @@ export class AppComponent {
       warningSharp,
       bookmarkOutline,
       bookmarkSharp,
+      accessibilityOutline,
+      trainOutline,
+      arrowForwardCircleOutline,
+      mapOutline,
     });
   }
 }

@@ -32,7 +32,10 @@
       (click)="openStationDetails(station)"
     >
       <ion-thumbnail slot="start">
-        <img [src]="station.image" alt="{{ station.name }}" />
+        <img
+          [src]="station.image || defaultStationThumbnail"
+          alt="{{ station.name }}"
+        />
       </ion-thumbnail>
       <ion-label>
         <h2>{{ station.name }}</h2>

@@ -19,8 +19,9 @@ import {
 } from '@ionic/angular/standalone';
 import { StationDetailsComponent } from '../../station-details/station-details.component';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransitService } from 'src/app/core/transit.service';
+import { AppConfig } from 'src/app/core/config';
 
 @Component({
   selector: 'app-line-viewer',
@@ -49,10 +50,13 @@ import { TransitService } from 'src/app/core/transit.service';
 export class LineViewerPage implements OnInit {
   transitLines: any[] = [];
 
+  defaultStationThumbnail = AppConfig.defaultStationThumbnail;
+
   constructor(
     private modalController: ModalController,
     private route: ActivatedRoute,
-    private transitService: TransitService
+    private transitService: TransitService,
+    private router: Router
   ) {
     this.transitLines = this.transitService.getAllLines();
   }
@@ -70,7 +74,12 @@ export class LineViewerPage implements OnInit {
 
   selectedLine: any = null;
 
-  onLineChange(event: any) {}
+  onLineChange(event: any) {
+    const lineCode = event.detail.value.code;
+
+    // Update the route with the selected line code
+    this.router.navigate(['/lines/line-viewer', lineCode]);
+  }
 
   selectLineByCode(lineCode: string) {
     if (lineCode) {

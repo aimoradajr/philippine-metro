@@ -3,7 +3,7 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <!-- Default Main Menu Items -->
-        <ion-list>
+        <!-- <ion-list>
           <ion-list-header>
             <ion-label>Main Menu</ion-label>
           </ion-list-header>
@@ -15,12 +15,19 @@
             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
             <ion-label>Credits</ion-label>
           </ion-item>
-        </ion-list>
+          <ion-item
+            routerLink="/version-history"
+            routerLinkActive="active-item"
+          >
+            <ion-icon slot="start" name="time-outline"></ion-icon>
+            <ion-label>Version History</ion-label>
+          </ion-item>
+        </ion-list> -->
 
         <!-- Pathfinder -->
         <ion-list>
           <ion-list-header>
-            <ion-label>Pathfinder</ion-label>
+            <ion-label>Home</ion-label>
           </ion-list-header>
 
           <!-- Pathfinder -->
@@ -28,8 +35,11 @@
             [routerLink]="['/pathfinder']"
             routerLinkActive="active-item"
           >
-            <ion-icon slot="start" name="navigate-outline"></ion-icon>
-            <ion-label>Pathfinder</ion-label>
+            <ion-icon
+              slot="start"
+              name="arrow-forward-circle-outline"
+            ></ion-icon>
+            <ion-label>Trip Planner</ion-label>
           </ion-item>
         </ion-list>
 
@@ -38,15 +48,6 @@
           <ion-list-header>
             <ion-label>Lines</ion-label>
           </ion-list-header>
-
-          <!-- MRT 3 -->
-          <ion-item
-            [routerLink]="['/lines/line-viewer/', 'MRT3']"
-            routerLinkActive="active-item"
-          >
-            <ion-icon slot="start" name="subway-outline"></ion-icon>
-            <ion-label>MRT 3</ion-label>
-          </ion-item>
 
           <!-- LRT 1 -->
           <ion-item
@@ -62,8 +63,32 @@
             [routerLink]="['/lines/line-viewer/', 'LRT2']"
             routerLinkActive="active-item"
           >
-            <ion-icon slot="start" name="train-sharp"></ion-icon>
+            <ion-icon slot="start" name="train-outline"></ion-icon>
             <ion-label>LRT 2</ion-label>
+          </ion-item>
+
+          <!-- MRT 3 -->
+          <ion-item
+            [routerLink]="['/lines/line-viewer/', 'MRT3']"
+            routerLinkActive="active-item"
+          >
+            <ion-icon slot="start" name="train-outline"></ion-icon>
+            <ion-label>MRT 3</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- More -->
+        <ion-list>
+          <ion-item routerLink="/map" routerLinkActive="active-item">
+            <ion-icon slot="start" name="map-outline"></ion-icon>
+            <ion-label>Map</ion-label>
+          </ion-item>
+          <ion-item
+            routerLink="/version-history"
+            routerLinkActive="active-item"
+          >
+            <ion-icon slot="start" name="accessibility-outline"></ion-icon>
+            <ion-label>Version History</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>

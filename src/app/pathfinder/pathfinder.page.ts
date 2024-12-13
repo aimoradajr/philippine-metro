@@ -32,6 +32,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TransitService } from '../core/transit.service';
 import { Edge, Station } from '../core/transit.config';
+import { addIcons } from 'ionicons';
+import { expandOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-pathfinder',
@@ -98,6 +100,10 @@ export class PathFinderPage implements OnInit {
     private route: ActivatedRoute,
     private transitService: TransitService
   ) {
+    addIcons({
+      expandOutline,
+    });
+
     this.allLines = this.transitService.getAllLines();
     this.allStationsFlatObj = this.transitService.getAllStationsFlatObj();
 
@@ -305,12 +311,12 @@ export class PathFinderPage implements OnInit {
           (edge: Edge) => edge.to === nextStationCode
         );
 
-        // mark stations that are just in between inter-station transfers
         if (
           activatedEdgePrev?.transferType === 'inter-station' &&
           activatedEdge?.transferType === 'inter-station' &&
           activatedEdgePrev?.lineCode === activatedEdge?.lineCode
         ) {
+          // mark stations that are just in between inter-station transfers
           station.isInBetweenStationTransfer = true;
         }
 
@@ -346,7 +352,7 @@ export class PathFinderPage implements OnInit {
     });
   }
 
-  isPathCollapsed: boolean = true;
+  isPathCollapsed: boolean = false;
   togglePathCollapse() {
     this.isPathCollapsed = !this.isPathCollapsed;
   }

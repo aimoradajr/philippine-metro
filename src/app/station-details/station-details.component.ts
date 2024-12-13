@@ -12,6 +12,8 @@ import {
   IonImg,
 } from '@ionic/angular/standalone';
 import { AppConfig } from '../core/config'; // Adjust the path as needed
+import { addIcons } from 'ionicons';
+import { close } from 'ionicons/icons';
 
 @Component({
   selector: 'app-station-details',
@@ -37,7 +39,11 @@ export class StationDetailsComponent {
   constructor(
     private modalController: ModalController,
     private router: Router
-  ) {}
+  ) {
+    addIcons({
+      close,
+    });
+  }
 
   dismissModal() {
     this.modalController.dismiss();

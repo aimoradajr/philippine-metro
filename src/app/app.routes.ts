@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
+    redirectTo: 'pathfinder',
     pathMatch: 'full',
   },
   {
@@ -31,5 +31,16 @@ export const routes: Routes = [
     path: 'pathfinder',
     loadComponent: () =>
       import('./pathfinder/pathfinder.page').then((m) => m.PathFinderPage),
+  },
+  {
+    path: 'version-history',
+    loadComponent: () =>
+      import('./version-history/version-history.page').then(
+        (m) => m.VersionHistoryPage
+      ),
+  },
+  {
+    path: 'map',
+    loadComponent: () => import('./map/map.page').then((m) => m.MapPage),
   },
 ];
