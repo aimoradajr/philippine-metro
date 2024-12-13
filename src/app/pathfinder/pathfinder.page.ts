@@ -113,8 +113,10 @@ export class PathFinderPage implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.selectedStartStationCode = params['startStationCode'];
-      this.selectedEndStationCode = params['endStationCode'];
+      this.selectedStartStationCode =
+        params['startStationCode'] || localStorage.getItem('startStationCode');
+      this.selectedEndStationCode =
+        params['endStationCode'] || localStorage.getItem('endStationCode');
 
       if (this.selectedStartStationCode) {
         this.preselectStartStation(this.selectedStartStationCode);
@@ -130,6 +132,12 @@ export class PathFinderPage implements OnInit {
     });
 
     this.onRouteChange(); // Initialize the current route
+  }
+
+  loadLastSelection() {
+    // Load the last selected stations from localStorage
+    this.selectedStartStationCode = localStorage.getItem('startStationCode');
+    this.selectedEndStationCode = localStorage.getItem('endStationCode');
   }
 
   // preselect the start line and station
@@ -228,7 +236,7 @@ export class PathFinderPage implements OnInit {
     }
   }
 
-  calculatePath() {
+  calculatePathDijstra() {
     if (!this.selectedStartStationCode || !this.selectedEndStationCode) {
       console.error('Both start and end stations must be selected');
       return;
@@ -245,6 +253,10 @@ export class PathFinderPage implements OnInit {
     }
   }
 
+  calculatePath() {
+    this.calculateKPaths();
+  }
+
   calculatedPaths: any[] = [];
   calculatedPathsEnriched: any[] = [];
   isCalculationDone: boolean = false; // Tracks if calculation has been performed
@@ -253,6 +265,10 @@ export class PathFinderPage implements OnInit {
       console.error('Both start and end stations must be selected');
       return;
     }
+
+    // save start and end to local storage
+    localStorage.setItem('startStationCode', this.selectedStartStationCode);
+    localStorage.setItem('endStationCode', this.selectedEndStationCode);
 
     try {
       this.calculatedPaths = this.transitService.findKShortestPaths(
@@ -292,7 +308,8 @@ export class PathFinderPage implements OnInit {
         // mark stations that are just in between inter-station transfers
         if (
           activatedEdgePrev?.transferType === 'inter-station' &&
-          activatedEdge?.transferType === 'inter-station'
+          activatedEdge?.transferType === 'inter-station' &&
+          activatedEdgePrev?.lineCode === activatedEdge?.lineCode
         ) {
           station.isInBetweenStationTransfer = true;
         }
@@ -329,7 +346,7 @@ export class PathFinderPage implements OnInit {
     });
   }
 
-  isPathCollapsed: boolean = false;
+  isPathCollapsed: boolean = true;
   togglePathCollapse() {
     this.isPathCollapsed = !this.isPathCollapsed;
   }
