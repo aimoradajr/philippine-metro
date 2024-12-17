@@ -12,6 +12,12 @@ export interface Edge {
 
   // geo
   path?: { lat: number; lng: number }[]; // Sequence of coordinates defining the path
+
+  // auto derived line properties
+  lineCode?: string;
+  lineColor?: string;
+  lineBgColor?: string;
+  lineTextColor?: string;
 }
 
 export interface Station {
@@ -25,6 +31,12 @@ export interface Station {
 
   // geo
   coordinates?: { lat: number; lng: number }; // Geographic coordinates
+
+  // auto derived line properties
+  lineCode?: string;
+  lineColor?: string;
+  lineBgColor?: string;
+  lineTextColor?: string;
 }
 
 export interface TransitLine {
@@ -40,7 +52,7 @@ export const TRANSIT_LINES: TransitLine[] = [
   {
     name: 'LRT 1',
     code: 'LRT1',
-    color: 'green',
+    color: 'purple',
     bgColor: 'green',
     textColor: 'white',
     stations: [
@@ -885,7 +897,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.474573544628553, lng: 120.97574500672548 }, // Las Piñas
         edges: [
           {
-            to: 'LRT1_MANILA_CAVITE_TOLL',
+            to: 'LRT1_DR_SANTOS',
             weight: 3,
             isOperational: false,
             transferType: 'inter-station',

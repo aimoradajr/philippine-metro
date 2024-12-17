@@ -200,16 +200,61 @@ export class TransitService {
   getAllStationsFlatObj() {
     return this.transitLines.reduce((acc: Record<string, any>, line) => {
       line.stations.forEach((station: any) => {
-        acc[station.code] = {
+        let newStation = {
           ...station,
           lineCode: line.code,
           lineColor: line.color,
           lineBgColor: line.bgColor,
           lineTextColor: line.textColor,
         };
+
+        // attach line config to each edge
+        if (station.edges) {
+          newStation.edges = station.edges.map((edge: any) => {
+            return {
+              ...edge,
+              lineCode: line.code,
+              lineColor: line.color,
+              lineBgColor: line.bgColor,
+              lineTextColor: line.textColor,
+            };
+          });
+        }
+
+        acc[station.code] = newStation;
       });
       return acc;
     }, {} as Record<string, any>);
+  }
+
+  getAllStationsFlatArray() {
+    return this.transitLines.reduce((acc: any[], line) => {
+      line.stations.forEach((station) => {
+        let newStation = {
+          ...station,
+          lineCode: line.code,
+          lineColor: line.color,
+          lineBgColor: line.bgColor,
+          lineTextColor: line.textColor,
+        };
+
+        // attach line config to each edge
+        if (station.edges) {
+          newStation.edges = station.edges.map((edge: any) => {
+            return {
+              ...edge,
+              lineCode: line.code,
+              lineColor: line.color,
+              lineBgColor: line.bgColor,
+              lineTextColor: line.textColor,
+            };
+          });
+        }
+
+        acc.push(newStation);
+      });
+      return acc;
+    }, []);
   }
 
   getLineByCode(code: string) {

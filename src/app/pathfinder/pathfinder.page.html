@@ -111,11 +111,15 @@
         <div class="summary-item">
           <p><strong>Changes:</strong> {{ currentRoute?.transfers }}</p>
         </div>
-        <!-- <div>
-          <ion-button (click)="togglePathCollapse()">
-            <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
-          </ion-button>
-        </div> -->
+      </div>
+
+      <div style="text-align: right; padding-left: 5px; padding-right: 5px">
+        <ion-button (click)="showPathInMap()">
+          <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="togglePathCollapse()">
+          <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
+        </ion-button>
       </div>
     </ion-toolbar>
   </ng-container>
@@ -125,7 +129,15 @@
   *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
 >
   <ion-content>
-    <ion-list>
+    <ng-container *ngIf="pathViewMode === 'list'">
+      <app-map-viewer
+        masterMapDisplayMode="minimal"
+        [highlightStationsArray]="highlightStationsArray"
+        [highlightEdgesArray]="highlightEdgesArray"
+      ></app-map-viewer>
+    </ng-container>
+
+    <ion-list *ngIf="pathViewMode === 'list'">
       <ng-container
         *ngFor="let station of currentRoute?.enrichedPath; let i = index"
       >

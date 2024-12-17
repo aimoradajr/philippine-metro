@@ -1,0 +1,41 @@
+<google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
+  <!-- master: stations -->
+  <ng-container *ngFor="let station of stationsArray">
+    <map-marker
+      *ngIf="station.coordinates"
+      [position]="station.coordinates!"
+      [title]="station.name"
+      [label]="station.name"
+      [icon]="getStationIcon(station.isOperational)"
+    ></map-marker>
+  </ng-container>
+
+  <!-- master: edges -->
+  <ng-container *ngFor="let edge of edgesArray">
+    <map-polyline
+      *ngIf="edge.path"
+      [path]="edge.path"
+      [options]="getEdgeOptions(edge)"
+    ></map-polyline>
+  </ng-container>
+
+  <!-- highlight: stations -->
+  <ng-container *ngFor="let station of highlightStationsArray">
+    <map-marker
+      *ngIf="station.coordinates"
+      [position]="station.coordinates!"
+      [title]="station.name"
+      [label]="station.name"
+      [icon]="getStationIcon(station.isOperational, 'highlight')"
+    ></map-marker>
+  </ng-container>
+
+  <!-- highlight: edges -->
+  <ng-container *ngFor="let edge of highlightEdgesArray">
+    <map-polyline
+      *ngIf="edge.path"
+      [path]="edge.path"
+      [options]="getEdgeOptions(edge, 'highlight')"
+    ></map-polyline>
+  </ng-container>
+</google-map>

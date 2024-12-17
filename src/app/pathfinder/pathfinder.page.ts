@@ -34,6 +34,7 @@ import { TransitService } from '../core/transit.service';
 import { Edge, Station } from '../core/transit.config';
 import { addIcons } from 'ionicons';
 import { expandOutline } from 'ionicons/icons';
+import { MapViewerComponent } from '../map/map-viewer/map-viewer';
 
 @Component({
   selector: 'app-pathfinder',
@@ -65,6 +66,7 @@ import { expandOutline } from 'ionicons/icons';
     IonCardTitle,
     IonCardContent,
     IonBadge,
+    MapViewerComponent,
   ],
 })
 export class PathFinderPage implements OnInit {
@@ -355,5 +357,10 @@ export class PathFinderPage implements OnInit {
   isPathCollapsed: boolean = false;
   togglePathCollapse() {
     this.isPathCollapsed = !this.isPathCollapsed;
+  }
+
+  pathViewMode: 'map' | 'list' = 'list';
+  showPathInMap() {
+    this.pathViewMode = 'map';
   }
 }
