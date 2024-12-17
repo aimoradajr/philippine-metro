@@ -9,6 +9,9 @@ export interface Edge {
   accessibility?: string;
   additionalCost?: string;
   direction?: string; // northbound, southbound, eastbound, westbound, clockwise, counterclockwise
+
+  // geo
+  path?: { lat: number; lng: number }[]; // Sequence of coordinates defining the path
 }
 
 export interface Station {
@@ -19,6 +22,9 @@ export interface Station {
   image?: string;
   description?: string;
   edges?: Edge[];
+
+  // geo
+  coordinates?: { lat: number; lng: number }; // Geographic coordinates
 }
 
 export interface TransitLine {
@@ -46,12 +52,17 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Northern terminus of LRT-1, serving the Muñoz area in Quezon City.',
+        coordinates: { lat: 14.65765, lng: 121.02121 }, // FPJ Station
         edges: [
           {
             to: 'LRT1_BALINTAWAK',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.6575, lng: 121.0207 },
+              { lat: 14.65745, lng: 121.00378 },
+            ],
           },
         ],
       },
@@ -62,18 +73,27 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Quezon City, near Balintawak Market.',
+        coordinates: { lat: 14.65745, lng: 121.00378 }, // Balintawak Station
         edges: [
           {
             to: 'LRT1_FPJ',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.65765, lng: 121.02121 },
+              { lat: 14.65745, lng: 121.00378 },
+            ],
           },
           {
             to: 'LRT1_MONUMENTO',
             weight: 4,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.65745, lng: 121.00378 },
+              { lat: 14.65444, lng: 120.98378 },
+            ],
           },
         ],
       },
@@ -85,18 +105,27 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'A major station in Caloocan City, near the Bonifacio Monument.',
+        coordinates: { lat: 14.65444, lng: 120.98378 }, // Monumento Station
         edges: [
           {
             to: 'LRT1_BALINTAWAK',
             weight: 4,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.65745, lng: 121.00378 },
+              { lat: 14.65444, lng: 120.98378 },
+            ],
           },
           {
             to: 'LRT1_5TH_AVENUE',
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.65444, lng: 120.98378 },
+              { lat: 14.644455, lng: 120.983474 },
+            ],
           },
         ],
       },
@@ -107,18 +136,27 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Caloocan City, near 5th Avenue.',
+        coordinates: { lat: 14.644455, lng: 120.983474 }, // 5th Avenue Station
         edges: [
           {
             to: 'LRT1_MONUMENTO',
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.65444, lng: 120.98378 },
+              { lat: 14.644455, lng: 120.983474 },
+            ],
           },
           {
             to: 'LRT1_R_PAPA',
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.644455, lng: 120.983474 },
+              { lat: 14.63619, lng: 120.98239 },
+            ],
           },
         ],
       },
@@ -129,18 +167,27 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Situated in Manila, near R. Papa Street.',
+        coordinates: { lat: 14.63619, lng: 120.98239 }, // R. Papa Station
         edges: [
           {
             to: 'LRT1_5TH_AVENUE',
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.644455, lng: 120.983474 },
+              { lat: 14.63619, lng: 120.98239 },
+            ],
           },
           {
             to: 'LRT1_ABAD_SANTOS',
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.63619, lng: 120.98239 },
+              { lat: 14.63061, lng: 120.98147 },
+            ],
           },
         ],
       },

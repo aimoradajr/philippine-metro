@@ -14,6 +14,28 @@
     </ion-toolbar>
   </ion-header>
 
+  <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
+    <ng-container *ngFor="let station of stationsArray">
+      <map-marker
+        *ngIf="station.coordinates"
+        [position]="station.coordinates!"
+        [title]="station.name"
+      ></map-marker>
+    </ng-container>
+
+    <ng-container *ngFor="let edge of edgesArray">
+      <map-polyline
+        *ngIf="edge.path"
+        [path]="edge.path"
+        [options]="{
+      strokeColor: edge.isOperational ? '#00FF00' : '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    }"
+      ></map-polyline>
+    </ng-container>
+  </google-map>
+
   <!-- Add visible content here -->
   <div id="main-content">
     <!-- <h1>Home</h1> -->
