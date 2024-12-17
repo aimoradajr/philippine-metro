@@ -298,6 +298,9 @@ export class PathFinderPage implements OnInit {
 
   enrichPaths(paths: { path: string[]; cost: number }[]): any[] {
     return paths.map(({ path, cost }) => {
+      let allStations: Station[] = [];
+      let allEdges: Edge[] = [];
+
       const enrichedPath = path.map((stationCode, index, arr) => {
         const station = this.allStationsFlatObj?.[stationCode] || {};
         const prevStationCode = index > 0 ? arr[index - 1] : null;
@@ -321,6 +324,10 @@ export class PathFinderPage implements OnInit {
           // mark stations that are just in between inter-station transfers
           station.isInBetweenStationTransfer = true;
         }
+
+        // Add station to allStations
+        allStations.push(station);
+        allEdges.push(activatedEdge);
 
         return {
           ...station,
@@ -350,6 +357,10 @@ export class PathFinderPage implements OnInit {
         cost,
         transfers,
         totalDuration,
+
+        // for mapping
+        allStations: allStations,
+        allEdges: allEdges,
       };
     });
   }
@@ -362,5 +373,9 @@ export class PathFinderPage implements OnInit {
   pathViewMode: 'map' | 'list' = 'list';
   showPathInMap() {
     this.pathViewMode = 'map';
+  }
+
+  showPathInList() {
+    this.pathViewMode = 'list';
   }
 }

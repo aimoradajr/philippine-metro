@@ -114,9 +114,13 @@
       </div>
 
       <div style="text-align: right; padding-left: 5px; padding-right: 5px">
-        <ion-button (click)="showPathInMap()">
+        <ion-button *ngIf="pathViewMode === 'list'" (click)="showPathInMap()">
           <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
         </ion-button>
+        <ion-button *ngIf="pathViewMode === 'map'" (click)="showPathInList()">
+          <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+        </ion-button>
+
         <ion-button (click)="togglePathCollapse()">
           <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
         </ion-button>
@@ -129,15 +133,15 @@
   *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
 >
   <ion-content>
-    <ng-container *ngIf="pathViewMode === 'list'">
+    <div [hidden]="pathViewMode !== 'map'">
       <app-map-viewer
         masterMapDisplayMode="minimal"
-        [highlightStationsArray]="highlightStationsArray"
-        [highlightEdgesArray]="highlightEdgesArray"
+        [highlightStationsArray]="currentRoute?.allStations || []"
+        [highlightEdgesArray]="currentRoute?.allEdges || []"
       ></app-map-viewer>
-    </ng-container>
+    </div>
 
-    <ion-list *ngIf="pathViewMode === 'list'">
+    <ion-list [hidden]="pathViewMode !== 'list'">
       <ng-container
         *ngFor="let station of currentRoute?.enrichedPath; let i = index"
       >
