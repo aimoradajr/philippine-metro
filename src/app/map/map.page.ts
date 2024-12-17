@@ -84,4 +84,20 @@ export class MapPage implements OnInit {
     this.stationsArray = stations; // TODO: get this function in transitService
     this.edgesArray = edgesWithPaths; // TODO: get this function in transitService
   }
+
+  // Customize marker options
+  markerOptions: google.maps.MarkerOptions = {
+    draggable: false,
+    icon: {
+      url: 'path/to/custom-icon.png', // Path to your custom icon
+      scaledSize: new google.maps.Size(40, 40), // Scale the icon to desired size
+    },
+    label: {
+      text: 'A', // Label text
+      color: '#FFFFFF', // Label color
+      fontSize: '16px', // Label font size
+      fontWeight: 'bold', // Label font weight
+    },
+    title: 'Custom Marker', // Tooltip text on hover
+  };
 }
