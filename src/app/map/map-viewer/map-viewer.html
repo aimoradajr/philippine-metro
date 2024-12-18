@@ -6,7 +6,7 @@
       [position]="station.coordinates!"
       [title]="station.name"
       [label]="station.name"
-      [icon]="getStationIcon(station.isOperational)"
+      [icon]="getStationIcon(station)"
     ></map-marker>
   </ng-container>
 
@@ -26,7 +26,17 @@
       [position]="station.coordinates!"
       [title]="station.name"
       [label]="station.name"
-      [icon]="getStationIcon(station.isOperational, 'highlight')"
+      [icon]="getStationIcon(station, 'highlight')"
+    ></map-marker>
+  </ng-container>
+
+  <!-- highlight: station actions -->
+  <ng-container *ngFor="let station of highlightStationsArray">
+    <map-marker
+      *ngIf="station.coordinates && station.stationAction !== null"
+      [position]="station.coordinates!"
+      [title]="station.name"
+      [icon]="getStationActionIcon(station)"
     ></map-marker>
   </ng-container>
 

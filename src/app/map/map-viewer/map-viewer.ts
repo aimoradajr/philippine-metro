@@ -55,44 +55,89 @@ export class MapViewerComponent implements OnInit {
 
   // Define icon objects with size and anchor properties
   stationActiveIcon: google.maps.Icon = {
-    url: 'assets/icon/station-active.png', // Path to your active station icon
+    url: 'assets/icons/station-active.png', // Path to your active station icon
     scaledSize: new google.maps.Size(30, 30), // Desired size
     anchor: new google.maps.Point(15, 15), // Anchor point
   };
   stationActiveIcon_Min: google.maps.Icon = {
-    url: 'assets/icon/station-active-min.png', // Path to your active station icon
+    url: 'assets/icons/station-active-min.png', // Path to your active station icon
     scaledSize: new google.maps.Size(8, 8), // Desired size
     anchor: new google.maps.Point(4, 4), // Anchor point
   };
 
   stationInactiveIcon: google.maps.Icon = {
-    url: 'assets/icon/station-inactive.png', // Path to your inactive station icon
+    url: 'assets/icons/station-inactive.png', // Path to your inactive station icon
     scaledSize: new google.maps.Size(30, 30), // Desired size
     anchor: new google.maps.Point(15, 15), // Anchor point
   };
   stationInactiveIcon_Min: google.maps.Icon = {
-    url: 'assets/icon/station-inactive-min.png', // Path to your inactive station icon
+    url: 'assets/icons/station-inactive-min.png', // Path to your inactive station icon
     scaledSize: new google.maps.Size(8, 8), // Desired size
     anchor: new google.maps.Point(4, 4), // Anchor point
   };
 
   // Function to determine the appropriate icon based on operational status
-  getStationIcon(isOperational: boolean, displayMode = ''): google.maps.Icon {
-    switch (displayMode || this.masterMapDisplayMode) {
+  getStationIcon(station: Station, displayMode = ''): google.maps.Icon {
+    const mode = displayMode || this.masterMapDisplayMode;
+    let icon;
+
+    switch (mode) {
       case 'highlight':
-        return isOperational
-          ? this.stationActiveIcon
-          : this.stationInactiveIcon;
+        icon = {
+          ...(station?.isOperational
+            ? this.stationActiveIcon
+            : this.stationInactiveIcon),
+        };
+        break;
       case 'minimal':
-        return isOperational
-          ? this.stationActiveIcon_Min
-          : this.stationInactiveIcon_Min;
+        icon = {
+          ...(station?.isOperational
+            ? this.stationActiveIcon_Min
+            : this.stationInactiveIcon_Min),
+        };
+        break;
       case 'base':
       default:
-        return isOperational
-          ? this.stationActiveIcon
-          : this.stationInactiveIcon;
+        icon = {
+          ...(station?.isOperational
+            ? this.stationActiveIcon
+            : this.stationInactiveIcon),
+        };
     }
+
+    // overrides
+    if (mode !== 'minimal') {
+      if (station.stationActiveIcon && station?.isOperational) {
+        icon.url = station.stationActiveIcon!;
+      }
+      if (station.stationInactiveIcon && !station?.isOperational) {
+        icon.url = station.stationInactiveIcon!;
+      }
+    }
+
+    return icon;
+  }
+
+  getStationActionIcon(station: Station): google.maps.Icon {
+    // Clone the base icon
+    let icon: google.maps.Icon = {
+      url: 'assets/icons/station-action-board.png', // Path to your active station icon
+      scaledSize: new google.maps.Size(30, 30), // Desired size
+      anchor: new google.maps.Point(15, 55), // Anchor point
+    };
+
+    // Override icon for specific station types
+    if (station.stationAction === 'board-initial') {
+      icon.url = 'assets/icons/station-action-board-initial.png';
+    } else if (station.stationAction === 'board') {
+      icon.url = 'assets/icons/station-action-board.png';
+    } else if (station.stationAction === 'alight-and-transfer') {
+      icon.url = 'assets/icons/station-action-alight-and-transfer.png';
+    } else if (station.stationAction === 'alight-end') {
+      icon.url = 'assets/icons/station-action-alight-end.png';
+    }
+
+    return icon;
   }
 
   // Define polyline options for operational and non-operational edges
@@ -105,7 +150,7 @@ export class MapViewerComponent implements OnInit {
   operationalEdgeOptions_Min: google.maps.PolylineOptions = {
     strokeColor: '#00FF00', // Green color for operational edges
     strokeOpacity: 1.0,
-    strokeWeight: 1, // Thiner line
+    strokeWeight: 2, // Thiner line
     icons: [], // Solid
   };
   operationalEdgeOptions_Highlight: google.maps.PolylineOptions = {
@@ -134,16 +179,16 @@ export class MapViewerComponent implements OnInit {
   nonOperationalEdgeOptions_Min: google.maps.PolylineOptions = {
     strokeColor: 'orange', // Red color for non-operational edges
     strokeOpacity: 0,
-    strokeWeight: 1, // Thiner line
+    strokeWeight: 2, // Thiner line
     icons: [
       {
         icon: {
           path: 'M 0,-1 0,1', // Simple line segment
           strokeOpacity: 1,
-          scale: 4, // Controls dash thickness
+          scale: 2, // Controls dash thickness
         }, // Dashed line symbol
         offset: '0', // Start at the beginning
-        repeat: '20px', // Distance between dashes
+        repeat: '10px', // Distance between dashes
       },
     ],
   };
@@ -170,25 +215,35 @@ export class MapViewerComponent implements OnInit {
 
     switch (displayMode || this.masterMapDisplayMode) {
       case 'highlight':
-        edgeOptions = edge?.isOperational
-          ? this.operationalEdgeOptions_Highlight
-          : this.nonOperationalEdgeOptions_Highlight;
+        edgeOptions = {
+          ...(edge?.isOperational
+            ? this.operationalEdgeOptions_Highlight
+            : this.nonOperationalEdgeOptions_Highlight),
+        };
         break;
       case 'minimal':
-        edgeOptions = edge?.isOperational
-          ? this.operationalEdgeOptions_Min
-          : this.nonOperationalEdgeOptions_Min;
+        edgeOptions = {
+          ...(edgeOptions = edge?.isOperational
+            ? this.operationalEdgeOptions_Min
+            : this.nonOperationalEdgeOptions_Min),
+        };
         break;
       case 'base':
       default:
-        edgeOptions = edge?.isOperational
-          ? this.operationalEdgeOptions
-          : this.nonOperationalEdgeOptions;
+        edgeOptions = {
+          ...(edge?.isOperational
+            ? this.operationalEdgeOptions
+            : this.nonOperationalEdgeOptions),
+        };
     }
 
     // apply station.lineColor to edgeOptions.strokeColor
     if (edge.lineColor) {
       edgeOptions.strokeColor = edge.lineColor;
+    }
+
+    if (edge.transferType === 'inter-line') {
+      edgeOptions.strokeColor = 'black';
     }
 
     return edgeOptions;

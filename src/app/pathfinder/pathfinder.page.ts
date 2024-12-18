@@ -33,7 +33,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TransitService } from '../core/transit.service';
 import { Edge, Station } from '../core/transit.config';
 import { addIcons } from 'ionicons';
-import { expandOutline } from 'ionicons/icons';
+import { expandOutline, listOutline, mapOutline } from 'ionicons/icons';
 import { MapViewerComponent } from '../map/map-viewer/map-viewer';
 
 @Component({
@@ -104,6 +104,8 @@ export class PathFinderPage implements OnInit {
   ) {
     addIcons({
       expandOutline,
+      mapOutline,
+      listOutline,
     });
 
     this.allLines = this.transitService.getAllLines();
@@ -306,40 +308,72 @@ export class PathFinderPage implements OnInit {
         const prevStationCode = index > 0 ? arr[index - 1] : null;
         const nextStationCode = index < arr.length - 1 ? arr[index + 1] : null;
 
+        let stationAction:
+          | 'board-initial'
+          | 'board'
+          | 'alight-and-transfer'
+          | 'alight-end'
+          | null = null;
+
+        if (index === 0) {
+          // start station
+          stationAction = 'board-initial';
+        } else if (index === arr.length - 1) {
+          // end station
+          stationAction = 'alight-end';
+        }
+
         // Find the edge from the previous station to the current station
-        const activatedEdgePrev = station.edges?.find(
+        const prevEdge = station.edges?.find(
           (edge: Edge) => edge.to === prevStationCode
         );
 
         // Find the edge from the current station to the next station
-        const activatedEdge = station.edges?.find(
+        const nextEdge = station.edges?.find(
           (edge: Edge) => edge.to === nextStationCode
         );
 
         if (
-          activatedEdgePrev?.transferType === 'inter-station' &&
-          activatedEdge?.transferType === 'inter-station' &&
-          activatedEdgePrev?.lineCode === activatedEdge?.lineCode
+          prevEdge?.transferType === 'inter-station' &&
+          nextEdge?.transferType === 'inter-station' &&
+          prevEdge?.lineCode === nextEdge?.lineCode
         ) {
           // mark stations that are just in between inter-station transfers
           station.isInBetweenStationTransfer = true;
         }
 
-        // Add station to allStations
-        allStations.push(station);
-        allEdges.push(activatedEdge);
+        // alight and transfer to another line
+        if (nextEdge?.transferType === 'inter-line') {
+          stationAction = 'alight-and-transfer';
+        }
 
-        return {
+        // board from another line
+        if (prevEdge?.transferType === 'inter-line') {
+          stationAction = 'board';
+        }
+
+        // path node
+        const pathStation = {
           ...station,
-          activatedEdgePrev: activatedEdgePrev || null,
-          activatedEdge: activatedEdge || null,
+          stationAction: stationAction,
+          prevEdge: prevEdge || null,
+          nextEdge: nextEdge || null,
         };
+
+        // Add station to allStations for mapping
+        allStations.push({
+          ...station,
+          stationAction: stationAction,
+        });
+        allEdges.push(nextEdge);
+
+        return pathStation;
       });
 
       // Calculate interline transfers
       const transfers = enrichedPath.reduce(
         (transferCount, station) =>
-          station.activatedEdge?.transferType === 'inter-line'
+          station.nextEdge?.transferType === 'inter-line'
             ? transferCount + 1
             : transferCount,
         0

@@ -206,6 +206,9 @@ export class TransitService {
           lineColor: line.color,
           lineBgColor: line.bgColor,
           lineTextColor: line.textColor,
+
+          stationActiveIcon: line.stationActiveIcon,
+          stationInactiveIcon: line.stationInactiveIcon,
         };
 
         // attach line config to each edge
@@ -217,6 +220,9 @@ export class TransitService {
               lineColor: line.color,
               lineBgColor: line.bgColor,
               lineTextColor: line.textColor,
+
+              stationActiveIcon: line.stationActiveIcon,
+              stationInactiveIcon: line.stationInactiveIcon,
             };
           });
         }
@@ -236,6 +242,9 @@ export class TransitService {
           lineColor: line.color,
           lineBgColor: line.bgColor,
           lineTextColor: line.textColor,
+
+          stationActiveIcon: line.stationActiveIcon,
+          stationInactiveIcon: line.stationInactiveIcon,
         };
 
         // attach line config to each edge
@@ -247,6 +256,9 @@ export class TransitService {
               lineColor: line.color,
               lineBgColor: line.bgColor,
               lineTextColor: line.textColor,
+
+              stationActiveIcon: line.stationActiveIcon,
+              stationInactiveIcon: line.stationInactiveIcon,
             };
           });
         }

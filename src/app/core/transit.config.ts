@@ -1,3 +1,46 @@
+export interface TransitLine {
+  name: string;
+  code: string;
+  stations: Station[];
+  color?: string;
+  bgColor?: string;
+  textColor?: string;
+
+  stationActiveIcon?: string; // file path to icon
+  stationInactiveIcon?: string; // file path to icon
+}
+
+export interface Station {
+  id: number;
+  code: string;
+  name: string;
+  isOperational: boolean;
+  image?: string;
+  description?: string;
+  edges?: Edge[];
+
+  // geo
+  coordinates?: { lat: number; lng: number }; // Geographic coordinates
+
+  // auto derived line properties
+  lineCode?: string;
+  lineColor?: string;
+  lineBgColor?: string;
+  lineTextColor?: string;
+
+  // auto derive from line
+  stationActiveIcon?: string; // file path to icon
+  stationInactiveIcon?: string; // file path to icon
+
+  // properties used for pathing and mapping
+  stationAction?:
+    | 'board-initial'
+    | 'board'
+    | 'alight-and-transfer'
+    | 'alight-end'
+    | null;
+}
+
 export interface Edge {
   from?: string;
   to: string;
@@ -20,41 +63,14 @@ export interface Edge {
   lineTextColor?: string;
 }
 
-export interface Station {
-  id: number;
-  code: string;
-  name: string;
-  isOperational: boolean;
-  image?: string;
-  description?: string;
-  edges?: Edge[];
-
-  // geo
-  coordinates?: { lat: number; lng: number }; // Geographic coordinates
-
-  // auto derived line properties
-  lineCode?: string;
-  lineColor?: string;
-  lineBgColor?: string;
-  lineTextColor?: string;
-}
-
-export interface TransitLine {
-  name: string;
-  code: string;
-  stations: Station[];
-  color?: string;
-  bgColor?: string;
-  textColor?: string;
-}
-
 export const TRANSIT_LINES: TransitLine[] = [
   {
     name: 'LRT 1',
     code: 'LRT1',
-    color: 'purple',
+    color: 'green',
     bgColor: 'green',
     textColor: 'white',
+    stationActiveIcon: 'assets/icons/station-active-lrt1.png',
     stations: [
       {
         id: 1,
@@ -379,7 +395,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             direction: 'northbound', // Assuming Recto is northbound relative to LRT-1 Doroteo Jose
             path: [
               { lat: 14.605461953754634, lng: 120.98194541980351 }, // from me
-              { lat: 14.6065, lng: 120.9885 }, // to next line
+              { lat: 14.60348141245216, lng: 120.9834813414183 }, // to next line (LRT-2 Recto)
             ],
           },
         ],
@@ -982,6 +998,7 @@ export const TRANSIT_LINES: TransitLine[] = [
     color: 'blue',
     bgColor: 'blue',
     textColor: 'white',
+    stationActiveIcon: 'assets/icons/station-active-lrt2.png',
     stations: [
       {
         id: 1,
@@ -990,6 +1007,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Eastern terminus of LRT-2, located in Antipolo, Rizal.',
+        // 14.624824811486416, 121.121248307
+        coordinates: { lat: 14.624824811486416, lng: 121.121248307 }, // Antipolo Station
         edges: [
           {
             from: 'LRT2_ANTIPOLO',
@@ -1002,6 +1021,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.624824811486416, lng: 121.121248307 }, // from me
+              { lat: 14.62052076177822, lng: 121.10074150354535 }, // to next
+            ],
           },
         ],
       },
@@ -1012,6 +1035,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Marikina City, near major commercial areas.',
+        // 14.62052076177822, 121.10074150354535
+        coordinates: { lat: 14.62052076177822, lng: 121.10074150354535 }, // Marikina Station
         edges: [
           {
             from: 'LRT2_MARIKINA',
@@ -1024,6 +1049,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.62052076177822, lng: 121.10074150354535 }, // from me
+              { lat: 14.624824811486416, lng: 121.121248307 }, // to prev
+            ],
           },
           {
             from: 'LRT2_MARIKINA',
@@ -1036,6 +1065,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.62052076177822, lng: 121.10074150354535 }, // from me
+              { lat: 14.622135967911797, lng: 121.08597686462393 }, // to next
+            ],
           },
         ],
       },
@@ -1047,6 +1080,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located along Marcos Highway, near the boundary of Marikina and Pasig.',
+        // 14.622135967911797, 121.08597686462393
+        coordinates: { lat: 14.622135967911797, lng: 121.08597686462393 }, // Santolan Station
         edges: [
           {
             from: 'LRT2_SANTOLAN',
@@ -1059,6 +1094,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.622135967911797, lng: 121.08597686462393 }, // from me
+              { lat: 14.62052076177822, lng: 121.10074150354535 }, // to prev
+            ],
           },
           {
             from: 'LRT2_SANTOLAN',
@@ -1071,6 +1110,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.622135967911797, lng: 121.08597686462393 }, // from me
+              { lat: 14.630800864143024, lng: 121.07271230628201 }, // to next
+            ],
           },
         ],
       },
@@ -1082,6 +1125,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Underground station located along Katipunan Avenue, Quezon City.',
+        // 14.630800864143024, 121.07271230628201
+        coordinates: { lat: 14.630800864143024, lng: 121.07271230628201 }, // Katipunan Station
         edges: [
           {
             from: 'LRT2_KATIPUNAN',
@@ -1094,6 +1139,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.630800864143024, lng: 121.07271230628201 }, // from me
+              { lat: 14.622135967911797, lng: 121.08597686462393 }, // to prev
+            ],
           },
           {
             from: 'LRT2_KATIPUNAN',
@@ -1106,6 +1155,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.630800864143024, lng: 121.07271230628201 }, // from me
+              { lat: 14.628043289011293, lng: 121.06482289673204 }, // to next
+            ],
           },
         ],
       },
@@ -1116,6 +1169,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Project 3, Quezon City, near Anonas Street.',
+        // 14.628043289011293, 121.06482289673204
+        coordinates: { lat: 14.628043289011293, lng: 121.06482289673204 }, // Anonas Station
         edges: [
           {
             from: 'LRT2_ANONAS',
@@ -1128,6 +1183,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.628043289011293, lng: 121.06482289673204 }, // from me
+              { lat: 14.630800864143024, lng: 121.07271230628201 }, // to prev
+            ],
           },
           {
             from: 'LRT2_ANONAS',
@@ -1140,6 +1199,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.628043289011293, lng: 121.06482289673204 }, // from me
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // to next
+            ],
           },
         ],
       },
@@ -1151,6 +1214,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located in Quezon City, a major commercial hub with connections to MRT-3.',
+        // 14.622724831527815, 121.05266770816854
+        coordinates: { lat: 14.622724831527815, lng: 121.05266770816854 }, // Cubao Station
         edges: [
           {
             from: 'LRT2_CUBAO',
@@ -1164,6 +1229,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // from me
+              { lat: 14.628043289011293, lng: 121.06482289673204 }, // to prev
+            ],
           },
           {
             from: 'LRT2_CUBAO',
@@ -1177,6 +1246,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // from me
+              { lat: 14.618744832179202, lng: 121.04278254495594 }, // to next
+            ],
           },
           {
             from: 'LRT2_CUBAO',
@@ -1190,6 +1263,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and ramps available',
             additionalCost: 'Separate fare required',
             direction: 'northbound',
+            path: [
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // from me
+              { lat: 14.62315428507241, lng: 121.0530533095045 }, // to next line
+            ],
           },
         ],
       },
@@ -1200,6 +1277,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Situated in Quezon City, near New Manila.',
+        // 14.618744832179202, 121.04278254495594
+        coordinates: { lat: 14.618744832179202, lng: 121.04278254495594 }, // Betty Go-Belmonte Station
         edges: [
           {
             from: 'LRT2_BETTY_GO_BELMONTE',
@@ -1212,6 +1291,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.618744832179202, lng: 121.04278254495594 }, // from me
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // to prev
+            ],
           },
           {
             from: 'LRT2_BETTY_GO_BELMONTE',
@@ -1224,6 +1307,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.618744832179202, lng: 121.04278254495594 }, // from me
+              { lat: 14.613660961641079, lng: 121.0345201516396 }, // to next
+            ],
           },
         ],
       },
@@ -1235,6 +1322,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located in Quezon City, known for electronics shops along Gilmore Avenue.',
+        // 14.613660961641079, 121.0345201516396
+        coordinates: { lat: 14.613660961641079, lng: 121.0345201516396 }, // Gilmore Station
         edges: [
           {
             from: 'LRT2_GILMORE',
@@ -1248,6 +1337,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.613660961641079, lng: 121.0345201516396 }, // from me
+              { lat: 14.618744832179202, lng: 121.04278254495594 }, // to prev
+            ],
           },
           {
             from: 'LRT2_GILMORE',
@@ -1260,6 +1353,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.613660961641079, lng: 121.0345201516396 }, // from me
+              { lat: 14.610667645518005, lng: 121.02633594643939 }, // to next
+            ],
           },
         ],
       },
@@ -1271,6 +1368,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located in San Juan City, near J. Ruiz Street and residential areas.',
+        // 14.610667645518005, 121.02633594643939
+        coordinates: { lat: 14.610667645518005, lng: 121.02633594643939 }, // J. Ruiz Station
         edges: [
           {
             from: 'LRT2_J_RUIZ',
@@ -1283,6 +1382,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.610667645518005, lng: 121.02633594643939 }, // from me
+              { lat: 14.613660961641079, lng: 121.0345201516396 }, // to prev
+            ],
           },
           {
             from: 'LRT2_J_RUIZ',
@@ -1295,6 +1398,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.610667645518005, lng: 121.02633594643939 }, // from me
+              { lat: 14.604210926251874, lng: 121.01734453043514 }, // to next
+            ],
           },
         ],
       },
@@ -1305,6 +1412,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Santa Mesa, Manila, near V. Mapa High School.',
+        // 14.604210926251874, 121.01734453043514
+        coordinates: { lat: 14.604210926251874, lng: 121.01734453043514 }, // V. Mapa Station
         edges: [
           {
             from: 'LRT2_V_MAPA',
@@ -1317,6 +1426,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.604210926251874, lng: 121.01734453043514 }, // from me
+              { lat: 14.610667645518005, lng: 121.02633594643939 }, // to prev
+            ],
           },
           {
             from: 'LRT2_V_MAPA',
@@ -1329,6 +1442,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.604210926251874, lng: 121.01734453043514 }, // from me
+              { lat: 14.601759353452428, lng: 121.0052661412116 }, // to next
+            ],
           },
         ],
       },
@@ -1340,6 +1457,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Situated in Santa Mesa, Manila, near educational institutions.',
+        // 14.601759353452428, 121.0052661412116
+        coordinates: { lat: 14.601759353452428, lng: 121.0052661412116 }, // Pureza Station
         edges: [
           {
             from: 'LRT2_PUREZA',
@@ -1352,6 +1471,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.601759353452428, lng: 121.0052661412116 }, // from me
+              { lat: 14.604210926251874, lng: 121.01734453043514 }, // to prev
+            ],
           },
           {
             from: 'LRT2_PUREZA',
@@ -1364,6 +1487,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.601759353452428, lng: 121.0052661412116 }, // from me
+              { lat: 14.600864578161373, lng: 120.99250867046764 }, // to next
+            ],
           },
         ],
       },
@@ -1374,6 +1501,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         isOperational: true,
         image: '',
         description: 'Located in Sampaloc, Manila, near Legarda Street.',
+        // 14.600864578161373, 120.99250867046764
+        coordinates: { lat: 14.600864578161373, lng: 120.99250867046764 }, // Legarda Station
         edges: [
           {
             from: 'LRT2_LEGARDA',
@@ -1386,6 +1515,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.600864578161373, lng: 120.99250867046764 }, // from me
+              { lat: 14.601759353452428, lng: 121.0052661412116 }, // to prev
+            ],
           },
           {
             from: 'LRT2_LEGARDA',
@@ -1398,6 +1531,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'westbound',
+            path: [
+              { lat: 14.600864578161373, lng: 120.99250867046764 }, // from me
+              { lat: 14.60348141245216, lng: 120.9834813414183 }, // to next
+            ],
           },
         ],
       },
@@ -1409,6 +1546,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Western terminus of LRT-2, located in Manila, near University Belt.',
+        // 14.60348141245216, 120.9834813414183
+        coordinates: { lat: 14.60348141245216, lng: 120.9834813414183 }, // Recto Station
         edges: [
           {
             from: 'LRT2_RECTO',
@@ -1421,6 +1560,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            path: [
+              { lat: 14.60348141245216, lng: 120.9834813414183 }, // from me
+              { lat: 14.600864578161373, lng: 120.99250867046764 }, // to prev
+            ],
           },
           {
             from: 'LRT2_RECTO',
@@ -1434,6 +1577,131 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and ramps available',
             additionalCost: 'Separate fare required',
             direction: 'northbound',
+            path: [
+              { lat: 14.60348141245216, lng: 120.9834813414183 }, // from me
+              { lat: 14.605461953754634, lng: 120.98194541980351 }, // to next line
+            ],
+          },
+        ],
+      },
+
+      // Proposed stations
+      // tutuban
+      {
+        id: 14,
+        code: 'LRT2_TUTUBAN',
+        name: 'Tutuban',
+        isOperational: false,
+        image: '',
+        description: 'Planned station in Tutuban, Manila.',
+        // 14.606363198972117, 120.97193630977111
+        coordinates: { lat: 14.606363198972117, lng: 120.97193630977111 }, // Tutuban Station
+        edges: [
+          {
+            from: 'LRT2_TUTUBAN',
+            to: 'LRT2_RECTO',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: false,
+            transferDescription: 'Direct train service to Recto station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+            path: [
+              { lat: 14.606363198972117, lng: 120.97193630977111 }, // from me
+              { lat: 14.60348141245216, lng: 120.9834813414183 }, // to next
+            ],
+          },
+          {
+            from: 'LRT2_TUTUBAN',
+            to: 'LRT2_DIVISORIA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: false,
+            transferDescription: 'Direct train service to Divisoria station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+            path: [
+              { lat: 14.606363198972117, lng: 120.97193630977111 }, // from me
+              { lat: 14.602790069620127, lng: 120.96755569678145 }, // to next
+            ],
+          },
+        ],
+      },
+      // divisoria
+      {
+        id: 15,
+        code: 'LRT2_DIVISORIA',
+        name: 'Divisoria',
+        isOperational: false,
+        image: '',
+        description: 'Planned station in Divisoria, Manila.',
+        // 14.602790069620127, 120.96755569678145
+        coordinates: { lat: 14.602790069620127, lng: 120.96755569678145 }, // Divisoria Station
+        edges: [
+          {
+            from: 'LRT2_DIVISORIA',
+            to: 'LRT2_TUTUBAN',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: false,
+            transferDescription: 'Direct train service to Tutuban station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+            path: [
+              { lat: 14.602790069620127, lng: 120.96755569678145 }, // from me
+              { lat: 14.606363198972117, lng: 120.97193630977111 }, // to prev
+            ],
+          },
+          {
+            from: 'LRT2_DIVISORIA',
+            to: 'LRT2_PIER_4',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: false,
+            transferDescription: 'Direct train service to Pier 4 station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'westbound',
+            path: [
+              { lat: 14.602790069620127, lng: 120.96755569678145 }, // from me
+              { lat: 14.602524631445576, lng: 120.96157707895948 }, // to next
+            ],
+          },
+        ],
+      },
+      // pier 4
+      {
+        id: 16,
+        code: 'LRT2_PIER_4',
+        name: 'Pier 4',
+        isOperational: false,
+        image: '',
+        description: 'Planned station near Pier 4, Manila.',
+        // 14.602524631445576, 120.96157707895948
+        coordinates: { lat: 14.602524631445576, lng: 120.96157707895948 }, // Pier 4 Station
+        edges: [
+          {
+            from: 'LRT2_PIER_4',
+            to: 'LRT2_DIVISORIA',
+            weight: 3,
+            transferType: 'inter-station',
+            isOperational: false,
+            transferDescription: 'Direct train service to Divisoria station.',
+            transferDistance: 'Approximately 3 minutes by train',
+            accessibility: 'Elevators and escalators available',
+            additionalCost: 'None',
+            direction: 'eastbound',
+            path: [
+              { lat: 14.602524631445576, lng: 120.96157707895948 }, // from me
+              { lat: 14.602790069620127, lng: 120.96755569678145 }, // to prev
+            ],
           },
         ],
       },
