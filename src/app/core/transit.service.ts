@@ -216,6 +216,9 @@ export class TransitService {
           newStation.edges = station.edges.map((edge: any) => {
             return {
               ...edge,
+
+              from: edge.from || station.code,
+
               lineCode: line.code,
               lineColor: line.color,
               lineBgColor: line.bgColor,
@@ -252,6 +255,9 @@ export class TransitService {
           newStation.edges = station.edges.map((edge: any) => {
             return {
               ...edge,
+
+              from: edge.from || station.code,
+
               lineCode: line.code,
               lineColor: line.color,
               lineBgColor: line.bgColor,
@@ -273,10 +279,8 @@ export class TransitService {
     return this.transitLines.find((line) => line.code === code);
   }
 
+  // simplify getStationByCode
   getStationByCode(stationCode: string) {
-    return this.transitLines
-      .map((line) => line.stations)
-      .reduce((acc, val) => acc.concat(val), [])
-      .find((station) => station.code === stationCode);
+    return this.getAllStationsFlatObj()[stationCode];
   }
 }

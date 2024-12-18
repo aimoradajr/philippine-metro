@@ -8,6 +8,10 @@ export interface TransitLine {
 
   stationActiveIcon?: string; // file path to icon
   stationInactiveIcon?: string; // file path to icon
+
+  // pricing
+  minFare?: number; // in PHP
+  maxFare?: number; // in PHP
 }
 
 export interface Station {
@@ -39,13 +43,30 @@ export interface Station {
     | 'alight-and-transfer'
     | 'alight-end'
     | null;
+  prevEdge?: Edge; // in pathfinding context, the actual edge taken to reach this station
+  nextEdge?: Edge; // in pathfinding context, the actual edge to take to reach the next station
 }
 
 export interface Edge {
+  // code: string;
   from?: string;
   to: string;
   weight: number;
   transferType: 'inter-station' | 'inter-line' | 'inter-modal';
+  transitMode?:
+    | 'walk'
+    | 'bicycle'
+    | 'motorcycle'
+    | 'tricycle'
+    | 'taxi'
+    | 'car'
+    | 'jeepney'
+    | 'bus'
+    | 'train'
+    | 'lrt'
+    | 'mrt'
+    | 'pnr'
+    | 'ferry';
   isOperational: boolean;
   transferDescription?: string;
   transferDistance?: string;
@@ -61,6 +82,9 @@ export interface Edge {
   lineColor?: string;
   lineBgColor?: string;
   lineTextColor?: string;
+
+  // price
+  price?: number; // in PHP
 }
 
 export const TRANSIT_LINES: TransitLine[] = [
@@ -71,6 +95,8 @@ export const TRANSIT_LINES: TransitLine[] = [
     bgColor: 'green',
     textColor: 'white',
     stationActiveIcon: 'assets/icons/station-active-lrt1.png',
+    minFare: 1,
+    maxFare: 3,
     stations: [
       {
         id: 1,
@@ -84,6 +110,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.657615323114445, lng: 121.02094825800144 }, // FPJ Station
         edges: [
           {
+            from: 'LRT1_FPJ',
             to: 'LRT1_BALINTAWAK',
             weight: 5,
             isOperational: true,
@@ -106,6 +133,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.657535163572017, lng: 121.00386348386314 }, // Balintawak Station
         edges: [
           {
+            from: 'LRT1_BALINTAWAK',
             to: 'LRT1_FPJ',
             weight: 5,
             isOperational: true,
@@ -116,6 +144,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
+            from: 'LRT1_BALINTAWAK',
             to: 'LRT1_MONUMENTO',
             weight: 4,
             isOperational: true,
@@ -139,6 +168,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.65432216386683, lng: 120.98384231447913 }, // Monumento Station
         edges: [
           {
+            from: 'LRT1_MONUMENTO',
             to: 'LRT1_BALINTAWAK',
             weight: 4,
             isOperational: true,
@@ -149,6 +179,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
+            from: 'LRT1_MONUMENTO',
             to: 'LRT1_5TH_AVENUE',
             weight: 3,
             isOperational: true,
@@ -171,6 +202,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.644436303427462, lng: 120.983385695334 }, // 5th Avenue Station
         edges: [
           {
+            from: 'LRT1_5TH_AVENUE',
             to: 'LRT1_MONUMENTO',
             weight: 3,
             isOperational: true,
@@ -181,6 +213,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
+            from: 'LRT1_5TH_AVENUE',
             to: 'LRT1_R_PAPA',
             weight: 2,
             isOperational: true,
@@ -217,6 +250,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            price: 2,
             path: [
               { lat: 14.636138537552963, lng: 120.98228369673073 }, // from me
               { lat: 14.630590938571148, lng: 120.98129525929572 }, // to next
@@ -249,6 +283,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            price: 2,
             path: [
               { lat: 14.630590938571148, lng: 120.98129525929572 }, // from me
               { lat: 14.622652585067982, lng: 120.98286856250003 }, // to next
@@ -387,6 +422,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_RECTO',
             weight: 2,
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via an elevated walkway.',
             transferDistance: 'Approximately 2-minute walk',
@@ -693,6 +729,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'MRT3_TAFT_AVENUE',
             weight: 5, // Approximate walking time in minutes
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via a covered footbridge.',
             transferDistance: 'Approximately a 5-minute walk',
@@ -701,7 +738,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             direction: 'northbound', // Assuming MRT-3 Taft Avenue is northbound relative to LRT-1 EDSA
             path: [
               { lat: 14.538714843616395, lng: 121.00063929330985 }, // from me
-              { lat: 14.537667926267758, lng: 121.00204802209245 }, // to next line
+              { lat: 14.53768596175474, lng: 121.00178304515234 }, // to next line
             ],
           },
         ],
@@ -999,6 +1036,8 @@ export const TRANSIT_LINES: TransitLine[] = [
     bgColor: 'blue',
     textColor: 'white',
     stationActiveIcon: 'assets/icons/station-active-lrt2.png',
+    minFare: 10,
+    maxFare: 30,
     stations: [
       {
         id: 1,
@@ -1256,6 +1295,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'MRT3_CUBAO',
             weight: 5,
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription:
               'Connected via walkway to MRT-3 Cubao station.',
@@ -1265,7 +1305,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             direction: 'northbound',
             path: [
               { lat: 14.622724831527815, lng: 121.05266770816854 }, // from me
-              { lat: 14.62315428507241, lng: 121.0530533095045 }, // to next line
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // to next line
             ],
           },
         ],
@@ -1515,6 +1555,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            price: 2,
             path: [
               { lat: 14.600864578161373, lng: 120.99250867046764 }, // from me
               { lat: 14.601759353452428, lng: 121.0052661412116 }, // to prev
@@ -1560,6 +1601,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
+            price: 2,
             path: [
               { lat: 14.60348141245216, lng: 120.9834813414183 }, // from me
               { lat: 14.600864578161373, lng: 120.99250867046764 }, // to prev
@@ -1570,6 +1612,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT1_DOROTEO_JOSE',
             weight: 5,
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription:
               'Connected via elevated walkway to LRT-1 Doroteo Jose station.',
@@ -1713,6 +1756,7 @@ export const TRANSIT_LINES: TransitLine[] = [
     color: 'yellow',
     bgColor: 'yellow',
     textColor: 'black',
+    stationActiveIcon: 'assets/icons/station-active-mrt3.png',
     stations: [
       {
         id: 1,
@@ -1722,12 +1766,18 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Northern terminus of MRT-3, adjacent to TriNoma Mall and near SM City North EDSA.',
+        // 14.652169907896354, 121.03226455190827
+        coordinates: { lat: 14.652169907896354, lng: 121.03226455190827 }, // North Avenue Station
         edges: [
           {
             to: 'MRT3_QUEZON_AVENUE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.652169907896354, lng: 121.03226455190827 }, // from me
+              { lat: 14.64275621704705, lng: 121.03847691656055 }, // to next
+            ],
           },
         ],
       },
@@ -1739,18 +1789,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located near the intersection of Quezon Avenue and EDSA, close to Eton Centris and various government offices.',
+        // 14.64275621704705, 121.03847691656055
+        coordinates: { lat: 14.64275621704705, lng: 121.03847691656055 }, // Quezon Avenue Station
         edges: [
           {
             to: 'MRT3_NORTH_AVENUE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.64275621704705, lng: 121.03847691656055 }, // from me
+              { lat: 14.652169907896354, lng: 121.03226455190827 }, // to prev
+            ],
           },
           {
             to: 'MRT3_GMA_KAMUNING',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.64275621704705, lng: 121.03847691656055 }, // from me
+              { lat: 14.635217035522803, lng: 121.0434184846183 }, // to next
+            ],
           },
         ],
       },
@@ -1762,18 +1822,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Situated near GMA Network Center and accessible to Kamuning Road.',
+        // 14.635217035522803, 121.0434184846183
+        coordinates: { lat: 14.635217035522803, lng: 121.0434184846183 }, // GMA-Kamuning Station
         edges: [
           {
             to: 'MRT3_QUEZON_AVENUE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.635217035522803, lng: 121.0434184846183 }, // from me
+              { lat: 14.64275621704705, lng: 121.03847691656055 }, // to prev
+            ],
           },
           {
             to: 'MRT3_CUBAO',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.635217035522803, lng: 121.0434184846183 }, // from me
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // to next
+            ],
           },
         ],
       },
@@ -1785,24 +1855,35 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Integrated with Araneta City, providing connections to LRT Line 2 and access to shopping centers like Gateway Mall.',
+        // 14.61954088328936, 121.05094326122577
+        coordinates: { lat: 14.61954088328936, lng: 121.05094326122577 }, // Cubao Station
         edges: [
           {
             to: 'MRT3_GMA_KAMUNING',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // from me
+              { lat: 14.635217035522803, lng: 121.0434184846183 }, // to prev
+            ],
           },
           {
             to: 'MRT3_SANTOLAN_ANNAPOLIS',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // from me
+              { lat: 14.607819718187484, lng: 121.05634098040402 }, // to next
+            ],
           },
           {
             from: 'MRT3_CUBAO',
             to: 'LRT2_CUBAO',
             weight: 5,
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription:
               'Connected via a covered walkway inside the Araneta City complex.',
@@ -1810,6 +1891,10 @@ export const TRANSIT_LINES: TransitLine[] = [
             accessibility: 'Elevators and ramps are available',
             additionalCost: 'Separate fare required',
             direction: 'southbound', // Assuming LRT-2 Cubao is southbound relative to MRT-3 Cubao
+            path: [
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // from me
+              { lat: 14.622724831527815, lng: 121.05266770816854 }, // to next line
+            ],
           },
         ],
       },
@@ -1821,18 +1906,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Positioned near Greenhills Shopping Center and various commercial establishments.',
+        // 14.607819718187484, 121.05634098040402
+        coordinates: { lat: 14.607819718187484, lng: 121.05634098040402 }, // Santolan-Annapolis Station
         edges: [
           {
             to: 'MRT3_CUBAO',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.607819718187484, lng: 121.05634098040402 }, // from me
+              { lat: 14.61954088328936, lng: 121.05094326122577 }, // to prev
+            ],
           },
           {
             to: 'MRT3_ORTIGAS',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.607819718187484, lng: 121.05634098040402 }, // from me
+              { lat: 14.588041121351441, lng: 121.05694278354636 }, // to next
+            ],
           },
         ],
       },
@@ -1844,18 +1939,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Serves the Ortigas Central Business District, with proximity to SM Megamall and Robinsons Galleria.',
+        // 14.588041121351441, 121.05694278354636
+        coordinates: { lat: 14.588041121351441, lng: 121.05694278354636 }, // Ortigas Station
         edges: [
           {
             to: 'MRT3_SANTOLAN_ANNAPOLIS',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.588041121351441, lng: 121.05694278354636 }, // from me
+              { lat: 14.607819718187484, lng: 121.05634098040402 }, // to prev
+            ],
           },
           {
             to: 'MRT3_SHAW_BOULEVARD',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.588041121351441, lng: 121.05694278354636 }, // from me
+              { lat: 14.58146097152234, lng: 121.05362348774825 }, // to next
+            ],
           },
         ],
       },
@@ -1867,18 +1972,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located near Shangri-La Plaza and Starmall EDSA-Shaw, serving as a major transfer point for commuters.',
+        // 14.58146097152234, 121.05362348774825
+        coordinates: { lat: 14.58146097152234, lng: 121.05362348774825 }, // Shaw Boulevard Station
         edges: [
           {
             to: 'MRT3_ORTIGAS',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.58146097152234, lng: 121.05362348774825 }, // from me
+              { lat: 14.588041121351441, lng: 121.05694278354636 }, // to prev
+            ],
           },
           {
             to: 'MRT3_BONI',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.58146097152234, lng: 121.05362348774825 }, // from me
+              { lat: 14.574314844661698, lng: 121.04829707172406 }, // to next
+            ],
           },
         ],
       },
@@ -1890,18 +2005,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Provides access to the Pioneer area and nearby commercial establishments.',
+        // 14.574314844661698, 121.04829707172406
+        coordinates: { lat: 14.574314844661698, lng: 121.04829707172406 }, // Boni Station
         edges: [
           {
             to: 'MRT3_SHAW_BOULEVARD',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.574314844661698, lng: 121.04829707172406 }, // from me
+              { lat: 14.58146097152234, lng: 121.05362348774825 }, // to prev
+            ],
           },
           {
             to: 'MRT3_GUADALUPE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.574314844661698, lng: 121.04829707172406 }, // from me
+              { lat: 14.567224719862711, lng: 121.0465297922152 }, // to next
+            ],
           },
         ],
       },
@@ -1913,18 +2038,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Situated near Guadalupe Nuevo and Guadalupe Viejo, with access to the Pasig River ferry service.',
+        // 14.567224719862711, 121.0465297922152
+        coordinates: { lat: 14.567224719862711, lng: 121.0465297922152 }, // Guadalupe Station
         edges: [
           {
             to: 'MRT3_BONI',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.567224719862711, lng: 121.0465297922152 }, // from me
+              { lat: 14.574314844661698, lng: 121.04829707172406 }, // to prev
+            ],
           },
           {
             to: 'MRT3_BUENDIA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.567224719862711, lng: 121.0465297922152 }, // from me
+              { lat: 14.554615536966176, lng: 121.0344275884317 }, // to next
+            ],
           },
         ],
       },
@@ -1936,18 +2071,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Located near the Makati Central Business District, providing access to various offices and commercial centers.',
+        // 14.554615536966176, 121.0344275884317
+        coordinates: { lat: 14.554615536966176, lng: 121.0344275884317 }, // Buendia Station
         edges: [
           {
             to: 'MRT3_GUADALUPE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.554615536966176, lng: 121.0344275884317 }, // from me
+              { lat: 14.567224719862711, lng: 121.0465297922152 }, // to prev
+            ],
           },
           {
             to: 'MRT3_AYALA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.554615536966176, lng: 121.0344275884317 }, // from me
+              { lat: 14.549182387052426, lng: 121.02797462354556 }, // to next
+            ],
           },
         ],
       },
@@ -1959,18 +2104,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Directly connected to Ayala Center, including Glorietta and Greenbelt malls, serving as a major hub for shoppers and professionals.',
+        // 14.549182387052426, 121.02797462354556
+        coordinates: { lat: 14.549182387052426, lng: 121.02797462354556 }, // Ayala Station
         edges: [
           {
             to: 'MRT3_BUENDIA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.549182387052426, lng: 121.02797462354556 }, // from me
+              { lat: 14.554615536966176, lng: 121.0344275884317 }, // to prev
+            ],
           },
           {
             to: 'MRT3_MAGALLANES',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.549182387052426, lng: 121.02797462354556 }, // from me
+              { lat: 14.542176999516412, lng: 121.01968479687375 }, // to next
+            ],
           },
         ],
       },
@@ -1982,18 +2137,28 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Positioned near the Magallanes Village and provides access to the South Luzon Expressway (SLEX).',
+        // 14.542176999516412, 121.01968479687375
+        coordinates: { lat: 14.542176999516412, lng: 121.01968479687375 }, // Magallanes Station
         edges: [
           {
             to: 'MRT3_AYALA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.542176999516412, lng: 121.01968479687375 }, // from me
+              { lat: 14.549182387052426, lng: 121.02797462354556 }, // to prev
+            ],
           },
           {
             to: 'MRT3_TAFT_AVENUE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.542176999516412, lng: 121.01968479687375 }, // from me
+              { lat: 14.53768596175474, lng: 121.00178304515234 }, // to next
+            ],
           },
         ],
       },
@@ -2005,26 +2170,35 @@ export const TRANSIT_LINES: TransitLine[] = [
         image: '',
         description:
           'Southern terminus of MRT-3, located at the intersection of EDSA and Taft Avenue in Pasay City. Provides a vital transfer point to LRT Line 1 via a connecting footbridge to EDSA Station, facilitating seamless north-south travel across Metro Manila.',
-        // 14.537667926267758, 121.00204802209245
-        coordinates: { lat: 14.537667926267758, lng: 121.00204802209245 }, // Taft Avenue
+        // 14.53768596175474, 121.00178304515234
+        coordinates: { lat: 14.53768596175474, lng: 121.00178304515234 }, // Taft Avenue Station
         edges: [
           {
             to: 'MRT3_MAGALLANES',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            path: [
+              { lat: 14.53768596175474, lng: 121.00178304515234 }, // from me
+              { lat: 14.542176999516412, lng: 121.01968479687375 }, // to prev
+            ],
           },
           {
             from: 'MRT3_TAFT_AVENUE',
             to: 'LRT1_EDSA',
             weight: 5, // Approximate walking time in minutes
             transferType: 'inter-line',
+            transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via a covered footbridge.',
             transferDistance: 'Approximately a 5-minute walk',
             accessibility: 'Elevators and ramps are available',
             additionalCost: 'Separate fare required',
             direction: 'southbound', // Assuming LRT-1 EDSA is southbound relative to MRT-3 Taft Avenue
+            path: [
+              { lat: 14.53768596175474, lng: 121.00178304515234 }, // from me
+              { lat: 14.538714843616395, lng: 121.00063929330985 }, // to next line
+            ],
           },
         ],
       },

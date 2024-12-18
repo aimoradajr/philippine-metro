@@ -303,6 +303,8 @@ export class PathFinderPage implements OnInit {
       let allStations: Station[] = [];
       let allEdges: Edge[] = [];
 
+      let pathSegments: any[] = [];
+
       const enrichedPath = path.map((stationCode, index, arr) => {
         const station = this.allStationsFlatObj?.[stationCode] || {};
         const prevStationCode = index > 0 ? arr[index - 1] : null;
@@ -318,15 +320,29 @@ export class PathFinderPage implements OnInit {
         if (index === 0) {
           // start station
           stationAction = 'board-initial';
+
+          // create new segment
+          pathSegments.push({
+            lineCode: station.lineCode,
+            stations: [],
+            fare: 0,
+            fareBreakdown: [],
+          });
         } else if (index === arr.length - 1) {
           // end station
           stationAction = 'alight-end';
         }
 
         // Find the edge from the previous station to the current station
-        const prevEdge = station.edges?.find(
-          (edge: Edge) => edge.to === prevStationCode
+        const prevStation = this.transitService.getStationByCode(
+          prevStationCode!
         );
+        let prevEdge;
+        if (prevStation) {
+          prevEdge = prevStation.edges?.find(
+            (edge: Edge) => edge.to === stationCode
+          );
+        }
 
         // Find the edge from the current station to the next station
         const nextEdge = station.edges?.find(
@@ -350,6 +366,14 @@ export class PathFinderPage implements OnInit {
         // board from another line
         if (prevEdge?.transferType === 'inter-line') {
           stationAction = 'board';
+
+          // create new segment
+          pathSegments.push({
+            lineCode: station.lineCode,
+            stations: [],
+            fare: 0,
+            fareBreakdown: [],
+          });
         }
 
         // path node
@@ -359,6 +383,9 @@ export class PathFinderPage implements OnInit {
           prevEdge: prevEdge || null,
           nextEdge: nextEdge || null,
         };
+
+        // add station to the current segment
+        pathSegments[pathSegments.length - 1].stations.push(pathStation);
 
         // Add station to allStations for mapping
         allStations.push({
@@ -385,6 +412,49 @@ export class PathFinderPage implements OnInit {
       const totalDuration =
         enrichedPath.length * stationTravelTime + transfers * transferTime;
 
+      // calculate total price of each pathSegments
+      let pathFare: number = 0;
+      pathSegments.forEach((segment) => {
+        const stations = segment.stations;
+
+        // calculate price for each segment
+        let segmentPrice = 0;
+        let segmentPriceBreakdown: any[] = [];
+        stations.forEach((station: Station) => {
+          const usedEdge = station?.prevEdge;
+
+          if (usedEdge) {
+            segmentPrice += usedEdge.price || 0;
+            segmentPriceBreakdown.push({
+              destinationStationCode: station.code,
+              price: usedEdge.price,
+            });
+          }
+        });
+
+        // get minFare from line
+        const line = this.transitService.getLineByCode(segment.lineCode);
+        const lineMinFare = line?.minFare || 0;
+        const lineMaxFare = line?.maxFare || 10000; // hard max fare 10000
+
+        // apply min fare
+        if (lineMinFare) {
+          segmentPrice = Math.max(segmentPrice, lineMinFare);
+        }
+
+        // apply max fare
+        if (lineMaxFare) {
+          segmentPrice = Math.min(segmentPrice, lineMaxFare);
+        }
+
+        // total segment fare
+        segment.fare = segmentPrice;
+        segment.fareBreakdown = segmentPriceBreakdown;
+
+        // add to total path fare
+        pathFare += segmentPrice;
+      });
+
       // Return enriched path with additional details
       return {
         enrichedPath,
@@ -395,6 +465,10 @@ export class PathFinderPage implements OnInit {
         // for mapping
         allStations: allStations,
         allEdges: allEdges,
+
+        // for pricing
+        pathSegments: pathSegments,
+        pathFare: pathFare,
       };
     });
   }

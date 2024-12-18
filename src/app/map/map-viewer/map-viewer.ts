@@ -246,6 +246,24 @@ export class MapViewerComponent implements OnInit {
       edgeOptions.strokeColor = 'black';
     }
 
+    // transitMode
+    if (edge.transitMode === 'walk') {
+      // make dashed
+      edgeOptions.strokeOpacity = 0;
+      edgeOptions.strokeWeight = 4;
+      edgeOptions.icons = [
+        {
+          icon: {
+            path: 'M 0,-1 0,1', // Simple line segment
+            strokeOpacity: 1,
+            scale: 4, // Controls dash thickness
+          }, // Dashed line symbol
+          offset: '0', // Start at the beginning
+          repeat: '15px', // Distance between dashes
+        },
+      ];
+    }
+
     return edgeOptions;
   }
 

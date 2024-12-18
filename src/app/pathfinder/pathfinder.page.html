@@ -100,7 +100,7 @@
         <div class="summary-item">
           <p>
             <strong>Price:</strong>
-            <!-- {{ currentRoute?.cost }} -->
+            {{ currentRoute?.pathFare }}
           </p>
         </div>
         <div class="summary-item">
@@ -187,6 +187,27 @@
                 station.nextEdge.to }}
               </p>
             </ion-item>
+
+            <!-- display activated edge -->
+            <ng-container *ngIf="station?.nextEdge">
+              <ion-item
+                *ngIf="station?.prevEdge?.transferType === 'inter-station'"
+              >
+                <p class="inter-station-change">
+                  -- {{station.prevEdge.price}} PPPPPPP Change from {{
+                  station.prevEdge.from }} to {{ station.prevEdge.to }}
+                </p>
+              </ion-item>
+
+              <ion-item
+                *ngIf="station?.nextEdge?.transferType === 'inter-station'"
+              >
+                <p class="inter-station-change">
+                  {{station.nextEdge.price}} Change from {{
+                  station.nextEdge.from }} to {{ station.nextEdge.to }}
+                </p>
+              </ion-item>
+            </ng-container>
           </ng-template>
         </ng-container>
       </ion-list>
