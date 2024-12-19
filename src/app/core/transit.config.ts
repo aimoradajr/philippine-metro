@@ -53,6 +53,7 @@ export interface Edge {
   to: string;
   weight: number;
   transferType: 'inter-station' | 'inter-line' | 'inter-modal';
+  duration?: number; // in minutes
   transitMode?:
     | 'walk'
     | 'bicycle'
@@ -115,6 +116,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 60,
             path: [
               { lat: 14.657615323114445, lng: 121.02094825800144 }, // from me
               { lat: 14.657535163572017, lng: 121.00386348386314 }, // to next

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   IonContent,
   IonHeader,
@@ -27,13 +27,27 @@ import {
   IonCardTitle,
   IonCardContent,
   IonBadge,
+  IonModal,
+  IonSearchbar,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TransitService } from '../core/transit.service';
 import { Edge, Station } from '../core/transit.config';
 import { addIcons } from 'ionicons';
-import { expandOutline, listOutline, mapOutline } from 'ionicons/icons';
+import {
+  analyticsOutline,
+  cardOutline,
+  expandOutline,
+  listOutline,
+  locationOutline,
+  mapOutline,
+  timeOutline,
+  walkOutline,
+} from 'ionicons/icons';
 import { MapViewerComponent } from '../map/map-viewer/map-viewer';
 
 @Component({
@@ -67,20 +81,24 @@ import { MapViewerComponent } from '../map/map-viewer/map-viewer';
     IonCardContent,
     IonBadge,
     MapViewerComponent,
+    IonModal,
+    IonSearchbar,
+    IonGrid,
+    IonRow,
+    IonCol,
   ],
 })
 export class PathFinderPage implements OnInit {
   allLines: any[] = [];
   allStationsFlatObj: any = {};
+  allStationsFlatArray: Station[] = [];
 
-  selectedStartLineCode: string | null = null;
-  selectedEndLineCode: string | null = null;
-
-  filteredStartStations: any[] = [];
-  filteredEndStations: any[] = [];
-
+  // start
   selectedStartStationCode: string | null = null;
+  selectedStartStation?: Station;
+  // end
   selectedEndStationCode: string | null = null;
+  selectedEndStation?: Station;
 
   calculatedPath: any;
 
@@ -106,38 +124,31 @@ export class PathFinderPage implements OnInit {
       expandOutline,
       mapOutline,
       listOutline,
+      locationOutline,
+      timeOutline,
+      cardOutline,
+      analyticsOutline,
+      walkOutline,
     });
 
     this.allLines = this.transitService.getAllLines();
     this.allStationsFlatObj = this.transitService.getAllStationsFlatObj();
-
-    // Set default values
-    if (this.allLines.length > 0) {
-      this.selectedStartLineCode = this.allLines[0].code;
-      this.selectedEndLineCode = this.selectedStartLineCode;
-      // Filter stations initially
-      this.filterStartStations();
-      this.filterEndStations();
-    }
+    this.allStationsFlatArray = this.transitService.getAllStationsFlatArray();
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      this.selectedStartStationCode =
+      const startStationCode =
         params['startStationCode'] || localStorage.getItem('startStationCode');
-      this.selectedEndStationCode =
+      const endStationCode =
         params['endStationCode'] || localStorage.getItem('endStationCode');
 
-      if (this.selectedStartStationCode) {
-        this.preselectStartStation(this.selectedStartStationCode);
+      if (startStationCode) {
+        this.preselectStartStation(startStationCode);
       }
 
-      if (this.selectedEndStationCode) {
-        this.preselectEndStation(this.selectedEndStationCode);
-      }
-
-      if (this.selectedStartStationCode && this.selectedEndStationCode) {
-        this.calculatePath();
+      if (endStationCode) {
+        this.preselectEndStation(endStationCode);
       }
     });
 
@@ -158,14 +169,11 @@ export class PathFinderPage implements OnInit {
       return;
     }
 
-    // Set the selected start line
-    this.selectedStartLineCode = station.lineCode;
-
-    // Filter stations based on the selected start line
-    this.filterStartStations();
-
     // Set the selected start station
     this.selectedStartStationCode = stationCode;
+    this.selectedStartStation = station;
+
+    this.calculatePath();
   }
 
   // preselect the end line and station
@@ -176,91 +184,75 @@ export class PathFinderPage implements OnInit {
       return;
     }
 
-    // Set the selected end line
-    this.selectedEndLineCode = station.lineCode;
-
-    // Filter stations based on the selected end line
-    this.filterEndStations();
-
     // Set the selected end station
     this.selectedEndStationCode = stationCode;
+    this.selectedEndStation = station;
+
+    this.calculatePath();
   }
 
-  onStartLineChange() {
-    // Update the stations for the selected start line
-    this.filterStartStations();
+  // select start station --------------------------------
+  @ViewChild('startStationSearchbar', { static: false })
+  startStationSearchbar?: IonSearchbar;
 
-    // Auto-select End Line if no end station is selected
-    if (!this.selectedEndStationCode) {
-      this.selectedEndLineCode = this.selectedStartLineCode;
-      this.onEndLineChange(); // Update filteredEndStations
-    }
-  }
-
-  onEndLineChange() {
-    // Update the stations for the selected end line
-    this.filterEndStations();
-  }
-
-  onStartStationChange() {
-    // this.selectedStartStationCode;
-
-    this.calculateKPaths();
-  }
-
-  onEndStationChange() {
-    this.calculateKPaths();
-  }
-
-  filterStartStations() {
-    const startLine = this.transitService.getLineByCode(
-      this.selectedStartLineCode!
-    );
-    this.filteredStartStations = startLine ? startLine.stations : [];
-
-    // Reset start station selection if it's no longer valid
-    if (
-      this.selectedStartStationCode &&
-      !this.filteredStartStations.some(
-        (s) => s.code === this.selectedStartStationCode
-      )
-    ) {
-      this.selectedStartStationCode = null;
-    }
-  }
-
-  filterEndStations() {
-    const endLine = this.transitService.getLineByCode(
-      this.selectedEndLineCode!
-    );
-    this.filteredEndStations = endLine ? endLine.stations : [];
-
-    // Reset end station selection if it's no longer valid
-    if (
-      this.selectedEndStationCode &&
-      !this.filteredEndStations.some(
-        (s) => s.code === this.selectedEndStationCode
-      )
-    ) {
-      this.selectedEndStationCode = null;
-    }
-  }
-
-  calculatePathDijstra() {
-    if (!this.selectedStartStationCode || !this.selectedEndStationCode) {
-      console.error('Both start and end stations must be selected');
-      return;
-    }
-
-    try {
-      this.calculatedPath = this.transitService.findShortestPath(
-        this.selectedStartStationCode,
-        this.selectedEndStationCode
+  startStations: Station[] = [];
+  searchQueryStartStation: string = '';
+  filterStartStations2() {
+    // if not searching, show all stations
+    if (!this.searchQueryStartStation) {
+      this.startStations = this.allStationsFlatArray;
+    } else {
+      // filter by partial match
+      this.startStations = this.allStationsFlatArray.filter((station) =>
+        station.name
+          .toLowerCase()
+          .includes(this.searchQueryStartStation.toLowerCase())
       );
-      // console.log('Calculated Path:', this.calculatedPath);
-    } catch (error: any) {
-      console.error(error?.message);
     }
+
+    // focus searchbar
+    setTimeout(() => {
+      this.startStationSearchbar?.setFocus();
+    }, 100);
+  }
+
+  selectStartStation(station: Station) {
+    this.selectedStartStationCode = station.code;
+    this.selectedStartStation = station;
+
+    this.calculateKPaths();
+  }
+
+  // select end station --------------------------------
+  @ViewChild('endStationSearchbar', { static: false })
+  endStationSearchbar?: IonSearchbar;
+
+  endStations: Station[] = [];
+  searchQueryEndStation: string = '';
+  filterEndStations2() {
+    // if not searching, show all stations
+    if (!this.searchQueryEndStation) {
+      this.endStations = this.allStationsFlatArray;
+    } else {
+      // filter by partial match
+      this.endStations = this.allStationsFlatArray.filter((station) =>
+        station.name
+          .toLowerCase()
+          .includes(this.searchQueryEndStation.toLowerCase())
+      );
+    }
+
+    // focus searchbar
+    setTimeout(() => {
+      this.endStationSearchbar?.setFocus();
+    }, 100);
+  }
+
+  selectEndStation(station: Station) {
+    this.selectedEndStationCode = station.code;
+    this.selectedEndStation = station;
+
+    this.calculateKPaths();
   }
 
   calculatePath() {
@@ -319,7 +311,7 @@ export class PathFinderPage implements OnInit {
 
         if (index === 0) {
           // start station
-          stationAction = 'board-initial';
+          stationAction ??= 'board-initial';
 
           // create new segment
           pathSegments.push({
@@ -330,7 +322,7 @@ export class PathFinderPage implements OnInit {
           });
         } else if (index === arr.length - 1) {
           // end station
-          stationAction = 'alight-end';
+          stationAction ??= 'alight-end';
         }
 
         // Find the edge from the previous station to the current station
@@ -360,12 +352,12 @@ export class PathFinderPage implements OnInit {
 
         // alight and transfer to another line
         if (nextEdge?.transferType === 'inter-line') {
-          stationAction = 'alight-and-transfer';
+          stationAction ??= 'alight-and-transfer';
         }
 
         // board from another line
         if (prevEdge?.transferType === 'inter-line') {
-          stationAction = 'board';
+          stationAction ??= 'board';
 
           // create new segment
           pathSegments.push({
@@ -374,6 +366,26 @@ export class PathFinderPage implements OnInit {
             fare: 0,
             fareBreakdown: [],
           });
+        }
+
+        // generate custom icon based on station action
+        switch (stationAction) {
+          case 'board-initial':
+            station.customIconPath =
+              'assets/icons/littleman/station-action-board-initial-littleman.png';
+            break;
+          case 'board':
+            station.customIconPath =
+              'assets/icons/littleman/station-action-board-littleman.png';
+            break;
+          case 'alight-and-transfer':
+            station.customIconPath =
+              'assets/icons/littleman/station-action-alight-and-transfer-littleman.png';
+            break;
+          case 'alight-end':
+            station.customIconPath =
+              'assets/icons/littleman/station-action-alight-end-littleman.png';
+            break;
         }
 
         // path node

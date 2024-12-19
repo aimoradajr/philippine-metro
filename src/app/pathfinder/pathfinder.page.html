@@ -9,69 +9,127 @@
 
   <!-- Fixed Selectors -->
   <ion-toolbar>
-    <!-- Start Line and Station -->
-    <ion-item>
-      <ion-label>Start</ion-label>
-      <ion-select
-        [(ngModel)]="selectedStartLineCode"
-        (ionChange)="onStartLineChange()"
-        interface="popover"
-      >
-        <ion-select-option *ngFor="let line of allLines" [value]="line.code">
-          {{ line.name }}
-        </ion-select-option>
-      </ion-select>
-      <ion-select
-        [(ngModel)]="selectedStartStationCode"
-        (ionChange)="onStartStationChange()"
-        interface="popover"
-      >
-        <ion-select-option
-          *ngFor="let station of filteredStartStations"
-          [value]="station.code"
-        >
-          {{ station.name }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <!-- Start Station Button -->
+        <ion-col size="6" class="m-0 p-0">
+          <!-- start station button -->
+          <ion-item button id="select-station-start">
+            <!-- Icon for Start Station -->
+            <ion-icon
+              [name]="'location-outline'"
+              slot="start"
+              style="margin-right: 15px"
+            ></ion-icon>
+            <ion-label class="ellipsis">
+              <ng-container *ngIf="!selectedStartStation"
+                >Select Start Station</ng-container
+              >
+              <ng-container *ngIf="selectedStartStation">
+                {{ selectedStartStation.lineCode }} - {{
+                selectedStartStation.name }}
+              </ng-container>
+            </ion-label>
+          </ion-item>
+        </ion-col>
 
-    <!-- End Line and Station -->
-    <ion-item>
-      <ion-label>End</ion-label>
-      <ion-select
-        [(ngModel)]="selectedEndLineCode"
-        (ionChange)="onEndLineChange()"
-        interface="popover"
-      >
-        <ion-select-option *ngFor="let line of allLines" [value]="line.code">
-          {{ line.name }}
-        </ion-select-option>
-      </ion-select>
-      <ion-select
-        [(ngModel)]="selectedEndStationCode"
-        (ionChange)="onEndStationChange()"
-        interface="popover"
-      >
-        <ion-select-option
-          *ngFor="let station of filteredEndStations"
-          [value]="station.code"
-        >
-          {{ station.name }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+        <!-- End Station Button -->
+        <ion-col size="6" class="m-0 p-0">
+          <!-- end station button -->
+          <ion-item button id="select-station-end">
+            <ion-icon
+              [name]="'location-outline'"
+              slot="start"
+              style="margin-right: 15px"
+            ></ion-icon>
+            <ion-label class="ellipsis">
+              <ng-container *ngIf="!selectedEndStation"
+                >Select End Station</ng-container
+              >
+              <ng-container *ngIf="selectedEndStation">
+                {{ selectedEndStation.lineCode }} - {{ selectedEndStation.name
+                }}
+              </ng-container>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <!-- calculate -->
-    <!-- <ion-button expand="full" (click)="calculatePath()">
-      Find Best K Path
-    </ion-button> -->
+    <!-- start station modal -->
+    <ion-modal
+      #modalStartStation
+      trigger="select-station-start"
+      (willPresent)="filterStartStations2()"
+    >
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Select Station</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modalStartStation.dismiss()"
+                >Close</ion-button
+              >
+            </ion-buttons>
+          </ion-toolbar>
+          <ion-searchbar
+            #startStationSearchbar
+            [(ngModel)]="searchQueryStartStation"
+            (ionInput)="filterStartStations2()"
+          ></ion-searchbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-item
+              *ngFor="let station of startStations"
+              (click)="selectStartStation(station); modalStartStation.dismiss()"
+            >
+              {{ station.lineCode }} - {{ station.name }}
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <!-- end station modal -->
+    <ion-modal
+      #modalEndStation
+      trigger="select-station-end"
+      (willPresent)="filterEndStations2()"
+    >
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Select Station</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modalEndStation.dismiss()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <ion-searchbar
+            #endStationSearchbar
+            [(ngModel)]="searchQueryEndStation"
+            (ionInput)="filterEndStations2()"
+          ></ion-searchbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-item
+              *ngFor="let station of endStations"
+              (click)="selectEndStation(station); modalEndStation.dismiss()"
+            >
+              {{ station.lineCode }} - {{ station.name }}
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </ion-toolbar>
 
   <ng-container
     *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
   >
     <!-- Tabs for Routes -->
-    <ion-toolbar>
+    <ion-toolbar style="margin-top: 10px">
       <ion-segment [(ngModel)]="selectedRoute" (ionChange)="onRouteChange()">
         <ion-segment-button value="preferred">
           Preferred Route
@@ -95,40 +153,50 @@
     <ion-toolbar>
       <div class="route-summary" style="padding-left: 5px; padding-right: 5px">
         <div class="summary-item">
-          <p><strong>Time:</strong> {{ currentRoute?.totalDuration }} mins</p>
+          <ion-icon name="time-outline"></ion-icon>
+          <span style="margin-left: 5px"
+            >{{ currentRoute?.totalDuration }} mins</span
+          >
         </div>
         <div class="summary-item">
-          <p>
-            <strong>Price:</strong>
-            {{ currentRoute?.pathFare }}
-          </p>
+          <!-- <ion-icon name="card-outline"></ion-icon> -->
+          <span style="margin-left: 5px">
+            {{ currentRoute?.pathFare | currency:'PHP':'symbol':'1.2-2' }}
+          </span>
         </div>
         <div class="summary-item">
-          <p>
-            <strong>Stations:</strong> {{ currentRoute?.enrichedPath.length }}
-          </p>
+          <!-- display path as segments -->
+          <ng-container *ngFor="let segment of currentRoute?.pathSegments">
+            <ion-icon
+              name="analytics-outline"
+              style="margin-left: 5px; margin-top: 1px"
+            ></ion-icon>
+            <span style="margin-left: 2px">
+              {{ segment?.stations?.length }}
+            </span>
+          </ng-container>
         </div>
-        <div class="summary-item">
+        <!-- <div class="summary-item">
           <p><strong>Changes:</strong> {{ currentRoute?.transfers }}</p>
-        </div>
-      </div>
+        </div> -->
 
-      <div style="text-align: right; padding-left: 5px; padding-right: 5px">
-        <ng-container *ngIf="pathViewMode === 'list'">
-          <ion-button (click)="showPathInMap()">
-            <ion-icon slot="start" name="map-outline"></ion-icon>
-            Show in Map
-          </ion-button>
+        <div style="flex: 1; text-align: right">
+          <ng-container *ngIf="pathViewMode === 'list'">
+            <ion-button (click)="showPathInMap()">
+              <ion-icon slot="start" name="map-outline"></ion-icon>
+              Map
+            </ion-button>
 
-          <ion-button (click)="togglePathCollapse()">
+            <!-- <ion-button (click)="togglePathCollapse()">
             <ion-icon slot="icon-only" name="expand-outline"></ion-icon>
-          </ion-button>
-        </ng-container>
+          </ion-button> -->
+          </ng-container>
 
-        <ion-button *ngIf="pathViewMode === 'map'" (click)="showPathInList()">
-          <ion-icon slot="start" name="list-outline"></ion-icon>
-          Show in List
-        </ion-button>
+          <ion-button *ngIf="pathViewMode === 'map'" (click)="showPathInList()">
+            <ion-icon slot="start" name="list-outline"></ion-icon>
+            List
+          </ion-button>
+        </div>
       </div>
     </ion-toolbar>
   </ng-container>
@@ -138,7 +206,7 @@
   *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
 >
   <ion-content>
-    <div [hidden]="pathViewMode !== 'map'">
+    <div [hidden]="pathViewMode !== 'map'" style="height: 100%">
       <app-map-viewer
         masterMapDisplayMode="minimal"
         [highlightStationsArray]="currentRoute?.allStations || []"
@@ -147,7 +215,7 @@
     </div>
 
     <div [hidden]="pathViewMode !== 'list'">
-      <ion-list>
+      <ion-list lines="full">
         <ng-container
           *ngFor="let station of currentRoute?.enrichedPath; let i = index"
         >
@@ -170,8 +238,19 @@
           <!-- Expanded View -->
           <ng-template #expandedView>
             <ion-item>
-              <ion-badge slot="start">{{ i + 1 }}</ion-badge>
-              <ion-label>{{ station.name }}</ion-label>
+              <div style="text-align: center; width: 30px; margin-right: 10px">
+                {{ i + 1 }}
+              </div>
+              <div
+                *ngIf="station.customIconPath"
+                style="text-align: center; width: 30px; margin-right: 10px"
+              >
+                <img
+                  src="{{ station.customIconPath }}"
+                  style="width: 30px; height: 30px"
+                />
+              </div>
+              <ion-label>{{ station.name }} </ion-label>
               <ion-chip
                 [style.background-color]="station.lineBgColor || '#CCC'"
                 [style.color]="station.lineTextColor || '#000'"
@@ -183,18 +262,22 @@
             <ion-item *ngIf="station?.nextEdge?.transferType === 'inter-line'">
               <!-- {{ station?.nextEdge?.transferType | json }} -->
               <p class="inter-line-change">
-                Change from {{ station.nextEdge.from }} to {{
-                station.nextEdge.to }}
+                <ion-icon
+                  *ngIf="station.nextEdge.transitMode === 'walk'"
+                  name="walk-outline"
+                  style="font-size: 20px; margin-right: 5px"
+                ></ion-icon>
+                {{ station.nextEdge.transitMode }} to {{ station.nextEdge.to }}
               </p>
             </ion-item>
 
             <!-- display activated edge -->
-            <ng-container *ngIf="station?.nextEdge">
+            <!-- <ng-container *ngIf="station?.nextEdge">
               <ion-item
                 *ngIf="station?.prevEdge?.transferType === 'inter-station'"
               >
                 <p class="inter-station-change">
-                  -- {{station.prevEdge.price}} PPPPPPP Change from {{
+                  -- {{station.prevEdge.price}} PREV Change from {{
                   station.prevEdge.from }} to {{ station.prevEdge.to }}
                 </p>
               </ion-item>
@@ -207,7 +290,7 @@
                   station.nextEdge.from }} to {{ station.nextEdge.to }}
                 </p>
               </ion-item>
-            </ng-container>
+            </ng-container> -->
           </ng-template>
         </ng-container>
       </ion-list>
