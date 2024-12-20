@@ -1,4 +1,10 @@
-<google-map height="100%" width="100%" [center]="center" [zoom]="zoom">
+<google-map
+  height="100%"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom"
+  [options]="mapOptions"
+>
   <!-- master: stations -->
   <ng-container *ngFor="let station of stationsArray">
     <map-marker

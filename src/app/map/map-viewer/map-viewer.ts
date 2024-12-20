@@ -42,6 +42,27 @@ import { TransitService } from '../../core/transit.service';
 export class MapViewerComponent implements OnInit {
   @ViewChild('mapElement', { static: false }) mapElement!: ElementRef;
 
+  center: google.maps.LatLngLiteral = {
+    lat: 14.581111288955865,
+    lng: 121.04244137485719,
+  }; // Example coordinates
+  zoom = 12;
+
+  // Define the restriction and other map options
+  mapOptions: google.maps.MapOptions = {
+    restriction: {
+      latLngBounds: {
+        north: 14.934959773480792, // Northern boundary of NCR
+        south: 14.172512762132273, // Southern boundary of NCR    // 121.24296679460922
+        east: 121.24296679460922, // Eastern boundary of NCR
+        west: 120.84009025026046, // Western boundary of NCR
+      },
+      strictBounds: false, // Allows the user to "touch" the boundary
+    },
+    minZoom: 10, // Optional: restrict zoom levels
+    maxZoom: 18, // Optional: restrict zoom levels
+  };
+
   @Input() highlightStationsArray: Station[] = [];
   @Input() highlightEdgesArray: Edge[] = [];
 
@@ -61,8 +82,8 @@ export class MapViewerComponent implements OnInit {
   };
   stationActiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-active-min.png', // Path to your active station icon
-    scaledSize: new google.maps.Size(8, 8), // Desired size
-    anchor: new google.maps.Point(4, 4), // Anchor point
+    scaledSize: new google.maps.Size(6, 6), // Desired size
+    anchor: new google.maps.Point(3, 3), // Anchor point
   };
 
   stationInactiveIcon: google.maps.Icon = {
@@ -72,8 +93,8 @@ export class MapViewerComponent implements OnInit {
   };
   stationInactiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-inactive-min.png', // Path to your inactive station icon
-    scaledSize: new google.maps.Size(8, 8), // Desired size
-    anchor: new google.maps.Point(4, 4), // Anchor point
+    scaledSize: new google.maps.Size(6, 6), // Desired size
+    anchor: new google.maps.Point(3, 3), // Anchor point
   };
 
   // Function to determine the appropriate icon based on operational status
@@ -313,9 +334,6 @@ export class MapViewerComponent implements OnInit {
 
     return edgeOptions;
   }
-
-  center: google.maps.LatLngLiteral = { lat: 14.5995, lng: 120.9842 }; // Example coordinates
-  zoom = 12;
 
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
