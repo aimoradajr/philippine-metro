@@ -197,7 +197,7 @@ export class MapViewerComponent implements OnInit {
   operationalEdgeOptions_Min: google.maps.PolylineOptions = {
     strokeColor: '#00FF00', // Green color for operational edges
     strokeOpacity: 1.0,
-    strokeWeight: 2, // Thiner line
+    strokeWeight: 1, // Thiner line
     icons: [], // Solid
   };
   operationalEdgeOptions_Highlight: google.maps.PolylineOptions = {
@@ -210,16 +210,16 @@ export class MapViewerComponent implements OnInit {
   nonOperationalEdgeOptions: google.maps.PolylineOptions = {
     strokeColor: 'orange', // Red color for non-operational edges
     strokeOpacity: 0,
-    strokeWeight: 4, // Thicker line
+    strokeWeight: 6, // Thicker line
     icons: [
       {
         icon: {
-          path: 'M 0,-1 0,1', // Simple line segment
-          strokeOpacity: 1,
-          scale: 4, // Controls dash thickness
+          path: 'M 0,-0.25 0,0.25', // Dash length = (0.5 - (-0.5)) × scale
+          strokeOpacity: 0.69,
+          scale: 6, // Controls dash thickness
         }, // Dashed line symbol
         offset: '0', // Start at the beginning
-        repeat: '20px', // Distance between dashes
+        repeat: '15px', // Distance between dashes
       },
     ],
   };
@@ -301,9 +301,9 @@ export class MapViewerComponent implements OnInit {
       edgeOptions.icons = [
         {
           icon: {
-            path: 'M 0,-1 0,1', // Simple line segment
-            strokeOpacity: 1,
-            scale: 4, // Controls dash thickness
+            path: 'M 0,-0.25 0,0.25', // Dash length = (0.5 - (-0.5)) × scale
+            strokeOpacity: 0.69,
+            scale: 6, // Controls dash thickness
           }, // Dashed line symbol
           offset: '0', // Start at the beginning
           repeat: '15px', // Distance between dashes

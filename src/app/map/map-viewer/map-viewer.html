@@ -21,7 +21,7 @@
   <!-- master: edges -->
   <ng-container *ngFor="let edge of edgesArray">
     <map-polyline
-      *ngIf="edge.path"
+      *ngIf="edge.path && !edge.hide"
       [path]="edge.path"
       [options]="getEdgeOptions(edge)"
     ></map-polyline>
