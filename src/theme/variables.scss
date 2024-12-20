@@ -1,2 +1,25 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+:root {
+  /* Primary Theme Color - Black for Buttons */
+  --ion-color-primary: #000000; /* Black buttons */
+  --ion-color-primary-rgb: 0, 0, 0;
+  --ion-color-primary-contrast: #ffffff; /* White text on black buttons */
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #333333; /* Dark gray for button shade effect */
+  --ion-color-primary-tint: #4d4d4d; /* Light gray for tint */
+
+  /* Secondary Theme Color */
+  --ion-color-secondary: #808080; /* Mid-gray for secondary buttons */
+  --ion-color-secondary-rgb: 128, 128, 128;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #666666;
+  --ion-color-secondary-tint: #999999;
+
+  /* Background and Text */
+  --ion-background-color: #ffffff; /* Light mode background */
+  --ion-text-color: #000000; /* Black text */
+  --ion-border-color: #e0e0e0; /* Light gray borders */
+}

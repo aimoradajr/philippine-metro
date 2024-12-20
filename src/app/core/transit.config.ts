@@ -9,6 +9,9 @@ export interface TransitLine {
   stationActiveIcon?: string; // file path to icon
   stationInactiveIcon?: string; // file path to icon
 
+  stationActiveIcon_Min?: string; // file path to icon
+  stationInactiveIcon_Min?: string; // file path to icon
+
   // pricing
   minFare?: number; // in PHP
   maxFare?: number; // in PHP
@@ -26,6 +29,10 @@ export interface Station {
   // geo
   coordinates?: { lat: number; lng: number }; // Geographic coordinates
 
+  // mapping
+  labelOffsetx?: number; // default 60
+  labelOffsety?: number; // default 15
+
   // auto derived line properties
   lineCode?: string;
   lineColor?: string;
@@ -35,6 +42,9 @@ export interface Station {
   // auto derive from line
   stationActiveIcon?: string; // file path to icon
   stationInactiveIcon?: string; // file path to icon
+
+  stationActiveIcon_Min?: string; // file path to icon
+  stationInactiveIcon_Min?: string; // file path to icon
 
   // properties used for pathing and mapping
   stationAction?:
@@ -96,6 +106,9 @@ export const TRANSIT_LINES: TransitLine[] = [
     bgColor: 'green',
     textColor: 'white',
     stationActiveIcon: 'assets/icons/station-active-lrt1.png',
+    stationInactiveIcon: 'assets/icons/station-inactive-lrt1.png',
+    stationActiveIcon_Min: 'assets/icons/station-active-min-lrt1.png',
+    stationInactiveIcon_Min: 'assets/icons/station-inactive-min-lrt1.png',
     minFare: 1,
     maxFare: 3,
     stations: [
@@ -168,6 +181,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'A major station in Caloocan City, near the Bonifacio Monument.',
         // 14.65432216386683, 120.98384231447913
         coordinates: { lat: 14.65432216386683, lng: 120.98384231447913 }, // Monumento Station
+        labelOffsety: 20,
         edges: [
           {
             from: 'LRT1_MONUMENTO',
@@ -1038,6 +1052,9 @@ export const TRANSIT_LINES: TransitLine[] = [
     bgColor: 'blue',
     textColor: 'white',
     stationActiveIcon: 'assets/icons/station-active-lrt2.png',
+    stationInactiveIcon: 'assets/icons/station-inactive-lrt2.png',
+    stationActiveIcon_Min: 'assets/icons/station-active-min-lrt2.png',
+    stationInactiveIcon_Min: 'assets/icons/station-inactive-min-lrt2.png',
     minFare: 10,
     maxFare: 30,
     stations: [
@@ -1759,6 +1776,9 @@ export const TRANSIT_LINES: TransitLine[] = [
     bgColor: 'yellow',
     textColor: 'black',
     stationActiveIcon: 'assets/icons/station-active-mrt3.png',
+    stationInactiveIcon: 'assets/icons/station-inactive-mrt3.png',
+    stationActiveIcon_Min: 'assets/icons/station-active-min-mrt3.png',
+    stationInactiveIcon_Min: 'assets/icons/station-inactive-min-mrt3.png',
     stations: [
       {
         id: 1,

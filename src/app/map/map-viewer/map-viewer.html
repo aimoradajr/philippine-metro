@@ -5,9 +5,17 @@
       *ngIf="station.coordinates"
       [position]="station.coordinates!"
       [title]="station.name"
-      [label]="station.name"
+      [label]="getStationLabel(station)"
       [icon]="getStationIcon(station)"
     ></map-marker>
+
+    <!-- <map-advanced-marker
+      *ngIf="station.coordinates"
+      [position]="station.coordinates!"
+      [title]="station.name"
+      [content]="getStationContent(station)"
+    >
+    </map-advanced-marker> -->
   </ng-container>
 
   <!-- master: edges -->
@@ -25,7 +33,7 @@
       *ngIf="station.coordinates"
       [position]="station.coordinates!"
       [title]="station.name"
-      [label]="station.name"
+      [label]="getStationLabel(station, 'highlight')"
       [icon]="getStationIcon(station, 'highlight')"
     ></map-marker>
   </ng-container>

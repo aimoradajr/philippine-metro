@@ -118,7 +118,8 @@ ion-item.selected {
   --color: var(--ion-color-primary);
 }
 
-.active-item {
+ion-item.active-item {
+  --color: #ffffff; /* White text and icons for active state */
+  --ion-icon-color: red; /* White icons for active state */
   --background: var(--ion-color-primary, #3880ff);
-  --color: var(--ion-color-light, #ffffff);
 }

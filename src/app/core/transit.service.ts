@@ -209,6 +209,8 @@ export class TransitService {
 
           stationActiveIcon: line.stationActiveIcon,
           stationInactiveIcon: line.stationInactiveIcon,
+          stationActiveIcon_Min: line.stationActiveIcon_Min,
+          stationInactiveIcon_Min: line.stationInactiveIcon_Min,
         };
 
         // attach line config to each edge
@@ -226,6 +228,8 @@ export class TransitService {
 
               stationActiveIcon: line.stationActiveIcon,
               stationInactiveIcon: line.stationInactiveIcon,
+              stationActiveIcon_Min: line.stationActiveIcon_Min,
+              stationInactiveIcon_Min: line.stationInactiveIcon_Min,
             };
           });
         }
@@ -248,6 +252,8 @@ export class TransitService {
 
           stationActiveIcon: line.stationActiveIcon,
           stationInactiveIcon: line.stationInactiveIcon,
+          stationActiveIcon_Min: line.stationActiveIcon_Min,
+          stationInactiveIcon_Min: line.stationInactiveIcon_Min,
         };
 
         // attach line config to each edge
@@ -265,6 +271,8 @@ export class TransitService {
 
               stationActiveIcon: line.stationActiveIcon,
               stationInactiveIcon: line.stationInactiveIcon,
+              stationActiveIcon_Min: line.stationActiveIcon_Min,
+              stationInactiveIcon_Min: line.stationInactiveIcon_Min,
             };
           });
         }

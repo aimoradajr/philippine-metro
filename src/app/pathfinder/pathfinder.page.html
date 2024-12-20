@@ -129,7 +129,7 @@
     *ngIf="isCalculationDone && calculatedPathsEnriched && calculatedPathsEnriched.length > 0"
   >
     <!-- Tabs for Routes -->
-    <ion-toolbar style="margin-top: 10px">
+    <ion-toolbar style="padding-top: 5px">
       <ion-segment [(ngModel)]="selectedRoute" (ionChange)="onRouteChange()">
         <ion-segment-button value="preferred">
           Preferred Route
@@ -208,7 +208,7 @@
   <ion-content>
     <div [hidden]="pathViewMode !== 'map'" style="height: 100%">
       <app-map-viewer
-        masterMapDisplayMode="minimal"
+        [masterMapDisplayMode]="'minimal'"
         [highlightStationsArray]="currentRoute?.allStations || []"
         [highlightEdgesArray]="currentRoute?.allEdges || []"
       ></app-map-viewer>
@@ -267,7 +267,11 @@
                   name="walk-outline"
                   style="font-size: 20px; margin-right: 5px"
                 ></ion-icon>
-                {{ station.nextEdge.transitMode }} to {{ station.nextEdge.to }}
+                {{ station.nextEdge.transitMode | titlecase }} {{
+                station.nextEdge.duration }}
+                <ng-container *ngIf="station.nextEdge?.distance">
+                  &nbsp;({{ station.nextEdge.distance }})
+                </ng-container>
               </p>
             </ion-item>
 

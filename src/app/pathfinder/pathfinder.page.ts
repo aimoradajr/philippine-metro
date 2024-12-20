@@ -32,6 +32,7 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -56,6 +57,7 @@ import { MapViewerComponent } from '../map/map-viewer/map-viewer';
   styleUrls: ['./pathfinder.page.scss'],
   standalone: true,
   imports: [
+    IonCardSubtitle,
     IonContent,
     IonHeader,
     IonTitle,

@@ -56,8 +56,8 @@ export class MapViewerComponent implements OnInit {
   // Define icon objects with size and anchor properties
   stationActiveIcon: google.maps.Icon = {
     url: 'assets/icons/station-active.png', // Path to your active station icon
-    scaledSize: new google.maps.Size(30, 30), // Desired size
-    anchor: new google.maps.Point(15, 15), // Anchor point
+    scaledSize: new google.maps.Size(16, 16), // Desired size
+    anchor: new google.maps.Point(8, 8), // Anchor point
   };
   stationActiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-active-min.png', // Path to your active station icon
@@ -67,8 +67,8 @@ export class MapViewerComponent implements OnInit {
 
   stationInactiveIcon: google.maps.Icon = {
     url: 'assets/icons/station-inactive.png', // Path to your inactive station icon
-    scaledSize: new google.maps.Size(30, 30), // Desired size
-    anchor: new google.maps.Point(15, 15), // Anchor point
+    scaledSize: new google.maps.Size(16, 16), // Desired size
+    anchor: new google.maps.Point(8, 8), // Anchor point
   };
   stationInactiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-inactive-min.png', // Path to your inactive station icon
@@ -115,24 +115,71 @@ export class MapViewerComponent implements OnInit {
       }
     }
 
+    // override minimal
+    if (mode === 'minimal') {
+      if (station.stationActiveIcon_Min && station?.isOperational) {
+        icon.url = station.stationActiveIcon_Min!;
+      }
+      if (station.stationInactiveIcon_Min && !station?.isOperational) {
+        icon.url = station.stationInactiveIcon_Min!;
+      }
+    }
+
+    const labelOffsetx = station.labelOffsetx ?? 60;
+    const labelOffsety = station.labelOffsety ?? 15;
+    icon.labelOrigin = new google.maps.Point(labelOffsetx, labelOffsety); // Label position
+
     return icon;
+  }
+
+  getStationLabel(station: Station, displayMode = ''): google.maps.MarkerLabel {
+    const mode = displayMode || this.masterMapDisplayMode;
+
+    if (mode === 'minimal') {
+      return {
+        text: station.name,
+        className: 'custom-marker-label-hide', // CSS class for styling
+      };
+    }
+
+    if (mode === 'highlight') {
+      return {
+        text: station.name,
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: '13px',
+        className: 'custom-marker-label-highlight', // CSS class
+      } as google.maps.MarkerLabel;
+    }
+
+    return {
+      text: station.name,
+      color: '#222',
+      fontSize: '12px',
+      className: 'custom-marker-label', // CSS class for styling
+    } as google.maps.MarkerLabel;
   }
 
   getStationActionIcon(station: Station): google.maps.Icon {
     // Clone the base icon
     let icon: google.maps.Icon = {
       url: 'assets/icons/station-action-board.png', // Path to your active station icon
-      scaledSize: new google.maps.Size(30, 30), // Desired size
-      anchor: new google.maps.Point(15, 55), // Anchor point
+      scaledSize: new google.maps.Size(50, 50), // Desired size
+      anchor: new google.maps.Point(25, 60), // Anchor point
     };
 
     // Override icon for specific station types
     if (station.stationAction === 'board-initial') {
       icon.url = 'assets/icons/station-action-board-initial.png';
     } else if (station.stationAction === 'board') {
-      icon.url = 'assets/icons/station-action-board.png';
+      icon.url = '';
     } else if (station.stationAction === 'alight-and-transfer') {
-      icon.url = 'assets/icons/station-action-alight-and-transfer.png';
+      icon.url = 'assets/icons/station-action-transfer.png';
+      icon.scaledSize = new google.maps.Size(60, 60);
+      icon.anchor = new google.maps.Point(30, 50);
+      // icon.url = 'assets/icons/station-action-exit.png';
+      // icon.scaledSize = new google.maps.Size(40, 40);
+      // icon.anchor = new google.maps.Point(20, 40);
     } else if (station.stationAction === 'alight-end') {
       icon.url = 'assets/icons/station-action-alight-end.png';
     }

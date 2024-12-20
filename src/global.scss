@@ -34,7 +34,7 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
 
 /* My custom styles */
 
@@ -69,4 +69,19 @@
 .mx-0 {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.custom-marker-label {
+  font-weight: bold; /* Font weight */
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white; /* White outline */
+}
+
+.custom-marker-label-hide {
+  display: none;
+}
+
+.custom-marker-label-highlight {
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white; /* White outline */
 }
