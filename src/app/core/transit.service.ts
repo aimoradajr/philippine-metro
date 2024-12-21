@@ -1,6 +1,6 @@
 // src/app/shared/services/transit-lines.service.ts
 import { Injectable } from '@angular/core';
-import { TRANSIT_LINES } from './transit.config';
+import { FAREMATRIX, Station, TRANSIT_LINES } from './transit.config';
 
 // @ts-ignore
 import Graph from 'node-dijkstra';
@@ -10,6 +10,7 @@ import Graph from 'node-dijkstra';
 })
 export class TransitService {
   private transitLines = TRANSIT_LINES;
+  private fareMatrix = FAREMATRIX;
 
   private route = new Graph();
 
@@ -290,5 +291,13 @@ export class TransitService {
   // simplify getStationByCode
   getStationByCode(stationCode: string) {
     return this.getAllStationsFlatObj()[stationCode];
+  }
+
+  // fare
+  calculateFare(stationA: Station, stationB: Station) {
+    // ensure null safe
+    return this.fareMatrix?.[stationA?.lineCode!]?.[stationA.code]?.[
+      stationB.code
+    ];
   }
 }

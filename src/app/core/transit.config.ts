@@ -56,6 +56,9 @@ export interface Station {
     | null;
   prevEdge?: Edge; // in pathfinding context, the actual edge taken to reach this station
   nextEdge?: Edge; // in pathfinding context, the actual edge to take to reach the next station
+
+  //
+  boardingTime?: number; // in minutes. boarding time for passengers.
 }
 
 export interface Edge {
@@ -64,7 +67,7 @@ export interface Edge {
   to: string;
   weight: number;
   transferType: 'inter-station' | 'inter-line' | 'inter-modal';
-  duration?: number; // in minutes
+  duration: number; // in minutes
   transitMode?:
     | 'walk'
     | 'bicycle'
@@ -95,9 +98,6 @@ export interface Edge {
   lineColor?: string;
   lineBgColor?: string;
   lineTextColor?: string;
-
-  // price
-  price?: number; // in PHP
 }
 
 export const TRANSIT_LINES: TransitLine[] = [
@@ -134,7 +134,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
-            duration: 60,
+            // travel duration from FPJ to Balintawak is 5 minutes
+            duration: 5,
             path: [
               { lat: 14.657615323114445, lng: 121.02094825800144 }, // from me
               { lat: 14.657535163572017, lng: 121.00386348386314 }, // to next
@@ -160,6 +161,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Balintawak to FPJ is 5 minutes
+            duration: 5,
             path: [
               { lat: 14.657535163572017, lng: 121.00386348386314 }, // from me
               { lat: 14.657615323114445, lng: 121.02094825800144 }, // to prev
@@ -171,6 +174,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 4,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Balintawak to Monumento is 4 minutes
+            duration: 4,
             path: [
               { lat: 14.657535163572017, lng: 121.00386348386314 }, // from me
               // 14.657209605641192, 120.98572964783018
@@ -206,6 +211,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 4,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Monumento to Balintawak is 4 minutes
+            duration: 4,
             path: [
               { lat: 14.65432216386683, lng: 120.98384231447913 }, // from me
               // reverse path from Balintawak to Monumento
@@ -223,6 +230,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Monumento to 5th Avenue is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.65432216386683, lng: 120.98384231447913 }, // from me
               { lat: 14.644436303427462, lng: 120.983385695334 }, // to next
@@ -246,6 +255,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from 5th Avenue to Monumento is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.644436303427462, lng: 120.983385695334 }, // from me
               { lat: 14.65432216386683, lng: 120.98384231447913 }, // to prev
@@ -257,6 +268,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from 5th Avenue to R. Papa is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.644436303427462, lng: 120.983385695334 }, // from me
               // 14.638898949127556, 120.98327580498872
@@ -287,6 +300,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from R. Papa to 5th Avenue is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.636138537552963, lng: 120.98228369673073 }, // from me
               // reverse path of subpoints from 5th Avenue to R. Papa
@@ -302,7 +317,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
-            price: 2,
+            // travel duration from R. Papa to Abad Santos is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.636138537552963, lng: 120.98228369673073 }, // from me
               // 14.633060481274489, 120.98079563862822
@@ -335,6 +351,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Abad Santos to R. Papa is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.630590938571148, lng: 120.98129525929572 }, // from me
               // reverse path of subpoints from R. Papa to Abad Santos
@@ -351,7 +369,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
-            price: 2,
+            // travel duration from Abad Santos to Blumentritt is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.630590938571148, lng: 120.98129525929572 }, // from me
               // 14.629216400235583, 120.98265187722332
@@ -381,6 +400,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Blumentritt to Abad Santos is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.622652585067982, lng: 120.98286856250003 }, // from me
               // reverse path of subpoints from Abad Santos to Blumentritt
@@ -395,6 +416,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Blumentritt to Tayuman is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.622652585067982, lng: 120.98286856250003 }, // from me
               { lat: 14.61675788330022, lng: 120.98270392147654 }, // to next
@@ -418,6 +441,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Tayuman to Blumentritt is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.61675788330022, lng: 120.98270392147654 }, // from me
               { lat: 14.622652585067982, lng: 120.98286856250003 }, // to prev
@@ -428,6 +453,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Tayuman to Bambang is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.61675788330022, lng: 120.98270392147654 }, // from me
               // 14.613186646981697, 120.98262042848863
@@ -453,6 +480,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Bambang to Tayuman is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.61117057596535, lng: 120.9822890904357 }, // from me
               // 14.613186646981697, 120.98262042848863
@@ -465,6 +494,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Bambang to Doroteo Jose is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.61117057596535, lng: 120.9822890904357 }, // from me
               { lat: 14.605461953754634, lng: 120.98194541980351 }, // to next
@@ -488,6 +519,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Doroteo Jose to Bambang is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.605461953754634, lng: 120.98194541980351 }, // from me
               { lat: 14.61117057596535, lng: 120.9822890904357 }, // to prev
@@ -498,6 +531,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Doroteo Jose to Carriedo is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.605461953754634, lng: 120.98194541980351 }, // from me
               // 14.602470553625214, 120.98179378869963
@@ -510,6 +545,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_RECTO',
             weight: 2,
             transferType: 'inter-line',
+            // travel duration from Doroteo Jose to LRT-2 Recto walking thru the elevated walkway is 2 minutes
+            duration: 2,
             transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via an elevated walkway.',
@@ -550,6 +587,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Carriedo to Doroteo Jose is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.59904708041471, lng: 120.98140067370474 }, // from me
               // 14.602470553625214, 120.98179378869963
@@ -562,6 +601,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Carriedo to Central Terminal is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.59904708041471, lng: 120.98140067370474 }, // from me
               // 14.598500583033132, 120.98116348440263
@@ -596,6 +637,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Central Terminal to Carriedo is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.592772584129786, lng: 120.98160257975337 }, // from me
               // reverse path of subpoints from Carriedo to Central Terminal
@@ -612,6 +655,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Central Terminal to UN Avenue is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.592772584129786, lng: 120.98160257975337 }, // from me
               // 14.591835040958324, 120.98182731071763
@@ -645,6 +690,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from UN Avenue to Central Terminal is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.582547796804986, lng: 120.98454208223805 }, // from me
               // reverse path of subpoints from Central Terminal to UN Avenue
@@ -661,6 +708,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from UN Avenue to Pedro Gil is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.582547796804986, lng: 120.98454208223805 }, // from me
               { lat: 14.576554438385337, lng: 120.98800315230707 }, // to next
@@ -684,6 +733,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Pedro Gil to UN Avenue is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.576554438385337, lng: 120.98800315230707 }, // from me
               { lat: 14.582547796804986, lng: 120.98454208223805 }, // to prev
@@ -694,6 +745,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Pedro Gil to Quirino is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.576554438385337, lng: 120.98800315230707 }, // from me
               { lat: 14.570502454798115, lng: 120.99151131231389 }, // to next
@@ -716,6 +769,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Quirino to Pedro Gil is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.570502454798115, lng: 120.99151131231389 }, // from me
               { lat: 14.576554438385337, lng: 120.98800315230707 }, // to prev
@@ -726,6 +781,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Quirino to Vito Cruz is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.570502454798115, lng: 120.99151131231389 }, // from me
               { lat: 14.563565052791175, lng: 120.99481603865144 }, // to next
@@ -748,6 +805,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Vito Cruz to Quirino is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.563565052791175, lng: 120.99481603865144 }, // from me
               { lat: 14.570502454798115, lng: 120.99151131231389 }, // to prev
@@ -758,6 +817,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Vito Cruz to Gil Puyat is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.563565052791175, lng: 120.99481603865144 }, // from me
               // 14.562467767309625, 120.99518000734405
@@ -782,6 +843,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Gil Puyat to Vito Cruz is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.55428697609849, lng: 120.99712587034271 }, // from me
               // reverse path of subpoints from Vito Cruz to Gil Puyat
@@ -794,6 +857,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Gil Puyat to Libertad is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.55428697609849, lng: 120.99712587034271 }, // from me
               { lat: 14.547796780097222, lng: 120.99855948289108 }, // to next
@@ -816,6 +881,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Libertad to Gil Puyat is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.547796780097222, lng: 120.99855948289108 }, // from me
               { lat: 14.55428697609849, lng: 120.99712587034271 }, // to prev
@@ -826,6 +893,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Libertad to EDSA is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.547796780097222, lng: 120.99855948289108 }, // from me
               { lat: 14.538714843616395, lng: 121.00063929330985 }, // to next
@@ -851,6 +920,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from EDSA to Libertad is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.538714843616395, lng: 121.00063929330985 }, // from me
               { lat: 14.547796780097222, lng: 120.99855948289108 }, // to prev
@@ -861,6 +932,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from EDSA to Baclaran is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.538714843616395, lng: 121.00063929330985 }, // from me
               // 14.5381857914863, 121.00068469805295
@@ -881,6 +954,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'MRT3_TAFT_AVENUE',
             weight: 5, // Approximate walking time in minutes
             transferType: 'inter-line',
+            // travel duration from LRT-1 EDSA to MRT-3 Taft Avenue walking thru the covered footbridge is 5 minutes
+            duration: 5,
             transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via a covered footbridge.',
@@ -933,6 +1008,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Baclaran to EDSA is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.534216158572693, lng: 120.99823494117172 }, // from me
               // reverse path of subpoints from EDSA to Baclaran
@@ -949,6 +1026,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Baclaran to Redemptorist is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.534216158572693, lng: 120.99823494117172 }, // from me
               // 14.532739239486938, 120.99707396391658
@@ -990,6 +1069,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Redemptorist to Baclaran is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.530231044787087, lng: 120.99278168609546 }, // from me
               // reverse path of subpoints from Baclaran to Redemptorist
@@ -1010,6 +1091,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Redemptorist to MIA is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.530231044787087, lng: 120.99278168609546 }, // from me
               // 14.526760154398835, 120.99330875628665
@@ -1039,6 +1122,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from MIA to Redemptorist is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.518510885287759, lng: 120.99286667487398 }, // from me
               // reverse path of subpoints from Redemptorist to MIA
@@ -1052,6 +1137,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from MIA to Asia World is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.518510885287759, lng: 120.99286667487398 }, // from me
               // 14.513553163448954, 120.99237012784604
@@ -1080,6 +1167,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Asia World to MIA is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.50845418511056, lng: 120.99118615050102 }, // from me
               // reverse path of subpoints from MIA to Asia World
@@ -1093,6 +1182,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Asia World to Ninoy Aquino is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.50845418511056, lng: 120.99118615050102 }, // from me
               // 14.50748586718183, 120.9909479021077
@@ -1141,6 +1232,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 2,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Ninoy Aquino to Asia World is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.498914085756669, lng: 120.99427694903393 }, // from me
               // reverse path of subpoints from Asia World to Ninoy Aquino
@@ -1165,6 +1258,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Ninoy Aquino to Dr. Santos is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.498914085756669, lng: 120.99427694903393 }, // from me
               // 14.498010080275803, 120.99431246154813
@@ -1211,6 +1306,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Dr. Santos to Ninoy Aquino is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.485487817830236, lng: 120.98938956143442 }, // from me
               // reverse path of subpoints from Ninoy Aquino to Dr. Santos
@@ -1234,6 +1331,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: false,
             transferType: 'inter-station',
+            // travel duration from Dr. Santos to Las Piñas is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.485487817830236, lng: 120.98938956143442 }, // from me
               // 14.480954381268424, 120.98726346953964
@@ -1279,6 +1378,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             isOperational: false,
             hide: true,
             transferType: 'inter-station',
+            // travel duration from Las Piñas to Dr. Santos is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.474573544628553, lng: 120.97574500672548 }, // from me
               // reverse path of subpoints from Dr. Santos to Las Piñas
@@ -1301,6 +1402,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 3,
             isOperational: false,
             transferType: 'inter-station',
+            // travel duration from Las Piñas to Zapote is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.474573544628553, lng: 120.97574500672548 }, // from me
               // 14.474510834474899, 120.97375128449015
@@ -1331,6 +1434,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             isOperational: false,
             hide: true,
             transferType: 'inter-station',
+            // travel duration from Zapote to Las Piñas is 3 minutes
+            duration: 3,
             path: [
               { lat: 14.471764874184087, lng: 120.96763115622156 }, // from me
               // reverse path of subpoints from Las Piñas to Zapote
@@ -1345,6 +1450,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 4,
             isOperational: false,
             transferType: 'inter-station',
+            // travel duration from Zapote to Niog is 4 minutes
+            duration: 4,
             path: [
               { lat: 14.471764874184087, lng: 120.96763115622156 }, // from me
               // 14.470902476644333, 120.96427263231548
@@ -1383,6 +1490,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             isOperational: false,
             hide: true,
             transferType: 'inter-station',
+            // travel duration from Niog to Zapote is 4 minutes
+            duration: 4,
             path: [
               { lat: 14.457625808747034, lng: 120.96005861893664 }, // from me
               // reverse path of subpoints from Zapote to Niog
@@ -1428,6 +1537,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_MARIKINA',
             weight: 4,
             transferType: 'inter-station',
+            // travel duration from Antipolo to Marikina is 4 minutes
+            duration: 4,
             isOperational: true,
             transferDescription: 'Direct train service to Marikina station.',
             transferDistance: 'Approximately 4 minutes by train',
@@ -1456,6 +1567,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_ANTIPOLO',
             weight: 4,
             transferType: 'inter-station',
+            // travel duration from Marikina to Antipolo is 4 minutes
+            duration: 4,
             isOperational: true,
             transferDescription: 'Direct train service to Antipolo station.',
             transferDistance: 'Approximately 4 minutes by train',
@@ -1472,6 +1585,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_SANTOLAN',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Marikina to Santolan is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Santolan station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -1513,6 +1628,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_MARIKINA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Santolan to Marikina is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Marikina station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -1535,6 +1652,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_KATIPUNAN',
             weight: 4,
             transferType: 'inter-station',
+            // travel duration from Santolan to Katipunan is 4 minutes
+            duration: 4,
             isOperational: true,
             transferDescription: 'Direct train service to Katipunan station.',
             transferDistance: 'Approximately 4 minutes by train',
@@ -1595,6 +1714,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_SANTOLAN',
             weight: 4,
             transferType: 'inter-station',
+            // travel duration from Katipunan to Santolan is 4 minutes
+            duration: 4,
             isOperational: true,
             transferDescription: 'Direct train service to Santolan station.',
             transferDistance: 'Approximately 4 minutes by train',
@@ -1627,6 +1748,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_ANONAS',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Katipunan to Anonas is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Anonas station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1662,6 +1785,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_KATIPUNAN',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Anonas to Katipunan is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Katipunan station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1682,6 +1807,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_CUBAO',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Anonas to Cubao is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Cubao station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -1719,6 +1846,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_ANONAS',
             weight: 3, // Approximate travel time in minutes
             transferType: 'inter-station',
+            // travel duration from Cubao to Anonas is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription:
               'Direct train service from Cubao to Anonas station.',
@@ -1741,6 +1870,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_BETTY_GO_BELMONTE',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Cubao to Betty Go-Belmonte is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription:
               'Direct train service to Betty Go-Belmonte station.',
@@ -1766,6 +1897,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'MRT3_CUBAO',
             weight: 5,
             transferType: 'inter-line',
+            // travel duration from LRT-2 Cubao to MRT-3 Cubao by walk is 7 minutes
+            duration: 7,
             transitMode: 'walk',
             isOperational: true,
             transferDescription:
@@ -1798,6 +1931,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_CUBAO',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Betty Go-Belmonte to Cubao is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Cubao station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1819,6 +1954,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_GILMORE',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Betty Go-Belmonte to Gilmore is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Gilmore station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1848,6 +1985,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_BETTY_GO_BELMONTE',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Gilmore to Betty Go-Belmonte is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription:
               'Direct train service to Betty Go-Belmonte station.',
@@ -1865,6 +2004,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_J_RUIZ',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Gilmore to J. Ruiz is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to J. Ruiz station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1899,6 +2040,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_GILMORE',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from J. Ruiz to Gilmore is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Gilmore station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1918,6 +2061,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_V_MAPA',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from J. Ruiz to V. Mapa is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to V. Mapa station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1954,6 +2099,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_J_RUIZ',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from V. Mapa to J. Ruiz is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to J. Ruiz station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -1975,6 +2122,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_PUREZA',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from V. Mapa to Pureza is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to Pureza station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -2016,6 +2165,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_V_MAPA',
             weight: 2,
             transferType: 'inter-station',
+            // travel duration from Pureza to V. Mapa is 2 minutes
+            duration: 2,
             isOperational: true,
             transferDescription: 'Direct train service to V. Mapa station.',
             transferDistance: 'Approximately 2 minutes by train',
@@ -2039,6 +2190,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_LEGARDA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Pureza to Legarda is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Legarda station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -2110,13 +2263,14 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_PUREZA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Legarda to Pureza is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Pureza station.',
             transferDistance: 'Approximately 3 minutes by train',
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
-            price: 2,
             path: [
               { lat: 14.600864578161373, lng: 120.99250867046764 }, // from me
               // reverse path of subpoints from Pureza to Legarda
@@ -2149,6 +2303,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_RECTO',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Legarda to Recto is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Recto station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -2197,13 +2353,14 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_LEGARDA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Recto to Legarda is 3 minutes
+            duration: 3,
             isOperational: true,
             transferDescription: 'Direct train service to Legarda station.',
             transferDistance: 'Approximately 3 minutes by train',
             accessibility: 'Elevators and escalators available',
             additionalCost: 'None',
             direction: 'eastbound',
-            price: 2,
             path: [
               { lat: 14.60348141245216, lng: 120.9834813414183 }, // from me
               // reverse path of subpoints from Legarda to Recto
@@ -2224,6 +2381,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_TUTUBAN',
             weight: 5,
             transferType: 'inter-station',
+            // travel duration from Recto to Tutuban is 5 minutes
+            duration: 5,
             isOperational: false,
             transferDescription: 'Direct train service to Tutuban station.',
             transferDistance: 'Approximately 5 minutes by train',
@@ -2260,6 +2419,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT1_DOROTEO_JOSE',
             weight: 5,
             transferType: 'inter-line',
+            // travel duration from Recto to Doroteo Jose by foot is 5 minutes
+            duration: 5,
             transitMode: 'walk',
             isOperational: true,
             transferDescription:
@@ -2301,6 +2462,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_RECTO',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Tutuban to Recto is 3 minutes
+            duration: 3,
             isOperational: false,
             hide: true,
             transferDescription: 'Direct train service to Recto station.',
@@ -2328,6 +2491,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_DIVISORIA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Tutuban to Divisoria is 3 minutes
+            duration: 3,
             isOperational: false,
             transferDescription: 'Direct train service to Divisoria station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -2369,6 +2534,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_TUTUBAN',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Divisoria to Tutuban is 3 minutes
+            duration: 3,
             isOperational: false,
             hide: true,
             transferDescription: 'Direct train service to Tutuban station.',
@@ -2392,6 +2559,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_PIER_4',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Divisoria to Pier 4 is 3 minutes
+            duration: 3,
             isOperational: false,
             transferDescription: 'Direct train service to Pier 4 station.',
             transferDistance: 'Approximately 3 minutes by train',
@@ -2457,6 +2626,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_DIVISORIA',
             weight: 3,
             transferType: 'inter-station',
+            // travel duration from Pier 4 to Divisoria is 3 minutes
+            duration: 3,
             isOperational: false,
             hide: true,
             transferDescription: 'Direct train service to Divisoria station.',
@@ -2518,6 +2689,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from North Avenue to Quezon Avenue is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.652169907896354, lng: 121.03226455190827 }, // from me
               { lat: 14.64275621704705, lng: 121.03847691656055 }, // to next
@@ -2541,6 +2714,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Quezon Avenue to North Avenue is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.64275621704705, lng: 121.03847691656055 }, // from me
               { lat: 14.652169907896354, lng: 121.03226455190827 }, // to prev
@@ -2551,6 +2726,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            // travel duration from Quezon Avenue to GMA-Kamuning is 2 minutes
+            duration: 2,
             path: [
               { lat: 14.64275621704705, lng: 121.03847691656055 }, // from me
               { lat: 14.635217035522803, lng: 121.0434184846183 }, // to next
@@ -2575,6 +2752,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.635217035522803, lng: 121.0434184846183 }, // from me
               { lat: 14.64275621704705, lng: 121.03847691656055 }, // to prev
@@ -2585,6 +2763,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.635217035522803, lng: 121.0434184846183 }, // from me
               // 14.632736048062538, 121.0449473654122
@@ -2616,6 +2795,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.619436167701586, lng: 121.05109226468761 }, // from me
               // reverse path of subpoints from GMA-Kamuning to Cubao
@@ -2631,6 +2811,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.619436167701586, lng: 121.05109226468761 }, // from me
               { lat: 14.607368674492228, lng: 121.05666307569197 }, // to next
@@ -2641,6 +2822,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT2_CUBAO',
             weight: 5,
             transferType: 'inter-line',
+            // transfer duration from MRT-3 Cubao to LRT-2 Cubao by foot is 7 minutes
+            duration: 7,
             transitMode: 'walk',
             isOperational: true,
             transferDescription:
@@ -2673,6 +2856,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.607368674492228, lng: 121.05666307569197 }, // from me
               { lat: 14.619436167701586, lng: 121.05109226468761 }, // to prev
@@ -2683,6 +2867,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.607368674492228, lng: 121.05666307569197 }, // from me
               // 14.602285978507956, 121.05900588373571
@@ -2734,6 +2919,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.587891443450124, lng: 121.05671105208569 }, // from me
               // reverse path of subpoints from Santolan-Annapolis to Ortigas
@@ -2759,6 +2945,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.587891443450124, lng: 121.05671105208569 }, // from me
               // 14.584604148339332, 121.0556117466593
@@ -2790,6 +2977,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.581241157304031, lng: 121.05360426276788 }, // from me
               // reverse path of subpoints from Ortigas to Shaw Boulevard
@@ -2805,6 +2993,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.581241157304031, lng: 121.05360426276788 }, // from me
               { lat: 14.573765068135797, lng: 121.04814319459827 }, // to next
@@ -2828,6 +3017,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.573765068135797, lng: 121.04814319459827 }, // from me
               { lat: 14.581241157304031, lng: 121.05360426276788 }, // to prev
@@ -2838,6 +3028,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.573765068135797, lng: 121.04814319459827 }, // from me
               // 14.572237958626003, 121.04722424489026
@@ -2867,6 +3058,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.566672857041965, lng: 121.04542599246548 }, // from me
               // reverse path of subpoints from Boni to Guadalupe
@@ -2881,6 +3073,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.566672857041965, lng: 121.04542599246548 }, // from me
               // 14.565273267001144, 121.04512971392451
@@ -2918,6 +3111,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.554615536966176, lng: 121.0344275884317 }, // from me
               // reverse path of subpoints from Guadalupe to Buendia
@@ -2936,6 +3130,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.554615536966176, lng: 121.0344275884317 }, // from me
               { lat: 14.549182387052426, lng: 121.02797462354556 }, // to next
@@ -2959,6 +3154,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.549182387052426, lng: 121.02797462354556 }, // from me
               { lat: 14.554615536966176, lng: 121.0344275884317 }, // to prev
@@ -2969,6 +3165,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.549182387052426, lng: 121.02797462354556 }, // from me
               { lat: 14.542176999516412, lng: 121.01968479687375 }, // to next
@@ -2992,6 +3189,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.542176999516412, lng: 121.01968479687375 }, // from me
               { lat: 14.549182387052426, lng: 121.02797462354556 }, // to prev
@@ -3002,6 +3200,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.542176999516412, lng: 121.01968479687375 }, // from me
               // 14.541128322656357, 121.01819588737736
@@ -3044,6 +3243,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
+            duration: 2,
             path: [
               { lat: 14.53768596175474, lng: 121.00178304515234 }, // from me
               // reverse path of subpoints from Magallanes to Taft Avenue
@@ -3064,6 +3264,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             to: 'LRT1_EDSA',
             weight: 5, // Approximate walking time in minutes
             transferType: 'inter-line',
+            // transfer duration from MRT-3 Taft Avenue to LRT-1 EDSA by foot is 5 minutes
+            duration: 5,
             transitMode: 'walk',
             isOperational: true,
             transferDescription: 'Connected via a covered footbridge.',
@@ -3102,3 +3304,1022 @@ export const TRANSIT_LINES: TransitLine[] = [
   },
   // Add more transit lines as needed
 ];
+
+// all mrt3 EXACT station codes here:
+/*
+MRT3_NORTH_AVENUE,
+MRT3_QUEZON_AVENUE,
+MRT3_GMA_KAMUNING,
+MRT3_CUBAO,
+MRT3_SANTOLAN_ANNAPOLIS,
+MRT3_ORTIGAS,
+MRT3_SHAW_BOULEVARD,
+MRT3_BONI,
+MRT3_GUADALUPE,
+MRT3_BUENDIA,
+MRT3_AYALA,
+MRT3_MAGALLANES,
+MRT3_TAFT_AVENUE */
+
+// all lrt1 EXACT station codes here:
+/* LRT1_FPJ,
+LRT1_BALINTAWAK,
+LRT1_MONUMENTO,
+LRT1_5TH_AVENUE,
+LRT1_R_PAPA,
+LRT1_ABAD_SANTOS,
+LRT1_BLUMENTRITT,
+LRT1_TAYUMAN,
+LRT1_BAMBANG,
+LRT1_DOROTEO_JOSE,
+LRT1_CARRIEDO,
+LRT1_CENTRAL_TERMINAL,
+LRT1_UN_AVENUE,
+LRT1_PEDRO_GIL,
+LRT1_QUIRINO,
+LRT1_VITO_CRUZ,
+LRT1_GIL_PUYAT,
+LRT1_LIBERTAD,
+LRT1_EDSA,
+LRT1_BACLARAN,
+LRT1_REDEMPTORIST,
+LRT1_MIA,
+LRT1_ASIA_WORLD,
+LRT1_NINOY_AQUINO,
+LRT1_DR_SANTOS,
+LRT1_LAS_PINAS,
+LRT1_ZAPOTE,
+LRT1_NIOG
+*/
+
+// all lrt2 EXACT station codes here:
+/*
+LRT2_RECTO,
+LRT2_LEGARDA,
+LRT2_PUREZA,
+LRT2_V_MAPA,
+LRT2_J_RUIZ,
+LRT2_GILMORE,
+LRT2_BETTY_GO_BELMONTE,
+LRT2_CUBAO,
+LRT2_ANONAS,
+LRT2_KATIPUNAN,
+LRT2_SANTOLAN,
+LRT2_MARIKINA,
+LRT2_ANTIPOLO
+*/
+
+export const FAREMATRIX: Record<
+  string,
+  Record<string, Record<string, number>>
+> = {
+  MRT3: {
+    MRT3_NORTH_AVENUE: {
+      MRT_NORTH_AVENUE: 0, // same
+      MRT3_QUEZON_AVENUE: 13,
+      MRT3_GMA_KAMUNING: 13,
+      MRT3_CUBAO: 16,
+      MRT3_SANTOLAN_ANNAPOLIS: 16,
+      MRT3_ORTIGAS: 20,
+      MRT3_SHAW_BOULEVARD: 20,
+      MRT3_BONI: 20,
+      MRT3_GUADALUPE: 24,
+      MRT3_BUENDIA: 24,
+      MRT3_AYALA: 28,
+      MRT3_MAGALLANES: 28,
+      MRT3_TAFT_AVENUE: 28,
+    },
+    MRT3_QUEZON_AVENUE: {
+      MRT3_NORTH_AVENUE: 13,
+      MRT3_QUEZON_AVENUE: 0, // same
+      MRT3_GMA_KAMUNING: 13,
+      MRT3_CUBAO: 13,
+      MRT3_SANTOLAN_ANNAPOLIS: 16,
+      MRT3_ORTIGAS: 16,
+      MRT3_SHAW_BOULEVARD: 20,
+      MRT3_BONI: 20,
+      MRT3_GUADALUPE: 20,
+      MRT3_BUENDIA: 24,
+      MRT3_AYALA: 24,
+      MRT3_MAGALLANES: 24,
+      MRT3_TAFT_AVENUE: 28,
+    },
+    MRT3_GMA_KAMUNING: {
+      MRT3_NORTH_AVENUE: 13,
+      MRT3_QUEZON_AVENUE: 13,
+      MRT3_GMA_KAMUNING: 0, // same
+      MRT3_CUBAO: 13,
+      MRT3_SANTOLAN_ANNAPOLIS: 13,
+      MRT3_ORTIGAS: 16,
+      MRT3_SHAW_BOULEVARD: 16,
+      MRT3_BONI: 20,
+      MRT3_GUADALUPE: 20,
+      MRT3_BUENDIA: 20,
+      MRT3_AYALA: 24,
+      MRT3_MAGALLANES: 24,
+      MRT3_TAFT_AVENUE: 24,
+    },
+    MRT3_CUBAO: {
+      MRT3_NORTH_AVENUE: 16,
+      MRT3_QUEZON_AVENUE: 13,
+      MRT3_GMA_KAMUNING: 13,
+      MRT3_CUBAO: 0, // same
+      MRT3_SANTOLAN_ANNAPOLIS: 13,
+      MRT3_ORTIGAS: 13,
+      MRT3_SHAW_BOULEVARD: 16,
+      MRT3_BONI: 16,
+      MRT3_GUADALUPE: 20,
+      MRT3_BUENDIA: 20,
+      MRT3_AYALA: 20,
+      MRT3_MAGALLANES: 24,
+      MRT3_TAFT_AVENUE: 24,
+    },
+    MRT3_SANTOLAN_ANNAPOLIS: {
+      MRT3_NORTH_AVENUE: 16,
+      MRT3_QUEZON_AVENUE: 16,
+      MRT3_GMA_KAMUNING: 13,
+      MRT3_CUBAO: 13,
+      MRT3_SANTOLAN_ANNAPOLIS: 0, // same
+      MRT3_ORTIGAS: 13,
+      MRT3_SHAW_BOULEVARD: 13,
+      MRT3_BONI: 16,
+      MRT3_GUADALUPE: 16,
+      MRT3_BUENDIA: 20,
+      MRT3_AYALA: 20,
+      MRT3_MAGALLANES: 20,
+      MRT3_TAFT_AVENUE: 24,
+    },
+    MRT3_ORTIGAS: {
+      MRT3_NORTH_AVENUE: 20,
+      MRT3_QUEZON_AVENUE: 16,
+      MRT3_GMA_KAMUNING: 16,
+      MRT3_CUBAO: 13,
+      MRT3_SANTOLAN_ANNAPOLIS: 13,
+      MRT3_ORTIGAS: 0, // same
+      MRT3_SHAW_BOULEVARD: 13,
+      MRT3_BONI: 13,
+      MRT3_GUADALUPE: 16,
+      MRT3_BUENDIA: 16,
+      MRT3_AYALA: 20,
+      MRT3_MAGALLANES: 20,
+      MRT3_TAFT_AVENUE: 20,
+    },
+    MRT3_SHAW_BOULEVARD: {
+      MRT3_NORTH_AVENUE: 20,
+      MRT3_QUEZON_AVENUE: 20,
+      MRT3_GMA_KAMUNING: 16,
+      MRT3_CUBAO: 16,
+      MRT3_SANTOLAN_ANNAPOLIS: 13,
+      MRT3_ORTIGAS: 13,
+      MRT3_SHAW_BOULEVARD: 0, // same
+      MRT3_BONI: 13,
+      MRT3_GUADALUPE: 13,
+      MRT3_BUENDIA: 16,
+      MRT3_AYALA: 16,
+      MRT3_MAGALLANES: 20,
+      MRT3_TAFT_AVENUE: 20,
+    },
+    MRT3_BONI: {
+      MRT3_NORTH_AVENUE: 20,
+      MRT3_QUEZON_AVENUE: 20,
+      MRT3_GMA_KAMUNING: 20,
+      MRT3_CUBAO: 16,
+      MRT3_SANTOLAN_ANNAPOLIS: 16,
+      MRT3_ORTIGAS: 13,
+      MRT3_SHAW_BOULEVARD: 13,
+      MRT3_BONI: 0, // same
+      MRT3_GUADALUPE: 13,
+      MRT3_BUENDIA: 13,
+      MRT3_AYALA: 16,
+      MRT3_MAGALLANES: 16,
+      MRT3_TAFT_AVENUE: 20,
+    },
+    MRT3_GUADALUPE: {
+      MRT3_NORTH_AVENUE: 24,
+      MRT3_QUEZON_AVENUE: 20,
+      MRT3_GMA_KAMUNING: 20,
+      MRT3_CUBAO: 20,
+      MRT3_SANTOLAN_ANNAPOLIS: 26,
+      MRT3_ORTIGAS: 16,
+      MRT3_SHAW_BOULEVARD: 13,
+      MRT3_BONI: 13,
+      MRT3_GUADALUPE: 0, // same
+      MRT3_BUENDIA: 13,
+      MRT3_AYALA: 13,
+      MRT3_MAGALLANES: 16,
+      MRT3_TAFT_AVENUE: 16,
+    },
+    MRT3_BUENDIA: {
+      MRT3_NORTH_AVENUE: 24,
+      MRT3_QUEZON_AVENUE: 24,
+      MRT3_GMA_KAMUNING: 20,
+      MRT3_CUBAO: 20,
+      MRT3_SANTOLAN_ANNAPOLIS: 20,
+      MRT3_ORTIGAS: 16,
+      MRT3_SHAW_BOULEVARD: 16,
+      MRT3_BONI: 13,
+      MRT3_GUADALUPE: 13,
+      MRT3_BUENDIA: 0, // same
+      MRT3_AYALA: 13,
+      MRT3_MAGALLANES: 13,
+      MRT3_TAFT_AVENUE: 16,
+    },
+    MRT3_AYALA: {
+      MRT3_NORTH_AVENUE: 24,
+      MRT3_QUEZON_AVENUE: 24,
+      MRT3_GMA_KAMUNING: 24,
+      MRT3_CUBAO: 20,
+      MRT3_SANTOLAN_ANNAPOLIS: 20,
+      MRT3_ORTIGAS: 20,
+      MRT3_SHAW_BOULEVARD: 16,
+      MRT3_BONI: 16,
+      MRT3_GUADALUPE: 13,
+      MRT3_BUENDIA: 13,
+      MRT3_AYALA: 0, // same
+      MRT3_MAGALLANES: 13,
+      MRT3_TAFT_AVENUE: 13,
+    },
+    MRT3_MAGALLANES: {
+      MRT3_NORTH_AVENUE: 28,
+      MRT3_QUEZON_AVENUE: 24,
+      MRT3_GMA_KAMUNING: 24,
+      MRT3_CUBAO: 24,
+      MRT3_SANTOLAN_ANNAPOLIS: 20,
+      MRT3_ORTIGAS: 20,
+      MRT3_SHAW_BOULEVARD: 20,
+      MRT3_BONI: 16,
+      MRT3_GUADALUPE: 16,
+      MRT3_BUENDIA: 13,
+      MRT3_AYALA: 13,
+      MRT3_MAGALLANES: 0, // same
+      MRT3_TAFT_AVENUE: 13,
+    },
+    MRT3_TAFT_AVENUE: {
+      MRT3_NORTH_AVENUE: 28,
+      MRT3_QUEZON_AVENUE: 28,
+      MRT3_GMA_KAMUNING: 24,
+      MRT3_CUBAO: 24,
+      MRT3_SANTOLAN_ANNAPOLIS: 24,
+      MRT3_ORTIGAS: 20,
+      MRT3_SHAW_BOULEVARD: 24,
+      MRT3_BONI: 20,
+      MRT3_GUADALUPE: 20,
+      MRT3_BUENDIA: 16,
+      MRT3_AYALA: 13,
+      MRT3_MAGALLANES: 13,
+      MRT3_TAFT_AVENUE: 0, // same
+    },
+  },
+  LRT1: {
+    LRT1_FPJ: {
+      LRT1_FPJ: 0, // same
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 30,
+      LRT1_CENTRAL_TERMINAL: 30,
+      LRT1_UN_AVENUE: 30,
+      LRT1_PEDRO_GIL: 30,
+      LRT1_QUIRINO: 30,
+      LRT1_VITO_CRUZ: 35,
+      LRT1_GIL_PUYAT: 35,
+      LRT1_LIBERTAD: 35,
+      LRT1_EDSA: 35,
+      LRT1_BACLARAN: 35,
+      LRT1_REDEMPTORIST: 40,
+      LRT1_MIA: 40,
+      LRT1_ASIA_WORLD: 40,
+      LRT1_NINOY_AQUINO: 45,
+      LRT1_DR_SANTOS: 45,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_BALINTAWAK: {
+      LRT1_FPJ: 20,
+      LRT1_BALINTAWAK: 0, // same
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 30,
+      LRT1_PEDRO_GIL: 30,
+      LRT1_QUIRINO: 30,
+      LRT1_VITO_CRUZ: 30,
+      LRT1_GIL_PUYAT: 30,
+      LRT1_LIBERTAD: 35,
+      LRT1_EDSA: 35,
+      LRT1_BACLARAN: 35,
+      LRT1_REDEMPTORIST: 35,
+      LRT1_MIA: 40,
+      LRT1_ASIA_WORLD: 40,
+      LRT1_NINOY_AQUINO: 40,
+      LRT1_DR_SANTOS: 45,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_MONUMENTO: {
+      LRT1_FPJ: 20,
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 0, // same
+      LRT1_5TH_AVENUE: 15,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 30,
+      LRT1_GIL_PUYAT: 30,
+      LRT1_LIBERTAD: 30,
+      LRT1_EDSA: 30,
+      LRT1_BACLARAN: 30,
+      LRT1_REDEMPTORIST: 35,
+      LRT1_MIA: 35,
+      LRT1_ASIA_WORLD: 35,
+      LRT1_NINOY_AQUINO: 40,
+      LRT1_DR_SANTOS: 40,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_5TH_AVENUE: {
+      LRT1_FPJ: 20,
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 15,
+      LRT1_5TH_AVENUE: 0, // same
+      LRT1_R_PAPA: 15,
+      LRT1_ABAD_SANTOS: 15,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 30,
+      LRT1_LIBERTAD: 30,
+      LRT1_EDSA: 30,
+      LRT1_BACLARAN: 30,
+      LRT1_REDEMPTORIST: 35,
+      LRT1_MIA: 35,
+      LRT1_ASIA_WORLD: 35,
+      LRT1_NINOY_AQUINO: 35,
+      LRT1_DR_SANTOS: 40,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_R_PAPA: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 15,
+      LRT1_R_PAPA: 0, // same
+      LRT1_ABAD_SANTOS: 15,
+      LRT1_BLUMENTRITT: 15,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 30,
+      LRT1_EDSA: 30,
+      LRT1_BACLARAN: 30,
+      LRT1_REDEMPTORIST: 30,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 35,
+      LRT1_NINOY_AQUINO: 35,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_ABAD_SANTOS: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 15,
+      LRT1_R_PAPA: 15,
+      LRT1_ABAD_SANTOS: 0, // same
+      LRT1_BLUMENTRITT: 15,
+      LRT1_TAYUMAN: 15,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 30,
+      LRT1_BACLARAN: 30,
+      LRT1_REDEMPTORIST: 30,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 35,
+      LRT1_NINOY_AQUINO: 35,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_BLUMENTRITT: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 20,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 15,
+      LRT1_ABAD_SANTOS: 15,
+      LRT1_BLUMENTRITT: 0, // same
+      LRT1_TAYUMAN: 15,
+      LRT1_BAMBANG: 15,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 30,
+      LRT1_REDEMPTORIST: 30,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 35,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_TAYUMAN: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 25,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 15,
+      LRT1_BLUMENTRITT: 15,
+      LRT1_TAYUMAN: 0, // same
+      LRT1_BAMBANG: 15,
+      LRT1_DOROTEO_JOSE: 15,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 30,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 35,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_BAMBANG: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 25,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 15,
+      LRT1_TAYUMAN: 15,
+      LRT1_BAMBANG: 0, // same
+      LRT1_DOROTEO_JOSE: 15,
+      LRT1_CARRIEDO: 15,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 30,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 30,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_DOROTEO_JOSE: {
+      LRT1_FPJ: 25,
+      LRT1_BALINTAWAK: 25,
+      LRT1_MONUMENTO: 20,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 15,
+      LRT1_BAMBANG: 15,
+      LRT1_DOROTEO_JOSE: 0, // same
+      LRT1_CARRIEDO: 15,
+      LRT1_CENTRAL_TERMINAL: 15,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 25,
+      LRT1_MIA: 30,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 30,
+      LRT1_DR_SANTOS: 35,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_CARRIEDO: {
+      LRT1_FPJ: 30,
+      LRT1_BALINTAWAK: 25,
+      LRT1_MONUMENTO: 25,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 15,
+      LRT1_DOROTEO_JOSE: 15,
+      LRT1_CARRIEDO: 0, // same
+      LRT1_CENTRAL_TERMINAL: 15,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 25,
+      LRT1_MIA: 25,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 30,
+      LRT1_DR_SANTOS: 30,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_CENTRAL_TERMINAL: {
+      LRT1_FPJ: 30,
+      LRT1_BALINTAWAK: 25,
+      LRT1_MONUMENTO: 25,
+      LRT1_5TH_AVENUE: 20,
+      LRT1_R_PAPA: 20,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 15,
+      LRT1_CARRIEDO: 15,
+      LRT1_CENTRAL_TERMINAL: 0, // same
+      LRT1_UN_AVENUE: 15,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 25,
+      LRT1_MIA: 25,
+      LRT1_ASIA_WORLD: 30,
+      LRT1_NINOY_AQUINO: 30,
+      LRT1_DR_SANTOS: 30,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_UN_AVENUE: {
+      LRT1_FPJ: 30,
+      LRT1_BALINTAWAK: 30,
+      LRT1_MONUMENTO: 25,
+      LRT1_5TH_AVENUE: 25,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 20,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 15,
+      LRT1_UN_AVENUE: 0, // same
+      LRT1_PEDRO_GIL: 15,
+      LRT1_QUIRINO: 15,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 25,
+      LRT1_MIA: 25,
+      LRT1_ASIA_WORLD: 25,
+      LRT1_NINOY_AQUINO: 30,
+      LRT1_DR_SANTOS: 30,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_PEDRO_GIL: {
+      LRT1_FPJ: 30,
+      LRT1_BALINTAWAK: 30,
+      LRT1_MONUMENTO: 25,
+      LRT1_5TH_AVENUE: 25,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 20,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 15,
+      LRT1_PEDRO_GIL: 0, // same
+      LRT1_QUIRINO: 15,
+      LRT1_VITO_CRUZ: 15,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 25,
+      LRT1_MIA: 25,
+      LRT1_ASIA_WORLD: 25,
+      LRT1_NINOY_AQUINO: 25,
+      LRT1_DR_SANTOS: 30,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_QUIRINO: {
+      LRT1_FPJ: 30,
+      LRT1_BALINTAWAK: 30,
+      LRT1_MONUMENTO: 25,
+      LRT1_5TH_AVENUE: 25,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 20,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 15,
+      LRT1_PEDRO_GIL: 15,
+      LRT1_QUIRINO: 0, // same
+      LRT1_VITO_CRUZ: 15,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 25,
+      LRT1_ASIA_WORLD: 25,
+      LRT1_NINOY_AQUINO: 25,
+      LRT1_DR_SANTOS: 30,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_VITO_CRUZ: {
+      LRT1_FPJ: 35,
+      LRT1_BALINTAWAK: 30,
+      LRT1_MONUMENTO: 30,
+      LRT1_5TH_AVENUE: 25,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 20,
+      LRT1_DOROTEO_JOSE: 20,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 15,
+      LRT1_QUIRINO: 15,
+      LRT1_VITO_CRUZ: 0, // same
+      LRT1_GIL_PUYAT: 15,
+      LRT1_LIBERTAD: 15,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 25,
+      LRT1_NINOY_AQUINO: 25,
+      LRT1_DR_SANTOS: 25,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_GIL_PUYAT: {
+      LRT1_FPJ: 35,
+      LRT1_BALINTAWAK: 30,
+      LRT1_MONUMENTO: 30,
+      LRT1_5TH_AVENUE: 30,
+      LRT1_R_PAPA: 25,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 20,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 15,
+      LRT1_GIL_PUYAT: 0, // same
+      LRT1_LIBERTAD: 15,
+      LRT1_EDSA: 15,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 25,
+      LRT1_DR_SANTOS: 25,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_LIBERTAD: {
+      LRT1_FPJ: 35,
+      LRT1_BALINTAWAK: 35,
+      LRT1_MONUMENTO: 30,
+      LRT1_5TH_AVENUE: 30,
+      LRT1_R_PAPA: 30,
+      LRT1_ABAD_SANTOS: 25,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 20,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 15,
+      LRT1_GIL_PUYAT: 15,
+      LRT1_LIBERTAD: 0, // same
+      LRT1_EDSA: 15,
+      LRT1_BACLARAN: 15,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 25,
+      LRT1_DR_SANTOS: 25,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_EDSA: {
+      LRT1_FPJ: 35,
+      LRT1_BALINTAWAK: 35,
+      LRT1_MONUMENTO: 30,
+      LRT1_5TH_AVENUE: 30,
+      LRT1_R_PAPA: 30,
+      LRT1_ABAD_SANTOS: 30,
+      LRT1_BLUMENTRITT: 25,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 15,
+      LRT1_LIBERTAD: 15,
+      LRT1_EDSA: 0, // same
+      LRT1_BACLARAN: 15,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 20,
+      LRT1_DR_SANTOS: 25,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_BACLARAN: {
+      LRT1_FPJ: 35,
+      LRT1_BALINTAWAK: 35,
+      LRT1_MONUMENTO: 30,
+      LRT1_5TH_AVENUE: 30,
+      LRT1_R_PAPA: 30,
+      LRT1_ABAD_SANTOS: 30,
+      LRT1_BLUMENTRITT: 30,
+      LRT1_TAYUMAN: 25,
+      LRT1_BAMBANG: 25,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 20,
+      LRT1_PEDRO_GIL: 20,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 15,
+      LRT1_EDSA: 15,
+      LRT1_BACLARAN: 0, // same
+      LRT1_REDEMPTORIST: 15,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 20,
+      LRT1_DR_SANTOS: 25,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_REDEMPTORIST: {
+      LRT1_FPJ: 40,
+      LRT1_BALINTAWAK: 35,
+      LRT1_MONUMENTO: 35,
+      LRT1_5TH_AVENUE: 35,
+      LRT1_R_PAPA: 30,
+      LRT1_ABAD_SANTOS: 30,
+      LRT1_BLUMENTRITT: 30,
+      LRT1_TAYUMAN: 30,
+      LRT1_BAMBANG: 30,
+      LRT1_DOROTEO_JOSE: 25,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 20,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 15,
+      LRT1_REDEMPTORIST: 0, // same
+      LRT1_MIA: 15,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 20,
+      LRT1_DR_SANTOS: 20,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_MIA: {
+      LRT1_FPJ: 40,
+      LRT1_BALINTAWAK: 40,
+      LRT1_MONUMENTO: 35,
+      LRT1_5TH_AVENUE: 35,
+      LRT1_R_PAPA: 30,
+      LRT1_ABAD_SANTOS: 30,
+      LRT1_BLUMENTRITT: 30,
+      LRT1_TAYUMAN: 30,
+      LRT1_BAMBANG: 30,
+      LRT1_DOROTEO_JOSE: 30,
+      LRT1_CARRIEDO: 25,
+      LRT1_CENTRAL_TERMINAL: 25,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 20,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 15,
+      LRT1_MIA: 0, // same
+      LRT1_ASIA_WORLD: 15,
+      LRT1_NINOY_AQUINO: 20,
+      LRT1_DR_SANTOS: 20,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_ASIA_WORLD: {
+      LRT1_FPJ: 40,
+      LRT1_BALINTAWAK: 40,
+      LRT1_MONUMENTO: 35,
+      LRT1_5TH_AVENUE: 35,
+      LRT1_R_PAPA: 35,
+      LRT1_ABAD_SANTOS: 35,
+      LRT1_BLUMENTRITT: 30,
+      LRT1_TAYUMAN: 30,
+      LRT1_BAMBANG: 30,
+      LRT1_DOROTEO_JOSE: 30,
+      LRT1_CARRIEDO: 30,
+      LRT1_CENTRAL_TERMINAL: 30,
+      LRT1_UN_AVENUE: 25,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 20,
+      LRT1_LIBERTAD: 20,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 15,
+      LRT1_ASIA_WORLD: 0, // same
+      LRT1_NINOY_AQUINO: 15,
+      LRT1_DR_SANTOS: 20,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_NINOY_AQUINO: {
+      LRT1_FPJ: 45,
+      LRT1_BALINTAWAK: 40,
+      LRT1_MONUMENTO: 40,
+      LRT1_5TH_AVENUE: 35,
+      LRT1_R_PAPA: 35,
+      LRT1_ABAD_SANTOS: 35,
+      LRT1_BLUMENTRITT: 35,
+      LRT1_TAYUMAN: 35,
+      LRT1_BAMBANG: 30,
+      LRT1_DOROTEO_JOSE: 30,
+      LRT1_CARRIEDO: 30,
+      LRT1_CENTRAL_TERMINAL: 30,
+      LRT1_UN_AVENUE: 30,
+      LRT1_PEDRO_GIL: 25,
+      LRT1_QUIRINO: 25,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 20,
+      LRT1_BACLARAN: 20,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 15,
+      LRT1_NINOY_AQUINO: 0, // same
+      LRT1_DR_SANTOS: 15,
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+    LRT1_DR_SANTOS: {
+      LRT1_FPJ: 45,
+      LRT1_BALINTAWAK: 45,
+      LRT1_MONUMENTO: 40,
+      LRT1_5TH_AVENUE: 40,
+      LRT1_R_PAPA: 35,
+      LRT1_ABAD_SANTOS: 35,
+      LRT1_BLUMENTRITT: 35,
+      LRT1_TAYUMAN: 35,
+      LRT1_BAMBANG: 35,
+      LRT1_DOROTEO_JOSE: 35,
+      LRT1_CARRIEDO: 30,
+      LRT1_CENTRAL_TERMINAL: 30,
+      LRT1_UN_AVENUE: 30,
+      LRT1_PEDRO_GIL: 30,
+      LRT1_QUIRINO: 30,
+      LRT1_VITO_CRUZ: 25,
+      LRT1_GIL_PUYAT: 25,
+      LRT1_LIBERTAD: 25,
+      LRT1_EDSA: 25,
+      LRT1_BACLARAN: 25,
+      LRT1_REDEMPTORIST: 20,
+      LRT1_MIA: 20,
+      LRT1_ASIA_WORLD: 20,
+      LRT1_NINOY_AQUINO: 15,
+      LRT1_DR_SANTOS: 0, // same
+      LRT1_LAS_PINAS: 0,
+      LRT1_ZAPOTE: 0,
+      LRT1_NIOG: 0,
+    },
+  },
+};

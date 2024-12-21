@@ -210,6 +210,7 @@ export class MapViewerComponent implements OnInit {
       // icon.anchor = new google.maps.Point(20, 40);
     } else if (station.stationAction === 'alight-end') {
       icon.url = 'assets/icons/station-action-alight-end.png';
+      icon.anchor = new google.maps.Point(25, 50);
     }
 
     return icon;

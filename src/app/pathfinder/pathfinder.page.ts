@@ -420,53 +420,35 @@ export class PathFinderPage implements OnInit {
         0
       );
 
-      // Calculate total duration (e.g., 2 minutes per station + 5 minutes per transfer)
-      const stationTravelTime = 2; // Minutes per station
-      const transferTime = 5; // Minutes per transfer
-      const totalDuration =
-        enrichedPath.length * stationTravelTime + transfers * transferTime;
+      // Calculate total duration based on edge.duration + station.wait
+      // totalDuration in minutes
+      const totalDuration = enrichedPath.reduce(
+        (duration, station, index, arr) => {
+          const edge = station.nextEdge;
+
+          return (
+            duration + (edge?.duration || 3) + (station?.boardingTime || 1)
+          );
+        },
+        0
+      );
 
       // calculate total price of each pathSegments
       let pathFare: number = 0;
       pathSegments.forEach((segment) => {
-        const stations = segment.stations;
+        // get start of segment
+        const startStation = segment.stations[0];
 
-        // calculate price for each segment
-        let segmentPrice = 0;
-        let segmentPriceBreakdown: any[] = [];
-        stations.forEach((station: Station) => {
-          const usedEdge = station?.prevEdge;
+        // get end of segment
+        const endStation = segment.stations[segment.stations.length - 1];
 
-          if (usedEdge) {
-            segmentPrice += usedEdge.price || 0;
-            segmentPriceBreakdown.push({
-              destinationStationCode: station.code,
-              price: usedEdge.price,
-            });
-          }
-        });
+        // get fare by matrix
+        const fare = this.transitService.calculateFare(
+          startStation,
+          endStation
+        );
 
-        // get minFare from line
-        const line = this.transitService.getLineByCode(segment.lineCode);
-        const lineMinFare = line?.minFare || 0;
-        const lineMaxFare = line?.maxFare || 10000; // hard max fare 10000
-
-        // apply min fare
-        if (lineMinFare) {
-          segmentPrice = Math.max(segmentPrice, lineMinFare);
-        }
-
-        // apply max fare
-        if (lineMaxFare) {
-          segmentPrice = Math.min(segmentPrice, lineMaxFare);
-        }
-
-        // total segment fare
-        segment.fare = segmentPrice;
-        segment.fareBreakdown = segmentPriceBreakdown;
-
-        // add to total path fare
-        pathFare += segmentPrice;
+        pathFare += fare || 0;
       });
 
       // Return enriched path with additional details
