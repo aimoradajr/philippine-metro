@@ -374,7 +374,7 @@ export class PathFinderPage implements OnInit {
         switch (stationAction) {
           case 'board-initial':
             station.customIconPath =
-              'assets/icons/littleman/station-action-board-initial-littleman.png';
+              'assets/icons/station-action-board-initial.png';
             break;
           case 'board':
             station.customIconPath =
@@ -386,7 +386,7 @@ export class PathFinderPage implements OnInit {
             break;
           case 'alight-end':
             station.customIconPath =
-              'assets/icons/littleman/station-action-alight-end-littleman.png';
+              'assets/icons/station-action-alight-end.png';
             break;
         }
 
