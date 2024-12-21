@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{ station?.name }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">
+      <ion-button fill="outline" (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,13 +20,19 @@
     "
   ></ion-img>
 
-  <p>{{ station?.description }}</p>
+  <div style="padding: 10px">
+    <p>{{ station?.description }}</p>
 
-  <ion-button expand="full" (click)="startHere(station)">
-    Start Here
-  </ion-button>
-  <ion-button expand="full" (click)="getDirections(station)">
-    Go Here
-  </ion-button>
+    <ion-button expand="full" (click)="startHere(station)">
+      Start Here
+    </ion-button>
+    <ion-button
+      style="margin-top: 10px"
+      expand="full"
+      (click)="getDirections(station)"
+    >
+      Go Here
+    </ion-button>
+  </div>
   <!-- Additional content and buttons -->
 </ion-content>

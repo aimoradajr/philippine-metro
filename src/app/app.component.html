@@ -31,16 +31,18 @@
           </ion-list-header>
 
           <!-- Pathfinder -->
-          <ion-item
-            [routerLink]="['/pathfinder']"
-            routerLinkActive="active-item"
-          >
-            <ion-icon
-              slot="start"
-              name="arrow-forward-circle-outline"
-            ></ion-icon>
-            <ion-label>Trip Planner</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              [routerLink]="['/pathfinder']"
+              routerLinkActive="active-item"
+            >
+              <ion-icon
+                slot="start"
+                name="arrow-forward-circle-outline"
+              ></ion-icon>
+              <ion-label>Trip Planner</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
         <!-- Lines with Submenus -->
@@ -50,46 +52,57 @@
           </ion-list-header>
 
           <!-- LRT 1 -->
-          <ion-item
-            [routerLink]="['/lines/line-viewer/', 'LRT1']"
-            routerLinkActive="active-item"
-          >
-            <ion-icon slot="start" name="train-outline"></ion-icon>
-            <ion-label>LRT 1</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              [routerLink]="['/lines/line-viewer/', 'LRT1']"
+              routerLinkActive="active-item"
+            >
+              <ion-icon slot="start" name="train-outline"></ion-icon>
+              <ion-label>LRT 1</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
           <!-- LRT 2 -->
-          <ion-item
-            [routerLink]="['/lines/line-viewer/', 'LRT2']"
-            routerLinkActive="active-item"
-          >
-            <ion-icon slot="start" name="train-outline"></ion-icon>
-            <ion-label>LRT 2</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              [routerLink]="['/lines/line-viewer/', 'LRT2']"
+              routerLinkActive="active-item"
+            >
+              <ion-icon slot="start" name="train-outline"></ion-icon>
+              <ion-label>LRT 2</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
           <!-- MRT 3 -->
-          <ion-item
-            [routerLink]="['/lines/line-viewer/', 'MRT3']"
-            routerLinkActive="active-item"
-          >
-            <ion-icon slot="start" name="train-outline"></ion-icon>
-            <ion-label>MRT 3</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              [routerLink]="['/lines/line-viewer/', 'MRT3']"
+              routerLinkActive="active-item"
+            >
+              <ion-icon slot="start" name="train-outline"></ion-icon>
+              <ion-label>MRT 3</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
         <!-- More -->
         <ion-list>
-          <ion-item routerLink="/map" routerLinkActive="active-item">
-            <ion-icon slot="start" name="map-outline"></ion-icon>
-            <ion-label>Map</ion-label>
-          </ion-item>
-          <ion-item
-            routerLink="/version-history"
-            routerLinkActive="active-item"
-          >
-            <ion-icon slot="start" name="accessibility-outline"></ion-icon>
-            <ion-label>Version History</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item routerLink="/map" routerLinkActive="active-item">
+              <ion-icon slot="start" name="map-outline"></ion-icon>
+              <ion-label>Map</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              routerLink="/version-history"
+              routerLinkActive="active-item"
+            >
+              <ion-icon slot="start" name="accessibility-outline"></ion-icon>
+              <ion-label>Version History</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -1153,7 +1153,7 @@ export const TRANSIT_LINES: TransitLine[] = [
       {
         id: 23,
         code: 'LRT1_ASIA_WORLD',
-        name: 'Asia World',
+        name: 'Asia World (PITX)',
         shortName: 'Asia World (PITX)',
         isOperational: true,
         image: '',

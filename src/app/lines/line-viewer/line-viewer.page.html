@@ -40,14 +40,8 @@
       <ion-label>
         <h2>{{ station.name }}</h2>
         <p>{{ station.description }}</p>
-        <p>
-          Status:
-          <span
-            [class.operational]="station.isOperational"
-            [class.non-operational]="!station.isOperational"
-          >
-            {{ station.isOperational ? 'Operational' : 'Not Operational' }}
-          </span>
+        <p *ngIf="station.isOperational === false">
+          <span class="non-operational">Not Operational </span>
         </p>
       </ion-label>
     </ion-item>
