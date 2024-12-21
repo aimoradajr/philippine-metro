@@ -21,6 +21,7 @@ export interface Station {
   id: number;
   code: string;
   name: string;
+  shortName?: string;
   isOperational: boolean;
   image?: string;
   description?: string;
@@ -117,12 +118,15 @@ export const TRANSIT_LINES: TransitLine[] = [
         id: 1,
         code: 'LRT1_FPJ',
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
+        shortName: 'FPJ (Roosevelt)',
         isOperational: true,
         image: '',
         description:
           'Northern terminus of LRT-1, serving the Muñoz area in Quezon City.',
         // 14.657615323114445, 121.02094825800144
         coordinates: { lat: 14.657615323114445, lng: 121.02094825800144 }, // FPJ Station
+        labelOffsetx: -30,
+        labelOffsety: -13,
         edges: [
           {
             from: 'LRT1_FPJ',
@@ -147,6 +151,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Quezon City, near Balintawak Market.',
         // 14.657535163572017, 121.00386348386314
         coordinates: { lat: 14.657535163572017, lng: 121.00386348386314 }, // Balintawak Station
+        labelOffsetx: -40,
+        labelOffsety: -15,
         edges: [
           {
             from: 'LRT1_BALINTAWAK',
@@ -192,7 +198,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'A major station in Caloocan City, near the Bonifacio Monument.',
         // 14.65432216386683, 120.98384231447913
         coordinates: { lat: 14.65432216386683, lng: 120.98384231447913 }, // Monumento Station
-        labelOffsety: 20,
+        labelOffsetx: 5,
         edges: [
           {
             from: 'LRT1_MONUMENTO',
@@ -368,6 +374,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'A station in Manila, near Blumentritt Road.',
         // 14.622652585067982, 120.98286856250003
         coordinates: { lat: 14.622652585067982, lng: 120.98286856250003 }, // Blumentritt Station
+        labelOffsetx: -3,
         edges: [
           {
             to: 'LRT1_ABAD_SANTOS',
@@ -404,6 +411,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Manila, near Tayuman Street.',
         // 14.61675788330022, 120.98270392147654
         coordinates: { lat: 14.61675788330022, lng: 120.98270392147654 }, // Tayuman Station
+        labelOffsetx: 3,
         edges: [
           {
             to: 'LRT1_BLUMENTRITT',
@@ -438,6 +446,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Situated in Manila, near Bambang Street.',
         // 14.61117057596535, 120.9822890904357
         coordinates: { lat: 14.61117057596535, lng: 120.9822890904357 }, // Bambang Station
+        labelOffsetx: 3,
         edges: [
           {
             to: 'LRT1_TAYUMAN',
@@ -472,6 +481,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'A major transfer point in Manila, connecting to LRT-2.',
         // 14.605461953754634, 120.98194541980351
         coordinates: { lat: 14.605461953754634, lng: 120.98194541980351 }, // Doroteo Jose Station
+        labelOffsety: -8,
         edges: [
           {
             to: 'LRT1_BAMBANG',
@@ -533,6 +543,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Manila, near Carriedo Street.',
         // 14.59904708041471, 120.98140067370474
         coordinates: { lat: 14.59904708041471, lng: 120.98140067370474 }, // Carriedo Station
+        labelOffsety: 10,
         edges: [
           {
             to: 'LRT1_DOROTEO_JOSE',
@@ -577,6 +588,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Situated in Manila, near the Manila City Hall.',
         // 14.592772584129786, 120.98160257975337
         coordinates: { lat: 14.592772584129786, lng: 120.98160257975337 }, // Central Terminal Station
+        labelOffsetx: -5,
+        labelOffsety: 10,
         edges: [
           {
             to: 'LRT1_CARRIEDO',
@@ -625,6 +638,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Manila, near the United Nations Avenue.',
         // 14.582547796804986, 120.98454208223805
         coordinates: { lat: 14.582547796804986, lng: 120.98454208223805 }, // UN Avenue Station
+        labelOffsetx: -5,
         edges: [
           {
             to: 'LRT1_CENTRAL_TERMINAL',
@@ -829,6 +843,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Located in Pasay City, near the intersection of Taft Avenue and Epifanio de los Santos Avenue (EDSA).',
         // 14.538714843616395, 121.00063929330985
         coordinates: { lat: 14.538714843616395, lng: 121.00063929330985 }, // EDSA Station
+        labelOffsetx: 5,
+        labelOffsety: -10,
         edges: [
           {
             to: 'LRT1_LIBERTAD',
@@ -910,6 +926,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Southern terminus of the original LRT-1 line, located in Parañaque City.',
         // 14.534216158572693, 120.99823494117172
         coordinates: { lat: 14.534216158572693, lng: 120.99823494117172 }, // Baclaran Station
+        labelOffsety: 10,
         edges: [
           {
             to: 'LRT1_EDSA',
@@ -965,6 +982,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Parañaque City, near the Redemptorist Church.',
         // 14.530231044787087, 120.99278168609546
         coordinates: { lat: 14.530231044787087, lng: 120.99278168609546 }, // Redemptorist Station
+        labelOffsety: 10,
         edges: [
           {
             from: 'LRT1_REDEMPTORIST',
@@ -1013,6 +1031,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Situated near the Ninoy Aquino International Airport (NAIA) complex.',
         // 14.518510885287759, 120.99286667487398
         coordinates: { lat: 14.518510885287759, lng: 120.99286667487398 }, // MIA
+        labelOffsetx: 5,
         edges: [
           {
             from: 'LRT1_MIA',
@@ -1048,6 +1067,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         id: 23,
         code: 'LRT1_ASIA_WORLD',
         name: 'Asia World',
+        shortName: 'Asia World (PITX)',
         isOperational: true,
         image: '',
         description:
@@ -1485,6 +1505,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Located along Marcos Highway, near the boundary of Marikina and Pasig.',
         // 14.622135967911797, 121.08597686462393
         coordinates: { lat: 14.622135967911797, lng: 121.08597686462393 }, // Santolan Station
+        labelOffsety: -10,
+        labelOffsetx: -3,
         edges: [
           {
             from: 'LRT2_SANTOLAN',
@@ -1633,6 +1655,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Project 3, Quezon City, near Anonas Street.',
         // 14.628043289011293, 121.06482289673204
         coordinates: { lat: 14.628043289011293, lng: 121.06482289673204 }, // Anonas Station
+        labelOffsety: 3,
         edges: [
           {
             from: 'LRT2_ANONAS',
@@ -1767,6 +1790,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Situated in Quezon City, near New Manila.',
         // 14.618744832179202, 121.04278254495594
         coordinates: { lat: 14.618744832179202, lng: 121.04278254495594 }, // Betty Go-Belmonte Station
+        labelOffsetx: -105,
+        labelOffsety: -10,
         edges: [
           {
             from: 'LRT2_BETTY_GO_BELMONTE',
@@ -1867,6 +1892,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Located in San Juan City, near J. Ruiz Street and residential areas.',
         // 14.610667645518005, 121.02633594643939
         coordinates: { lat: 14.610667645518005, lng: 121.02633594643939 }, // J. Ruiz Station
+        labelOffsety: 3,
         edges: [
           {
             from: 'LRT2_J_RUIZ',
@@ -2077,6 +2103,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Located in Sampaloc, Manila, near Legarda Street.',
         // 14.600864578161373, 120.99250867046764
         coordinates: { lat: 14.600864578161373, lng: 120.99250867046764 }, // Legarda Station
+        labelOffsety: 3,
         edges: [
           {
             from: 'LRT2_LEGARDA',
@@ -2163,6 +2190,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Western terminus of LRT-2, located in Manila, near University Belt.',
         // 14.60348141245216, 120.9834813414183
         coordinates: { lat: 14.60348141245216, lng: 120.9834813414183 }, // Recto Station
+        labelOffsety: -5,
         edges: [
           {
             from: 'LRT2_RECTO',
@@ -2265,6 +2293,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Planned station in Tutuban, Manila.',
         // 14.606363198972117, 120.97193630977111
         coordinates: { lat: 14.606363198972117, lng: 120.97193630977111 }, // Tutuban Station
+        labelOffsetx: -60,
+        labelOffsety: -15,
         edges: [
           {
             from: 'LRT2_TUTUBAN',
@@ -2331,6 +2361,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Planned station in Divisoria, Manila.',
         // 14.602790069620127, 120.96755569678145
         coordinates: { lat: 14.602790069620127, lng: 120.96755569678145 }, // Divisoria Station
+        labelOffsetx: -70,
+        labelOffsety: -15,
         edges: [
           {
             from: 'LRT2_DIVISORIA',
@@ -2417,6 +2449,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         description: 'Planned station near Pier 4, Manila.',
         // 14.602524631445576, 120.96157707895948
         coordinates: { lat: 14.602524631445576, lng: 120.96157707895948 }, // Pier 4 Station
+        labelOffsetx: -55,
+        labelOffsety: 0,
         edges: [
           {
             from: 'LRT2_PIER_4',
@@ -2534,6 +2568,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Situated near GMA Network Center and accessible to Kamuning Road.',
         // 14.635217035522803, 121.0434184846183
         coordinates: { lat: 14.635217035522803, lng: 121.0434184846183 }, // GMA-Kamuning Station
+        labelOffsetx: 5,
         edges: [
           {
             to: 'MRT3_QUEZON_AVENUE',
@@ -2631,6 +2666,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Positioned near Greenhills Shopping Center and various commercial establishments.',
         // 14.607368674492228, 121.05666307569197
         coordinates: { lat: 14.607368674492228, lng: 121.05666307569197 }, // Santolan-Annapolis Station
+        labelOffsetx: -5,
         edges: [
           {
             to: 'MRT3_CUBAO',
@@ -3001,6 +3037,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           'Southern terminus of MRT-3, located at the intersection of EDSA and Taft Avenue in Pasay City. Provides a vital transfer point to LRT Line 1 via a connecting footbridge to EDSA Station, facilitating seamless north-south travel across Metro Manila.',
         // 14.53768596175474, 121.00178304515234
         coordinates: { lat: 14.53768596175474, lng: 121.00178304515234 }, // Taft Avenue Station
+        labelOffsety: 5,
         edges: [
           {
             to: 'MRT3_MAGALLANES',

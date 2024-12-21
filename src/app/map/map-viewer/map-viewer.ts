@@ -146,9 +146,16 @@ export class MapViewerComponent implements OnInit {
       }
     }
 
-    const labelOffsetx = station.labelOffsetx ?? 60;
-    const labelOffsety = station.labelOffsety ?? 15;
-    icon.labelOrigin = new google.maps.Point(labelOffsetx, labelOffsety); // Label position
+    // Estimate the label width (average width per character)
+    const label = station.shortName || station.name;
+    const charWidth = 7; // Adjust based on font size and style
+    const nameLength = label.length || 1;
+    const labelOffsetX =
+      (nameLength * charWidth) / 2 + 13 + (station.labelOffsetx ?? 0);
+    const labelOffsetY = 10 + (station.labelOffsety ?? 0); // Default vertical offset
+
+    // Set the label origin
+    icon.labelOrigin = new google.maps.Point(labelOffsetX, labelOffsetY);
 
     return icon;
   }
@@ -158,14 +165,14 @@ export class MapViewerComponent implements OnInit {
 
     if (mode === 'minimal') {
       return {
-        text: station.name,
+        text: station.shortName || station.name,
         className: 'custom-marker-label-hide', // CSS class for styling
       };
     }
 
     if (mode === 'highlight') {
       return {
-        text: station.name,
+        text: station.shortName || station.name,
         color: 'black',
         fontWeight: 'bold',
         fontSize: '13px',
@@ -174,7 +181,7 @@ export class MapViewerComponent implements OnInit {
     }
 
     return {
-      text: station.name,
+      text: station.shortName || station.name,
       color: '#222',
       fontSize: '12px',
       className: 'custom-marker-label', // CSS class for styling
