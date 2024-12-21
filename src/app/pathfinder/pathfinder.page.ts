@@ -218,6 +218,16 @@ export class PathFinderPage implements OnInit {
     }, 100);
   }
 
+  searchQueryStartStationLine: string = '';
+  filterStartStations2_ByLine(lineCode: string) {
+    // this.searchQueryStartStationLine = lineCode;
+
+    // filter by line
+    this.startStations = this.allStationsFlatArray.filter(
+      (station) => station.lineCode === lineCode
+    );
+  }
+
   selectStartStation(station: Station) {
     this.selectedStartStationCode = station.code;
     this.selectedStartStation = station;
@@ -248,6 +258,16 @@ export class PathFinderPage implements OnInit {
     setTimeout(() => {
       this.endStationSearchbar?.setFocus();
     }, 100);
+  }
+
+  searchQueryEndStationLine: string = '';
+  filterEndStations2_ByLine(lineCode: string) {
+    // this.searchQueryEndStationLine = lineCode;
+
+    // filter by line
+    this.endStations = this.allStationsFlatArray.filter(
+      (station) => station.lineCode === lineCode
+    );
   }
 
   selectEndStation(station: Station) {
@@ -377,17 +397,21 @@ export class PathFinderPage implements OnInit {
               'assets/icons/station-action-board-initial.png';
             break;
           case 'board':
-            station.customIconPath =
-              'assets/icons/littleman/station-action-board-littleman.png';
+            station.customIconPath = null;
+            // station.customIconPath =
+            //   'assets/icons/littleman/station-action-board-littleman.png';
             break;
           case 'alight-and-transfer':
-            station.customIconPath =
-              'assets/icons/littleman/station-action-alight-and-transfer-littleman.png';
+            // station.customIconPath =
+            //   'assets/icons/littleman/station-action-alight-and-transfer-littleman.png';
+            station.customIconPath = 'assets/icons/station-action-exit.png';
             break;
           case 'alight-end':
             station.customIconPath =
               'assets/icons/station-action-alight-end.png';
             break;
+          default:
+            station.customIconPath = null;
         }
 
         // path node

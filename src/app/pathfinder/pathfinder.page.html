@@ -77,12 +77,28 @@
             [(ngModel)]="searchQueryStartStation"
             (ionInput)="filterStartStations2()"
           ></ion-searchbar>
+
+          <!-- line filter: set a filter for each button. then when clicked it should filter all the stations -->
+          <ion-toolbar>
+            <ion-buttons style="padding-left: 5px">
+              <ion-button
+                *ngFor="let line of allLines"
+                fill="outline"
+                [fill]="searchQueryStartStationLine === line.code ? 'solid' : 'outline'"
+                style="margin-left: 5px"
+                (click)="filterStartStations2_ByLine(line.code)"
+              >
+                {{ line?.code }}
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
         </ion-header>
         <ion-content>
           <ion-list>
             <ion-item
               *ngFor="let station of startStations"
               (click)="selectStartStation(station); modalStartStation.dismiss()"
+              [color]="selectedStartStationCode === station.code || selectedEndStationCode === station.code ? 'primary': ''"
             >
               {{ station.lineCode }} - {{ station.name }}
             </ion-item>
@@ -110,12 +126,27 @@
             [(ngModel)]="searchQueryEndStation"
             (ionInput)="filterEndStations2()"
           ></ion-searchbar>
+
+          <!-- line filter: set a filter for each button. then when clicked it should filter all the stations -->
+          <ion-toolbar>
+            <ion-buttons style="padding-left: 5px">
+              <ion-button
+                *ngFor="let line of allLines"
+                [fill]="searchQueryEndStationLine === line.code ? 'solid' : 'outline'"
+                style="margin-left: 5px"
+                (click)="filterEndStations2_ByLine(line.code)"
+              >
+                {{ line?.code }}
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
         </ion-header>
         <ion-content>
           <ion-list>
             <ion-item
               *ngFor="let station of endStations"
               (click)="selectEndStation(station); modalEndStation.dismiss()"
+              [color]="selectedStartStationCode === station.code || selectedEndStationCode === station.code ? 'primary': ''"
             >
               {{ station.lineCode }} - {{ station.name }}
             </ion-item>
