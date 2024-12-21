@@ -26,11 +26,15 @@ export class TransitService {
 
         // Define neighbors based on the station's edges property
         station?.edges?.forEach((edge) => {
-          edges[edge.to] = edge.weight;
+          if (edge.isOperational) {
+            edges[edge.to] = edge.weight;
+          }
         });
 
         // Add the station and its edges to the graph
-        this.route.addNode(station.code, edges);
+        if (station.isOperational) {
+          this.route.addNode(station.code, edges);
+        }
       });
     });
 
