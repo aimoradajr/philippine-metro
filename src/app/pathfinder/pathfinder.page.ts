@@ -324,6 +324,11 @@ export class PathFinderPage implements OnInit {
         const prevStationCode = index > 0 ? arr[index - 1] : null;
         const nextStationCode = index < arr.length - 1 ? arr[index + 1] : null;
 
+        // reset display settings
+        station.customIconPath = null;
+        station.customIconPathWidth = undefined;
+        station.customIconPathHeight = undefined;
+
         let stationAction:
           | 'board-initial'
           | 'board'
@@ -397,9 +402,8 @@ export class PathFinderPage implements OnInit {
               'assets/icons/station-action-board-initial.png';
             break;
           case 'board':
-            station.customIconPath = null;
-            // station.customIconPath =
-            //   'assets/icons/littleman/station-action-board-littleman.png';
+            station.customIconPath =
+              'assets/icons/littleman/station-action-board-littleman.png';
             break;
           case 'alight-and-transfer':
             // station.customIconPath =
@@ -412,6 +416,9 @@ export class PathFinderPage implements OnInit {
             break;
           default:
             station.customIconPath = null;
+          // station.customIconPath = 'assets/icons/station-active-min.png';
+          // station.customIconPathWidth = 10;
+          // station.customIconPathHeight = 10;
         }
 
         // path node

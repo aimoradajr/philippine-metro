@@ -269,19 +269,28 @@
           <!-- Expanded View -->
           <ng-template #expandedView>
             <ion-item>
-              <div style="text-align: center; width: 30px; margin-right: 10px">
-                {{ i + 1 }}
-              </div>
-              <div
-                *ngIf="station.customIconPath"
-                style="text-align: center; width: 30px; margin-right: 10px"
-              >
+              <div style="text-align: center; width: 30px; margin-right: 5px">
                 <img
+                  *ngIf="station.customIconPath"
                   src="{{ station.customIconPath }}"
-                  style="width: 30px; height: 30px"
+                  [style.width.px]="station.customIconPathWidth || 30"
+                  [style.height.px]="station.customIconPathHeight || 30"
                 />
               </div>
+              <div
+                style="
+                  text-align: center;
+                  width: 30px;
+                  margin-right: 10px;
+                  color: #777;
+                "
+              >
+                {{ i + 1 }}
+              </div>
               <ion-label>{{ station.name }} </ion-label>
+
+              <!-- <span style="padding-right: 4px"> {{ i + 1 }} </span> -->
+
               <ion-chip
                 [style.background-color]="station.lineBgColor || '#CCC'"
                 [style.color]="station.lineTextColor || '#000'"
