@@ -77,8 +77,8 @@ export class MapViewerComponent implements OnInit {
   // Define icon objects with size and anchor properties
   stationActiveIcon: google.maps.Icon = {
     url: 'assets/icons/station-active.png', // Path to your active station icon
-    scaledSize: new google.maps.Size(16, 16), // Desired size
-    anchor: new google.maps.Point(8, 8), // Anchor point
+    scaledSize: new google.maps.Size(12, 12), // Desired size
+    anchor: new google.maps.Point(6, 6), // Anchor point
   };
   stationActiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-active-min.png', // Path to your active station icon
@@ -88,8 +88,8 @@ export class MapViewerComponent implements OnInit {
 
   stationInactiveIcon: google.maps.Icon = {
     url: 'assets/icons/station-inactive.png', // Path to your inactive station icon
-    scaledSize: new google.maps.Size(16, 16), // Desired size
-    anchor: new google.maps.Point(8, 8), // Anchor point
+    scaledSize: new google.maps.Size(12, 12), // Desired size
+    anchor: new google.maps.Point(6, 6), // Anchor point
   };
   stationInactiveIcon_Min: google.maps.Icon = {
     url: 'assets/icons/station-inactive-min.png', // Path to your inactive station icon
@@ -182,7 +182,7 @@ export class MapViewerComponent implements OnInit {
 
     return {
       text: station.shortName || station.name,
-      color: '#222',
+      color: '#444',
       fontSize: '12px',
       className: 'custom-marker-label', // CSS class for styling
     } as google.maps.MarkerLabel;

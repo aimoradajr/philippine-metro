@@ -308,7 +308,7 @@
                   style="font-size: 20px; margin-right: 5px"
                 ></ion-icon>
                 {{ station.nextEdge.transitMode | titlecase }} {{
-                station.nextEdge.duration }}
+                station.nextEdge.duration }} min
                 <ng-container *ngIf="station.nextEdge?.distance">
                   &nbsp;({{ station.nextEdge.distance }})
                 </ng-container>

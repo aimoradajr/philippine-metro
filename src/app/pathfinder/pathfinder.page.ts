@@ -402,8 +402,7 @@ export class PathFinderPage implements OnInit {
               'assets/icons/station-action-board-initial.png';
             break;
           case 'board':
-            station.customIconPath =
-              'assets/icons/littleman/station-action-board-littleman.png';
+            station.customIconPath = 'assets/icons/station-action-board.png';
             break;
           case 'alight-and-transfer':
             // station.customIconPath =
