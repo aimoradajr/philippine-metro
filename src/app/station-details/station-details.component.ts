@@ -14,6 +14,7 @@ import {
 import { AppConfig } from '../core/config'; // Adjust the path as needed
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
+import { Station } from '../core/transit.config';
 
 @Component({
   selector: 'app-station-details',
@@ -32,7 +33,7 @@ import { close } from 'ionicons/icons';
   ],
 })
 export class StationDetailsComponent {
-  @Input() station: any;
+  @Input() station!: Station;
 
   defaultStationImage = AppConfig.defaultStationImage;
 

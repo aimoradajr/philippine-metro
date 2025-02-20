@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.aimoradajr.philippinemetro;
 
 import com.getcapacitor.BridgeActivity;
 

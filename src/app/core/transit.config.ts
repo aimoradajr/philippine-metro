@@ -23,7 +23,6 @@ export interface Station {
   name: string;
   shortName?: string;
   isOperational: boolean;
-  image?: string;
   description?: string;
   edges?: Edge[];
 
@@ -59,6 +58,10 @@ export interface Station {
 
   //
   boardingTime?: number; // in minutes. boarding time for passengers.
+
+  //
+  image?: string;
+  imageAttributionHtml?: string; // New property for image attribution
 }
 
 export interface Edge {
@@ -120,7 +123,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
         shortName: 'FPJ (Roosevelt)',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/79/LRT_Line_1_%28Metro_Manila_Districts%3B_2023-08-20%29_E911a_11.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT_Line_1_(Metro_Manila_Districts;_2023-08-20)_E911a_11.jpg">E911a</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Northern terminus of LRT-1, serving the Muñoz area in Quezon City.',
         // 14.657615323114445, 121.02094825800144
@@ -148,12 +154,15 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BALINTAWAK',
         name: 'Balintawak',
         isOperational: true,
-        image: '',
         description: 'Located in Quezon City, near Balintawak Market.',
         // 14.657535163572017, 121.00386348386314
         coordinates: { lat: 14.657535163572017, lng: 121.00386348386314 }, // Balintawak Station
         labelOffsetx: -40,
         labelOffsety: -15,
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/71/Balintawak_station_platform.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Balintawak_station_platform.jpg">PhiliptheNumber1</a>, CC0, via Wikimedia Commons',
         edges: [
           {
             from: 'LRT1_BALINTAWAK',
@@ -198,7 +207,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MONUMENTO',
         name: 'Monumento',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/a/ad/LRT-1_Monumento_2023-08-04.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT-1_Monumento_2023-08-04.jpg">LMP 2001</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'A major station in Caloocan City, near the Bonifacio Monument.',
         // 14.65432216386683, 120.98384231447913
@@ -244,7 +256,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_5TH_AVENUE',
         name: '5th Avenue',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/f/fa/5th_Avenue_LRT_Station.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:5th_Avenue_LRT_Station.jpg">Ramon FVelasquez</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Located in Caloocan City, near 5th Avenue.',
         // 14.644436303427462, 120.983385695334
         coordinates: { lat: 14.644436303427462, lng: 120.983385695334 }, // 5th Avenue Station
@@ -290,7 +305,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_R_PAPA',
         name: 'R. Papa',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/4/47/R._Papa_station_3351.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:R._Papa_station_3351.jpg">SwarmCheng</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Situated in Manila, near R. Papa Street.',
         // 14.636138537552963, 120.98228369673073
         coordinates: { lat: 14.636138537552963, lng: 120.98228369673073 }, // R. Papa Station
@@ -341,7 +359,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ABAD_SANTOS',
         name: 'Abad Santos',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/8/8d/Abad_Santos_Station2.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Abad_Santos_Station2.jpg">SwarmCheng</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located in Manila, near Abad Santos Avenue.',
         // 14.630590938571148, 120.98129525929572
         coordinates: { lat: 14.630590938571148, lng: 120.98129525929572 }, // Abad Santos Station
@@ -389,7 +410,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BLUMENTRITT',
         name: 'Blumentritt',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/4/48/Blumentritt_station_15.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Blumentritt_station_15.jpg">SwarmCheng</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'A station in Manila, near Blumentritt Road.',
         // 14.622652585067982, 120.98286856250003
         coordinates: { lat: 14.622652585067982, lng: 120.98286856250003 }, // Blumentritt Station
@@ -430,7 +454,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_TAYUMAN',
         name: 'Tayuman',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1c/Tayuman_station_03.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Tayuman_station_03.jpg">RamaGaspar</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located in Manila, near Tayuman Street.',
         // 14.61675788330022, 120.98270392147654
         coordinates: { lat: 14.61675788330022, lng: 120.98270392147654 }, // Tayuman Station
@@ -469,7 +496,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BAMBANG',
         name: 'Bambang',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/f/ff/Bambang_station_02.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Bambang_station_02.jpg">SwarmCheng</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Situated in Manila, near Bambang Street.',
         // 14.61117057596535, 120.9822890904357
         coordinates: { lat: 14.61117057596535, lng: 120.9822890904357 }, // Bambang Station
@@ -508,7 +538,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DOROTEO_JOSE',
         name: 'Doroteo Jose',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/8/81/Doroteo_Jose_LRT-1_2019-12-21.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Doroteo_Jose_LRT-1_2019-12-21.jpg">LMP 2001</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'A major transfer point in Manila, connecting to LRT-2.',
         // 14.605461953754634, 120.98194541980351
         coordinates: { lat: 14.605461953754634, lng: 120.98194541980351 }, // Doroteo Jose Station
@@ -576,7 +609,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CARRIEDO',
         name: 'Carriedo',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/72/Carriedo_station_platform.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Carriedo_station_platform.jpg">PhiliptheNumber1</a>, CC0, via Wikimedia Commons',
         description: 'Located in Manila, near Carriedo Street.',
         // 14.59904708041471, 120.98140067370474
         coordinates: { lat: 14.59904708041471, lng: 120.98140067370474 }, // Carriedo Station
@@ -625,7 +661,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CENTRAL_TERMINAL',
         name: 'Central Terminal',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/76/Central_Terminal_Platform.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Central_Terminal_Platform.jpg">Ultimatemetalhead485</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Situated in Manila, near the Manila City Hall.',
         // 14.592772584129786, 120.98160257975337
         coordinates: { lat: 14.592772584129786, lng: 120.98160257975337 }, // Central Terminal Station
@@ -679,7 +718,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_UN_AVENUE',
         name: 'United Nations (UN) Avenue',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/6/68/UN_Station_06-2024.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:UN_Station_06-2024.jpg">FlorZi</a>, CC0, via Wikimedia Commons',
         description: 'Located in Manila, near the United Nations Avenue.',
         // 14.582547796804986, 120.98454208223805
         coordinates: { lat: 14.582547796804986, lng: 120.98454208223805 }, // UN Avenue Station
@@ -722,7 +764,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_PEDRO_GIL',
         name: 'Pedro Gil',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/9c/LRT1_1G_%281000_class%29_train_at_Pedro_Gil_station.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT1_1G_(1000_class)_train_at_Pedro_Gil_station.jpg">GFDL</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, via Wikimedia Commons',
         description:
           'Situated in Ermita, Manila, near Pedro Gil Street. Nearby landmarks include Robinsons Place Manila and the University of the Philippines Manila.',
         // 14.576554438385337, 120.98800315230707
@@ -759,7 +804,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_QUIRINO',
         name: 'Quirino',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/95/9663LRT_Stations_Manila_Landmarks_03.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:9663LRT_Stations_Manila_Landmarks_03.jpg">Judgefloro</a>, CC0, via Wikimedia Commons',
         description: 'Located in Manila, near Quirino Avenue.',
         // 14.570502454798115, 120.99151131231389
         coordinates: { lat: 14.570502454798115, lng: 120.99151131231389 }, // Quirino Station
@@ -795,7 +843,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_VITO_CRUZ',
         name: 'Vito Cruz',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/72/9663LRT_Stations_Manila_Landmarks_14.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:9663LRT_Stations_Manila_Landmarks_14.jpg">Judgefloro</a>, CC0, via Wikimedia Commons',
         description: 'Situated in Manila, near Vito Cruz Street.',
         // 14.563565052791175, 120.99481603865144
         coordinates: { lat: 14.563565052791175, lng: 120.99481603865144 }, // Vito Cruz Station
@@ -833,7 +884,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_GIL_PUYAT',
         name: 'Gil Puyat',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/c2/Line_1_Gil_Puyat_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_1_Gil_Puyat_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Located in Pasay City, near Gil Puyat Avenue.',
         // 14.55428697609849, 120.99712587034271
         coordinates: { lat: 14.55428697609849, lng: 120.99712587034271 }, // Gil Puyat Station
@@ -871,7 +925,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_LIBERTAD',
         name: 'Libertad',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/cb/LRT-1_Libertad_Station%2C_Pasay_City%2C_Mar_2024.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT-1_Libertad_Station,_Pasay_City,_Mar_2024.jpg">Ralff Nestor Nacor</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Situated in Pasay City, near Libertad Street.',
         // 14.547796780097222, 120.99855948289108
         coordinates: { lat: 14.547796780097222, lng: 120.99855948289108 }, // Libertad Station
@@ -907,7 +964,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_EDSA',
         name: 'EDSA',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/cf/Essential_workers_await_the_arrival_of_an_LRT_train_at_the_Edsa_Station.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Essential_workers_await_the_arrival_of_an_LRT_train_at_the_Edsa_Station.jpg">PNA photo by Jess M. Escaros Jr.</a>, Public domain, via Wikimedia Commons',
         description:
           'Located in Pasay City, near the intersection of Taft Avenue and Epifanio de los Santos Avenue (EDSA).',
         // 14.538714843616395, 121.00063929330985
@@ -996,7 +1056,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BACLARAN',
         name: 'Baclaran',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/17/LRT1_Baclaran_station_and_1000_class.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT1_Baclaran_station_and_1000_class.jpg">Angge (longcakeHigad)</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Southern terminus of the original LRT-1 line, located in Parañaque City.',
         // 14.534216158572693, 120.99823494117172
@@ -1057,7 +1120,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_REDEMPTORIST',
         name: 'Redemptorist',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/90/Redemptoristplatform-A.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Redemptoristplatform-A.jpg">FLOCKTHEORY</a>, CC0, via Wikimedia Commons',
         description: 'Located in Parañaque City, near the Redemptorist Church.',
         // 14.530231044787087, 120.99278168609546
         coordinates: { lat: 14.530231044787087, lng: 120.99278168609546 }, // Redemptorist Station
@@ -1109,7 +1175,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MIA',
         name: 'MIA',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/5/5d/MIAPlatform-A.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MIAPlatform-A.jpg">FLOCKTHEORY</a>, CC0, via Wikimedia Commons',
         description:
           'Situated near the Ninoy Aquino International Airport (NAIA) complex.',
         // 14.518510885287759, 120.99286667487398
@@ -1156,7 +1225,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Asia World (PITX)',
         shortName: 'Asia World (PITX)',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/2/2d/Asiaworldplatform-A.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Asiaworldplatform-A.jpg">FLOCKTHEORY</a>, CC0, via Wikimedia Commons',
         description:
           'Located in Parañaque City, near the Asia World City complex.',
         // 14.50845418511056, 120.99118615050102
@@ -1222,7 +1294,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_NINOY_AQUINO',
         name: 'Ninoy Aquino',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1a/Ninoyaquinoplatform.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Ninoyaquinoplatform.jpg">FLOCKTHEORY</a>, CC0, via Wikimedia Commons',
         description: 'Situated along Ninoy Aquino Avenue in Parañaque City.',
         // 14.498914085756669, 120.99427694903393
         coordinates: { lat: 14.498914085756669, lng: 120.99427694903393 }, // Ninoy Aquino
@@ -1296,7 +1371,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DR_SANTOS',
         name: 'Dr. Santos',
         isOperational: true,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/2/20/LRT-1_CEP_Dr._Santos_%281%29_2024-11-24.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT-1_CEP_Dr._Santos_(1)_2024-11-24.jpg">LMP 2001</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located in Parañaque City, near Dr. Santos Avenue.',
         // 14.485487817830236, 120.98938956143442
         coordinates: { lat: 14.485487817830236, lng: 120.98938956143442 }, // Dr. Santos
@@ -1422,7 +1500,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ZAPOTE',
         name: 'Zapote',
         isOperational: false,
-        image: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/8/89/LRT-1_Zapote_Satellite_Depot_2024-07-07.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT-1_Zapote_Satellite_Depot_2024-07-07.jpg">LMP 2001</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Planned station near the Zapote area, serving both Las Piñas and Bacoor.',
         // 14.471764874184087, 120.96763115622156

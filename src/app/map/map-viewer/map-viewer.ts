@@ -36,7 +36,7 @@ import { TransitService } from '../../core/transit.service';
     CommonModule,
     FormsModule,
     IonMenuButton,
-    GoogleMapsModule,
+    GoogleMapsModule, // TO REMOVE
   ],
 })
 export class MapViewerComponent implements OnInit {
@@ -95,6 +95,47 @@ export class MapViewerComponent implements OnInit {
     url: 'assets/icons/station-inactive-min.png', // Path to your inactive station icon
     scaledSize: new google.maps.Size(6, 6), // Desired size
     anchor: new google.maps.Point(3, 3), // Anchor point
+  };
+
+  // circle markers (lightweight)------------------------------------
+  // Active station (standard size)
+  stationActiveIcon_CircleMarker: google.maps.Symbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8, // Adjust size (scale factor)
+    fillColor: '#00FF00', // Green fill color
+    fillOpacity: 0.8,
+    strokeColor: '#006400', // Dark green border
+    strokeWeight: 2,
+  };
+
+  // Active station (minimal size)
+  stationActiveIcon_Min_CircleMarker: google.maps.Symbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 4, // Smaller size
+    fillColor: '#00FF00',
+    fillOpacity: 0.8,
+    strokeColor: '#006400',
+    strokeWeight: 2,
+  };
+
+  // Inactive station (standard size)
+  stationInactiveIcon_CircleMarker: google.maps.Symbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    fillColor: '#FF0000', // Red fill color
+    fillOpacity: 0.8,
+    strokeColor: '#8B0000', // Dark red border
+    strokeWeight: 2,
+  };
+
+  // Inactive station (minimal size)
+  stationInactiveIcon_Min_CircleMarker: google.maps.Symbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 4,
+    fillColor: '#FF0000',
+    fillOpacity: 0.8,
+    strokeColor: '#8B0000',
+    strokeWeight: 2,
   };
 
   // Function to determine the appropriate icon based on operational status
@@ -158,6 +199,27 @@ export class MapViewerComponent implements OnInit {
     icon.labelOrigin = new google.maps.Point(labelOffsetX, labelOffsetY);
 
     return icon;
+  }
+
+  // Function to determine the appropriate icon based on operational status
+  getStationIcon_cirle(station: Station, displayMode = ''): google.maps.Symbol {
+    const mode = displayMode || this.masterMapDisplayMode;
+
+    switch (mode) {
+      case 'highlight':
+        return station.isOperational
+          ? this.stationActiveIcon_CircleMarker
+          : this.stationInactiveIcon_CircleMarker;
+      case 'minimal':
+        return station.isOperational
+          ? this.stationActiveIcon_Min_CircleMarker
+          : this.stationInactiveIcon_Min_CircleMarker;
+      case 'base':
+      default:
+        return station.isOperational
+          ? this.stationActiveIcon_CircleMarker
+          : this.stationInactiveIcon_CircleMarker;
+    }
   }
 
   getStationLabel(station: Station, displayMode = ''): google.maps.MarkerLabel {

@@ -1,0 +1,8 @@
+serve in dev mode.
+  ionic serve
+  ionic serve --port 4200
+
+Run on an Emulator or Device (If Needed)
+  ionic build
+  ionic capacitor copy android
+  ionic capacitor run android

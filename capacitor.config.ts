@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'xyz.aimoradajr.philippine-metro',
+  appId: 'com.aimoradajr.philippinemetro',
   appName: 'philippine-metro',
   webDir: 'www',
 };

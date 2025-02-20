@@ -20,8 +20,21 @@
     "
   ></ion-img>
 
+  <!-- attribution html set here as innerHtml -->
+  <div
+    style="
+      padding-top: 0px;
+      padding: 5px;
+      font-size: smaller;
+      opacity: 0.7;
+      text-align: center;
+    "
+  >
+    <div [innerHTML]="station.imageAttributionHtml"></div>
+  </div>
+
   <div style="padding: 10px">
-    <p>{{ station?.description }}</p>
+    <p style="text-align: center">{{ station?.description }}</p>
 
     <ion-button expand="full" (click)="startHere(station)">
       Start Here
