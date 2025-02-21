@@ -60,6 +60,7 @@ export interface Station {
   boardingTime?: number; // in minutes. boarding time for passengers.
 
   //
+  imageLocal?: string; // file path to image
   image?: string;
   imageAttributionHtml?: string; // New property for image attribution
 }
@@ -123,6 +124,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
         shortName: 'FPJ (Roosevelt)',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_FPJ.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/7/79/LRT_Line_1_%28Metro_Manila_Districts%3B_2023-08-20%29_E911a_11.jpg',
         imageAttributionHtml:
@@ -159,6 +161,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.657535163572017, lng: 121.00386348386314 }, // Balintawak Station
         labelOffsetx: -40,
         labelOffsety: -15,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_BALINTAWAK.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/7/71/Balintawak_station_platform.jpg',
         imageAttributionHtml:
@@ -207,6 +210,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MONUMENTO',
         name: 'Monumento',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_MONUMENTO.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/a/ad/LRT-1_Monumento_2023-08-04.jpg',
         imageAttributionHtml:
@@ -256,6 +260,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_5TH_AVENUE',
         name: '5th Avenue',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_5TH_AVENUE.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/f/fa/5th_Avenue_LRT_Station.jpg',
         imageAttributionHtml:
@@ -305,6 +310,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_R_PAPA',
         name: 'R. Papa',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_R_PAPA.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/4/47/R._Papa_station_3351.jpg',
         imageAttributionHtml:
@@ -359,6 +365,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ABAD_SANTOS',
         name: 'Abad Santos',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_ABAD_SANTOS.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/8/8d/Abad_Santos_Station2.jpg',
         imageAttributionHtml:
@@ -410,6 +417,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BLUMENTRITT',
         name: 'Blumentritt',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_BLUMENTRITT.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/4/48/Blumentritt_station_15.jpg',
         imageAttributionHtml:
@@ -454,6 +462,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_TAYUMAN',
         name: 'Tayuman',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_TAYUMAN.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/1/1c/Tayuman_station_03.jpg',
         imageAttributionHtml:
@@ -496,6 +505,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BAMBANG',
         name: 'Bambang',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_BAMBANG.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/f/ff/Bambang_station_02.jpg',
         imageAttributionHtml:
@@ -538,6 +548,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DOROTEO_JOSE',
         name: 'Doroteo Jose',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_DOROTEO_JOSE.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/8/81/Doroteo_Jose_LRT-1_2019-12-21.jpg',
         imageAttributionHtml:
@@ -609,6 +620,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CARRIEDO',
         name: 'Carriedo',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_CARRIEDO.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/7/72/Carriedo_station_platform.jpg',
         imageAttributionHtml:
@@ -661,6 +673,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_CENTRAL_TERMINAL',
         name: 'Central Terminal',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_CENTRAL_TERMINAL.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/7/76/Central_Terminal_Platform.jpg',
         imageAttributionHtml:
@@ -718,6 +731,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_UN_AVENUE',
         name: 'United Nations (UN) Avenue',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_UN_AVENUE.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/6/68/UN_Station_06-2024.jpg',
         imageAttributionHtml:
@@ -764,6 +778,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_PEDRO_GIL',
         name: 'Pedro Gil',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_PEDRO_GIL.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/9/9c/LRT1_1G_%281000_class%29_train_at_Pedro_Gil_station.jpg',
         imageAttributionHtml:
@@ -804,6 +819,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_QUIRINO',
         name: 'Quirino',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_QUIRINO.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/9/95/9663LRT_Stations_Manila_Landmarks_03.jpg',
         imageAttributionHtml:
@@ -843,6 +859,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_VITO_CRUZ',
         name: 'Vito Cruz',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_VITO_CRUZ.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/7/72/9663LRT_Stations_Manila_Landmarks_14.jpg',
         imageAttributionHtml:
@@ -884,6 +901,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_GIL_PUYAT',
         name: 'Gil Puyat',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_GIL_PUYAT.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/c2/Line_1_Gil_Puyat_Station_Platform_1.jpg',
         imageAttributionHtml:
@@ -925,6 +943,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_LIBERTAD',
         name: 'Libertad',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_LIBERTAD.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cb/LRT-1_Libertad_Station%2C_Pasay_City%2C_Mar_2024.jpg',
         imageAttributionHtml:
@@ -964,6 +983,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_EDSA',
         name: 'EDSA',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_EDSA.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/c/cf/Essential_workers_await_the_arrival_of_an_LRT_train_at_the_Edsa_Station.jpg',
         imageAttributionHtml:
@@ -1056,6 +1076,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_BACLARAN',
         name: 'Baclaran',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_BACLARAN.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/1/17/LRT1_Baclaran_station_and_1000_class.jpg',
         imageAttributionHtml:
@@ -1120,6 +1141,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_REDEMPTORIST',
         name: 'Redemptorist',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_REDEMPTORIST.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/9/90/Redemptoristplatform-A.jpg',
         imageAttributionHtml:
@@ -1175,6 +1197,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_MIA',
         name: 'MIA',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_MIA.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/5/5d/MIAPlatform-A.jpg',
         imageAttributionHtml:
@@ -1225,6 +1248,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Asia World (PITX)',
         shortName: 'Asia World (PITX)',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_ASIA_WORLD.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/2/2d/Asiaworldplatform-A.jpg',
         imageAttributionHtml:
@@ -1294,6 +1318,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_NINOY_AQUINO',
         name: 'Ninoy Aquino',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_NINOY_AQUINO.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/1/1a/Ninoyaquinoplatform.jpg',
         imageAttributionHtml:
@@ -1371,6 +1396,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_DR_SANTOS',
         name: 'Dr. Santos',
         isOperational: true,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_DR_SANTOS.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/2/20/LRT-1_CEP_Dr._Santos_%281%29_2024-11-24.jpg',
         imageAttributionHtml:
@@ -1500,6 +1526,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT1_ZAPOTE',
         name: 'Zapote',
         isOperational: false,
+        imageLocal: 'assets/images/lines/lrt1/LRT1_ZAPOTE.jpg',
         image:
           'https://upload.wikimedia.org/wikipedia/commons/8/89/LRT-1_Zapote_Satellite_Depot_2024-07-07.jpg',
         imageAttributionHtml:
@@ -1608,7 +1635,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_ANTIPOLO',
         name: 'Antipolo',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_ANTIPOLO.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/4/48/LRT_Antipolo%2C_Rizal%2C_Jul_2024.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:LRT_Antipolo,_Rizal,_Jul_2024.jpg">Ralff Nestor Nacor</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Eastern terminus of LRT-2, located in Antipolo, Rizal.',
         // 14.624824811486416, 121.121248307
         coordinates: { lat: 14.624824811486416, lng: 121.121248307 }, // Antipolo Station
@@ -1636,9 +1667,13 @@ export const TRANSIT_LINES: TransitLine[] = [
       {
         id: 2,
         code: 'LRT2_MARIKINA',
-        name: 'Marikina',
+        name: 'Marikina-Pasig',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_MARIKINA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/7b/Line_2_Marikina%E2%80%93Pasig_Station_Platform.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Marikina%E2%80%93Pasig_Station_Platform.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Located in Marikina City, near major commercial areas.',
         // 14.62052076177822, 121.10074150354535
         coordinates: { lat: 14.62052076177822, lng: 121.10074150354535 }, // Marikina Station
@@ -1696,7 +1731,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_SANTOLAN',
         name: 'Santolan',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_SANTOLAN.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/92/Line_2_Santolan_Station_Platform_6.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Santolan_Station_Platform_6.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Located along Marcos Highway, near the boundary of Marikina and Pasig.',
         // 14.622135967911797, 121.08597686462393
@@ -1784,7 +1823,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_KATIPUNAN',
         name: 'Katipunan',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_KATIPUNAN.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/e/ed/Line_2_Katipunan_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Katipunan_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Underground station located along Katipunan Avenue, Quezon City.',
         // 14.630800864143024, 121.07271230628201
@@ -1855,7 +1898,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_ANONAS',
         name: 'Anonas',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_ANONAS.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/17/Line_2_Anonas_Station_Platform_14.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Anonas_Station_Platform_14.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Located in Project 3, Quezon City, near Anonas Street.',
         // 14.628043289011293, 121.06482289673204
         coordinates: { lat: 14.628043289011293, lng: 121.06482289673204 }, // Anonas Station
@@ -1916,7 +1963,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_CUBAO',
         name: 'Cubao',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_CUBAO.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1e/Line_2_Araneta_Center-Cubao_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Araneta_Center-Cubao_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Located in Quezon City, a major commercial hub with connections to MRT-3.',
         // 14.622724831527815, 121.05266770816854
@@ -2000,7 +2051,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_BETTY_GO_BELMONTE',
         name: 'Betty Go-Belmonte',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_BETTY_GO_BELMONTE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/b/b9/Line_2_Betty_Go-Belmonte_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Betty_Go-Belmonte_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Situated in Quezon City, near New Manila.',
         // 14.618744832179202, 121.04278254495594
         coordinates: { lat: 14.618744832179202, lng: 121.04278254495594 }, // Betty Go-Belmonte Station
@@ -2055,7 +2110,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_GILMORE',
         name: 'Gilmore',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_GILMORE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/6/63/MRT2_megatren_TS9_leaving_Gilmore_station_%281%29.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT2_megatren_TS9_leaving_Gilmore_station_(1).jpg">Higad Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Located in Quezon City, known for electronics shops along Gilmore Avenue.',
         // 14.613660961641079, 121.0345201516396
@@ -2109,7 +2168,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_J_RUIZ',
         name: 'J. Ruiz',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_J_RUIZ.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/a/aa/Line_2_J._Ruiz_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_J._Ruiz_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Located in San Juan City, near J. Ruiz Street and residential areas.',
         // 14.610667645518005, 121.02633594643939
@@ -2170,7 +2233,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_V_MAPA',
         name: 'V. Mapa',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_V_MAPA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/3/32/V._Mapa_Station_fvf_02.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:V._Mapa_Station_fvf_02.jpg">Judgefloro</a>, Public domain, via Wikimedia Commons',
         description: 'Located in Santa Mesa, Manila, near V. Mapa High School.',
         // 14.604210926251874, 121.01734453043514
         coordinates: { lat: 14.604210926251874, lng: 121.01734453043514 }, // V. Mapa Station
@@ -2235,7 +2302,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_PUREZA',
         name: 'Pureza',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_PUREZA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/9d/Line_2_Pureza_Station_Platform_4.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Pureza_Station_Platform_4.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Situated in Santa Mesa, Manila, near educational institutions.',
         // 14.601759353452428, 121.0052661412116
@@ -2333,7 +2404,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_LEGARDA',
         name: 'Legarda',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_LEGARDA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/cc/Line_2_Legarda_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Legarda_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description: 'Located in Sampaloc, Manila, near Legarda Street.',
         // 14.600864578161373, 120.99250867046764
         coordinates: { lat: 14.600864578161373, lng: 120.99250867046764 }, // Legarda Station
@@ -2422,7 +2497,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'LRT2_RECTO',
         name: 'Recto',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/lrt2/LRT2_RECTO.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1e/Line_2_Recto_Station_Platform_3.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_2_Recto_Station_Platform_3.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Western terminus of LRT-2, located in Manila, near University Belt.',
         // 14.60348141245216, 120.9834813414183
@@ -2759,7 +2838,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_NORTH_AVENUE',
         name: 'North Avenue',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_NORTH_AVENUE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/4/41/MRT-3_North_Avenue_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_North_Avenue_Station_Platform_1.jpg">Mithril Cloud at English Wikipedia</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Northern terminus of MRT-3, adjacent to TriNoma Mall and near SM City North EDSA.',
         // 14.652169907896354, 121.03226455190827
@@ -2784,7 +2867,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_QUEZON_AVENUE',
         name: 'Quezon Avenue',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_QUEZON_AVENUE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/72/Line_3_Quezon_Avenue_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_3_Quezon_Avenue_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Located near the intersection of Quezon Avenue and EDSA, close to Eton Centris and various government offices.',
         // 14.64275621704705, 121.03847691656055
@@ -2821,7 +2908,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_GMA_KAMUNING',
         name: 'GMA-Kamuning',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_GMA_KAMUNING.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/d/db/MRT-3_Kamuning_Station_Platform_5.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Kamuning_Station_Platform_5.jpg">PhilippineRevolution</a>, Public domain, via Wikimedia Commons',
         description:
           'Situated near GMA Network Center and accessible to Kamuning Road.',
         // 14.635217035522803, 121.0434184846183
@@ -2865,7 +2956,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_CUBAO',
         name: 'Araneta Center-Cubao',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_CUBAO.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/0/01/Line_3_Araneta_Center-Cubao_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_3_Araneta_Center-Cubao_Station_Platform_1.jpg">Patrickroque01 at English Wikipedia</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Integrated with Araneta City, providing connections to LRT Line 2 and access to shopping centers like Gateway Mall.',
         // 14.619436167701586, 121.05109226468761
@@ -2925,7 +3020,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_SANTOLAN_ANNAPOLIS',
         name: 'Santolan-Annapolis',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_SANTOLAN_ANNAPOLIS.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/8/87/MRT-3_Santolan_Station_Platform_7.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Santolan_Station_Platform_7.jpg">PhilippineRevolution</a>, Public domain, via Wikimedia Commons',
         description:
           'Positioned near Greenhills Shopping Center and various commercial establishments.',
         // 14.607368674492228, 121.05666307569197
@@ -2989,7 +3088,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_ORTIGAS',
         name: 'Ortigas',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_ORTIGAS.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/73/MRT-3_Ortigas_Station_Platform_2.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Ortigas_Station_Platform_2.jpg">TLP</a>, Public domain, via Wikimedia Commons',
         description:
           'Serves the Ortigas Central Business District, with proximity to SM Megamall and Robinsons Galleria.',
         // 14.587891443450124, 121.05671105208569
@@ -3047,7 +3150,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_SHAW_BOULEVARD',
         name: 'Shaw Boulevard',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_SHAW_BOULEVARD.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/b/ba/MRT-3_Shaw_Boulevard_Station_Platform_2.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Shaw_Boulevard_Station_Platform_2.jpg">Exec8</a>, Public domain, via Wikimedia Commons',
         description:
           'Located near Shangri-La Plaza and Starmall EDSA-Shaw, serving as a major transfer point for commuters.',
         // 14.581241157304031, 121.05360426276788
@@ -3087,7 +3194,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_BONI',
         name: 'Boni',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_BONI.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/3/39/MRT-3_Boni_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Boni_Station_Platform_1.jpg">Exec8 at English Wikipedia</a>, Public domain, via Wikimedia Commons',
         description:
           'Provides access to the Pioneer area and nearby commercial establishments.',
         // 14.573765068135797, 121.04814319459827
@@ -3128,7 +3239,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_GUADALUPE',
         name: 'Guadalupe',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_GUADALUPE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/5/50/92050jfGuadalupe_Makati_Mandaluyong_Bridge_MRT-25_segments_Bridge_EDSAfvf.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:92050jfGuadalupe_Makati_Mandaluyong_Bridge_MRT-25_segments_Bridge_EDSAfvf.jpg">Judgefloro</a>, Public domain, via Wikimedia Commons',
         description:
           'Situated near Guadalupe Nuevo and Guadalupe Viejo, with access to the Pasig River ferry service.',
         // 14.566672857041965, 121.04542599246548
@@ -3181,7 +3296,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_BUENDIA',
         name: 'Buendia',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_BUENDIA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/f/f7/MRT-3_Buendia_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Buendia_Station_Platform_1.jpg">Jeromesandilanico</a>, CC0, via Wikimedia Commons',
         description:
           'Located near the Makati Central Business District, providing access to various offices and commercial centers.',
         // 14.554615536966176, 121.0344275884317
@@ -3224,7 +3343,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_AYALA',
         name: 'Ayala',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_AYALA.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/9b/Line_3_Ayala_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_3_Ayala_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Directly connected to Ayala Center, including Glorietta and Greenbelt malls, serving as a major hub for shoppers and professionals.',
         // 14.549182387052426, 121.02797462354556
@@ -3259,7 +3382,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_MAGALLANES',
         name: 'Magallanes',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_MAGALLANES.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/f/f9/Line_3_Magallanes_Station_Platform_1.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Line_3_Magallanes_Station_Platform_1.jpg">Korean Rail Fan</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons',
         description:
           'Positioned near the Magallanes Village and provides access to the South Luzon Expressway (SLEX).',
         // 14.542176999516412, 121.01968479687375
@@ -3312,7 +3439,11 @@ export const TRANSIT_LINES: TransitLine[] = [
         code: 'MRT3_TAFT_AVENUE',
         name: 'Taft Avenue',
         isOperational: true,
-        image: '',
+        imageLocal: 'assets/images/lines/mrt3/MRT3_TAFT_AVENUE.jpg',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/d/de/MRT-3_Taft_Avenue_Station_Platform_3.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-3_Taft_Avenue_Station_Platform_3.jpg">PhilippineRevolution</a>, Public domain, via Wikimedia Commons',
         description:
           'Southern terminus of MRT-3, located at the intersection of EDSA and Taft Avenue in Pasay City. Provides a vital transfer point to LRT Line 1 via a connecting footbridge to EDSA Station, facilitating seamless north-south travel across Metro Manila.',
         // 14.53768596175474, 121.00178304515234

@@ -33,7 +33,7 @@
     >
       <ion-thumbnail slot="start">
         <img
-          [src]="station.image || defaultStationThumbnail"
+          [src]="station?.imageLocal || station?.image || defaultStationThumbnail"
           alt="{{ station.name }}"
         />
       </ion-thumbnail>

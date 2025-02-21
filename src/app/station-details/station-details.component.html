@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-img
-    [src]="station?.image || defaultStationImage"
+    [src]="station?.imageLocal || station?.image || defaultStationImage"
     style="
       max-height: 200px;
       max-width: 100%;

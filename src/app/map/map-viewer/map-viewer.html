@@ -7,13 +7,13 @@
 >
   <!-- master: stations -->
   <ng-container *ngFor="let station of stationsArray">
-    <!-- <map-marker
+    <map-marker
       *ngIf="station.coordinates"
       [position]="station.coordinates!"
       [title]="station.name"
       [label]="getStationLabel(station)"
       [icon]="getStationIcon(station)"
-    ></map-marker> -->
+    ></map-marker>
 
     <!-- <map-advanced-marker
       *ngIf="station.coordinates"
