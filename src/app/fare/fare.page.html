@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fare</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Fare</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid style="overflow-x: auto">
+    <!-- Header Row -->
+    <ion-row style="flex-wrap: nowrap">
+      <ion-col
+        ><div style="width: 3rem">
+          <strong></strong></div
+      ></ion-col>
+      <ion-col
+        *ngFor="let dest of destinations"
+        style="
+          width: 1.5rem;
+          min-width: 1.5rem;
+          white-space: nowrap;
+          text-align: center;
+        "
+      >
+        <div class="vertical-header">
+          <strong>{{ cleanStationName(dest) }}</strong>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Fare Rows -->
+    <ion-row *ngFor="let origin of origins" style="flex-wrap: nowrap">
+      <ion-col>
+        <div style="width: 3rem; overflow: hidden; white-space: nowrap">
+          <strong>{{ cleanStationName(origin) }}</strong>
+        </div>
+      </ion-col>
+      <ion-col
+        *ngFor="let dest of destinations"
+        style="
+          width: 1.5rem;
+          min-width: 1.5rem;
+          white-space: nowrap;
+          text-align: center;
+        "
+      >
+        {{ getFare(origin, dest) }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

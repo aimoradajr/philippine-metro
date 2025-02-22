@@ -36,6 +36,7 @@ import {
   trainOutline,
   arrowForwardCircleOutline,
   mapOutline,
+  cashOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -89,6 +90,7 @@ export class AppComponent {
       trainOutline,
       arrowForwardCircleOutline,
       mapOutline,
+      cashOutline,
     });
   }
 }

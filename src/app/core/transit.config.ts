@@ -3587,7 +3587,7 @@ export const FAREMATRIX: Record<
 > = {
   MRT3: {
     MRT3_NORTH_AVENUE: {
-      MRT_NORTH_AVENUE: 0, // same
+      MRT3_NORTH_AVENUE: 0, // same
       MRT3_QUEZON_AVENUE: 13,
       MRT3_GMA_KAMUNING: 13,
       MRT3_CUBAO: 16,
