@@ -3489,7 +3489,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             // walk from pasig ferry guadalupe to mrt3 guadalupe
             duration: 10,
             transitMode: 'walk',
-            isOperational: false,
+            isOperational: true,
             transferDescription: 'Walk to Pasig Ferry Guadalupe Station',
             transferDistance: 'Approximately a 10-minute walk',
             accessibility: 'Elevators and ramps are available',
@@ -5790,7 +5790,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             // walk from pasig ferry guadalupe to mrt3 guadalupe
             duration: 10,
             transitMode: 'walk',
-            isOperational: false,
+            isOperational: true,
             transferDescription: 'Walk to MRT-3 Guadalupe Station',
             transferDistance: 'Approximately a 10-minute walk',
             accessibility: 'Elevators and ramps are available',
