@@ -95,7 +95,10 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="true">
-            <ion-item routerLink="/fare" routerLinkActive="active-item">
+            <ion-item
+              [routerLink]="['/fare/', 'LRT1']"
+              routerLinkActive="active-item"
+            >
               <ion-icon slot="start" name="cash-outline"></ion-icon>
               <ion-label>Fare</ion-label>
             </ion-item>

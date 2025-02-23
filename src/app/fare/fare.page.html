@@ -8,11 +8,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Fare</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label>Select Transit Line</ion-label>
+    <ion-select
+      interface="popover"
+      [(ngModel)]="selectedLine"
+      (ionChange)="onLineChange($event)"
+    >
+      <ion-select-option *ngFor="let line of transitLines" [value]="line"
+        >{{ line.name }}</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
 
   <ion-grid style="overflow-x: auto">
     <!-- Header Row -->
@@ -22,13 +29,15 @@
           <strong></strong></div
       ></ion-col>
       <ion-col
-        *ngFor="let dest of destinations"
+        *ngFor="let dest of destinations; let colIndex = index"
+        [ngClass]="{ 'highlight-column': colIndex === selectedColIndex }"
         style="
           width: 1.5rem;
           min-width: 1.5rem;
           white-space: nowrap;
           text-align: center;
         "
+        (click)="selectCol(colIndex)"
       >
         <div class="vertical-header">
           <strong>{{ cleanStationName(dest) }}</strong>
@@ -37,14 +46,26 @@
     </ion-row>
 
     <!-- Fare Rows -->
-    <ion-row *ngFor="let origin of origins" style="flex-wrap: nowrap">
-      <ion-col>
+    <ion-row
+      *ngFor="let origin of origins; let rowIndex = index"
+      style="flex-wrap: nowrap"
+    >
+      <ion-col
+        [ngClass]="{ 'highlight-row': rowIndex === selectedRowIndex }"
+        (click)="selectRow(rowIndex)"
+      >
         <div style="width: 3rem; overflow: hidden; white-space: nowrap">
           <strong>{{ cleanStationName(origin) }}</strong>
         </div>
       </ion-col>
       <ion-col
-        *ngFor="let dest of destinations"
+        *ngFor="let dest of destinations; let colIndex = index"
+        (click)="selectCell(rowIndex, colIndex)"
+        [ngClass]="{
+          'highlight-cell': rowIndex === selectedRowIndex && colIndex === selectedColIndex,
+          'highlight-column': colIndex === selectedColIndex,
+          'highlight-row': rowIndex === selectedRowIndex
+        }"
         style="
           width: 1.5rem;
           min-width: 1.5rem;

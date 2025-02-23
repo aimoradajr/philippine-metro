@@ -1,3 +1,15 @@
 .vertical-header {
   writing-mode: sideways-rl;
 }
+
+.highlight-row {
+  background-color: rgba(0, 0, 255, 0.1); /* Light blue background */
+}
+
+.highlight-column {
+  background-color: rgba(0, 255, 0, 0.1); /* Light green background */
+}
+
+.highlight-cell {
+  background-color: rgba(255, 255, 0, 0.3); /* Light yellow background */
+}

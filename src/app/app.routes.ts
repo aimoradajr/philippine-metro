@@ -44,7 +44,7 @@ export const routes: Routes = [
     loadComponent: () => import('./map/map.page').then((m) => m.MapPage),
   },
   {
-    path: 'fare',
+    path: 'fare/:line_code',
     loadComponent: () => import('./fare/fare.page').then((m) => m.FarePage),
   },
 ];
