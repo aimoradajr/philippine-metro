@@ -48,6 +48,7 @@ import {
   mapOutline,
   timeOutline,
   walkOutline,
+  swapHorizontalOutline,
 } from 'ionicons/icons';
 import { MapViewerComponent } from '../map/map-viewer/map-viewer';
 
@@ -123,14 +124,15 @@ export class PathFinderPage implements OnInit {
     private transitService: TransitService
   ) {
     addIcons({
-      expandOutline,
+      swapHorizontalOutline,
+      timeOutline,
+      analyticsOutline,
       mapOutline,
       listOutline,
-      locationOutline,
-      timeOutline,
-      cardOutline,
-      analyticsOutline,
       walkOutline,
+      expandOutline,
+      locationOutline,
+      cardOutline,
     });
 
     this.allLines = this.transitService.getAllLines();
@@ -511,5 +513,13 @@ export class PathFinderPage implements OnInit {
 
   showPathInList() {
     this.pathViewMode = 'list';
+  }
+
+  swapStations() {
+    const startCode = this.selectedStartStationCode;
+    const endCode = this.selectedEndStationCode;
+
+    this.preselectStartStation(endCode || '');
+    this.preselectEndStation(startCode || '');
   }
 }
