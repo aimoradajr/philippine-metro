@@ -3479,6 +3479,56 @@ export const TRANSIT_LINES: TransitLine[] = [
               { lat: 14.554615536966176, lng: 121.0344275884317 }, // to next
             ],
           },
+          // inter-line: walk to ferry
+          {
+            from: 'MRT3_GUADALUPE',
+            to: 'PASIGFERRY_GUADALUPE',
+            // Approximate walking time in minutes is 10 mins
+            weight: 10,
+            transferType: 'inter-line',
+            // walk from pasig ferry guadalupe to mrt3 guadalupe
+            duration: 10,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Walk to Pasig Ferry Guadalupe Station',
+            transferDistance: 'Approximately a 10-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'west',
+            path: [
+              // reverse the path here
+              // to mrt3 guadalupe
+              { lat: 14.566672857041965, lng: 121.04542599246548 }, // to mrt3 guadalupe
+              // 14.566602474387217, 121.04561307622704
+              { lat: 14.566602474387217, lng: 121.04561307622704 }, // sub
+              // 14.56671297723396, 121.04567980233648
+              { lat: 14.56671297723396, lng: 121.04567980233648 }, // sub
+              // 14.566801476190813, 121.04579483797491
+              { lat: 14.566801476190813, lng: 121.04579483797491 }, // sub
+              // 14.56681654497708, 121.04591868690663
+              { lat: 14.56681654497708, lng: 121.04591868690663 }, // sub
+              // 14.566810892821112, 121.04616889326459
+              { lat: 14.566810892821112, lng: 121.04616889326459 }, // sub
+              // 14.56695134594947, 121.04637862774331
+              { lat: 14.56695134594947, lng: 121.04637862774331 }, // sub
+              // 14.567090832070127, 121.04651864209687
+              { lat: 14.567090832070127, lng: 121.04651864209687 }, // sub
+              // 14.56731200188787, 121.0465883262037
+              { lat: 14.56731200188787, lng: 121.0465883262037 }, // sub
+              // 14.567553283401557, 121.04660935704815
+              { lat: 14.567553283401557, lng: 121.04660935704815 }, // sub
+              // 14.56767357677711, 121.04670027920145
+              { lat: 14.56767357677711, lng: 121.04670027920145 }, // sub
+              // 14.567728361714531, 121.04677648151788
+              { lat: 14.567728361714531, lng: 121.04677648151788 }, // sub
+              // 14.567757875398996, 121.04691927721625
+              { lat: 14.567757875398996, lng: 121.04691927721625 }, // sub
+              // 14.56785960747574, 121.04788956138205
+              { lat: 14.56785960747574, lng: 121.04788956138205 }, // sub
+              // to ferry guadalupe
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // to ferry guadalupe
+            ],
+          },
         ],
       },
       {
@@ -5728,6 +5778,55 @@ export const TRANSIT_LINES: TransitLine[] = [
               { lat: 14.554948583313758, lng: 121.07383486166952 }, // sub
               // to san joaquin
               { lat: 14.554601624603587, lng: 121.07386459488538 }, // to san joaquin
+            ],
+          },
+          // inter-line: walk to mrt3
+          {
+            from: 'PASIGFERRY_GUADALUPE',
+            to: 'MRT3_GUADALUPE',
+            // Approximate walking time in minutes is 10 mins
+            weight: 10,
+            transferType: 'inter-line',
+            // walk from pasig ferry guadalupe to mrt3 guadalupe
+            duration: 10,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Walk to MRT-3 Guadalupe Station',
+            transferDistance: 'Approximately a 10-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'west',
+            path: [
+              // from ferry guadalupe
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // from ferry guadalupe
+              // 14.56785960747574, 121.04788956138205
+              { lat: 14.56785960747574, lng: 121.04788956138205 }, // sub
+              // 14.567757875398996, 121.04691927721625
+              { lat: 14.567757875398996, lng: 121.04691927721625 }, // sub
+              // 14.567728361714531, 121.04677648151788
+              { lat: 14.567728361714531, lng: 121.04677648151788 }, // sub
+              // 14.56767357677711, 121.04670027920145
+              { lat: 14.56767357677711, lng: 121.04670027920145 }, // sub
+              // 14.567553283401557, 121.04660935704815
+              { lat: 14.567553283401557, lng: 121.04660935704815 }, // sub
+              // 14.56731200188787, 121.0465883262037
+              { lat: 14.56731200188787, lng: 121.0465883262037 }, // sub
+              // 14.567090832070127, 121.04651864209687
+              { lat: 14.567090832070127, lng: 121.04651864209687 }, // sub
+              // 14.56695134594947, 121.04637862774331
+              { lat: 14.56695134594947, lng: 121.04637862774331 }, // sub
+              // 14.566810892821112, 121.04616889326459
+              { lat: 14.566810892821112, lng: 121.04616889326459 }, // sub
+              // 14.56681654497708, 121.04591868690663
+              { lat: 14.56681654497708, lng: 121.04591868690663 }, // sub
+              // 14.566801476190813, 121.04579483797491
+              { lat: 14.566801476190813, lng: 121.04579483797491 }, // sub
+              // 14.56671297723396, 121.04567980233648
+              { lat: 14.56671297723396, lng: 121.04567980233648 }, // sub
+              // 14.566602474387217, 121.04561307622704
+              { lat: 14.566602474387217, lng: 121.04561307622704 }, // sub
+              // to mrt3 guadalupe
+              { lat: 14.566672857041965, lng: 121.04542599246548 }, // to mrt3 guadalupe
             ],
           },
         ],
