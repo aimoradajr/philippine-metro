@@ -4975,6 +4975,1057 @@ export const TRANSIT_LINES: TransitLine[] = [
       },
     ],
   },
+  // PASIG RIVER FERRY SERVICE
+  {
+    name: 'Pasig River Ferry Service',
+    code: 'PASIGFERRY',
+    color: 'teal',
+    bgColor: 'teal',
+    textColor: 'white',
+    stationActiveIcon: 'assets/icons/pasigferry/station-active-pasigferry.png',
+    stationInactiveIcon:
+      'assets/icons/pasigferry/station-inactive-pasigferry.png',
+    stationActiveIcon_Min:
+      'assets/icons/pasigferry/station-active-min-pasigferry.png',
+    stationInactiveIcon_Min:
+      'assets/icons/pasigferry/station-inactive-min-pasigferry.png',
+    stations: [
+      {
+        id: 1,
+        code: 'PASIGFERRY_PLAZA_MEXICO',
+        name: 'Plaza Mexico',
+        isOperational: false,
+        imageLocal:
+          'assets/images/lines/pasigferry/PASIGFERRY_PLAZA_MEXICO.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Plaza Mexico.',
+        // 14.594781189618825, 120.97517159755581
+        coordinates: { lat: 14.594781189618825, lng: 120.97517159755581 }, // Plaza Mexico Station
+        edges: [
+          {
+            to: 'PASIGFERRY_ESCOLTA',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.594781189618825, lng: 120.97517159755581 }, // from me
+              // 14.595069338169784, 120.97541375035388
+              { lat: 14.595069338169784, lng: 120.97541375035388 }, // sub
+              // 14.595351104098537, 120.97579934592726
+              { lat: 14.595351104098537, lng: 120.97579934592726 }, // sub
+              // 14.595971587447908, 120.97730487119681
+              { lat: 14.595971587447908, lng: 120.97730487119681 }, // sub
+              // 14.596195558180556, 120.97751905731623
+              { lat: 14.596195558180556, lng: 120.97751905731623 }, // sub
+              // to escolta
+              { lat: 14.596466929921698, lng: 120.97753604459676 }, // to escolta
+            ],
+          },
+        ],
+      },
+      {
+        id: 2,
+        code: 'PASIGFERRY_ESCOLTA',
+        name: 'Escolta',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_ESCOLTA.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Escolta.',
+        // 14.596466929921698, 120.97753604459676
+        coordinates: { lat: 14.596466929921698, lng: 120.97753604459676 }, // Escolta Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_ESCOLTA',
+            to: 'PASIGFERRY_PLAZA_MEXICO',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.596466929921698, lng: 120.97753604459676 }, // from me
+              // 14.596195558180556, 120.97751905731623
+              { lat: 14.596195558180556, lng: 120.97751905731623 }, // sub
+              // 14.595971587447908, 120.97730487119681
+              { lat: 14.595971587447908, lng: 120.97730487119681 }, // sub
+              // 14.595351104098537, 120.97579934592726
+              { lat: 14.595351104098537, lng: 120.97579934592726 }, // sub
+              // 14.595069338169784, 120.97541375035388
+              { lat: 14.595069338169784, lng: 120.97541375035388 }, // sub
+              // to plaza mexico
+              { lat: 14.594781189618825, lng: 120.97517159755581 }, // to plaza mexico
+            ],
+          },
+          {
+            to: 'PASIGFERRY_LAWTON',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.596466929921698, lng: 120.97753604459676 }, // from me
+              // 14.596263562716265, 120.97773880011486
+              { lat: 14.596263562716265, lng: 120.97773880011486 }, // sub
+              // 14.596240550425716, 120.97804397242679
+              { lat: 14.596240550425716, lng: 120.97804397242679 }, // sub
+              // 14.596832291367269, 120.9797653038039
+              { lat: 14.596832291367269, lng: 120.9797653038039 }, // sub
+              // 14.596241595697405, 120.98139289953838
+              { lat: 14.596241595697405, lng: 120.98139289953838 }, // sub
+              // 14.595916272103356, 120.98145317838325
+              { lat: 14.595916272103356, lng: 120.98145317838325 }, // sub
+              // to lawton
+              { lat: 14.59571308002594, lng: 120.98137420497147 }, // to lawton
+            ],
+          },
+        ],
+      },
+      {
+        id: 3,
+        code: 'PASIGFERRY_LAWTON',
+        name: 'Lawton',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_LAWTON.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Lawton.',
+        // 14.59571308002594, 120.98137420497147
+        coordinates: { lat: 14.59571308002594, lng: 120.98137420497147 }, // Lawton Station
+        edges: [
+          {
+            from: 'PASIGFERRY_LAWTON',
+            to: 'ESCOLTA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.59571308002594, lng: 120.98137420497147 }, // from me
+              // 14.595916272103356, 120.98145317838325
+              { lat: 14.595916272103356, lng: 120.98145317838325 }, // sub
+              // 14.596241595697405, 120.98139289953838
+              { lat: 14.596241595697405, lng: 120.98139289953838 }, // sub
+              // 14.596832291367269, 120.9797653038039
+              { lat: 14.596832291367269, lng: 120.9797653038039 }, // sub
+              // 14.596240550425716, 120.97804397242679
+              { lat: 14.596240550425716, lng: 120.97804397242679 }, // sub
+              // 14.596263562716265, 120.97773880011486
+              { lat: 14.596263562716265, lng: 120.97773880011486 }, // sub
+              // to escolta
+              { lat: 14.596466929921698, lng: 120.97753604459676 }, // to escolta
+            ],
+          },
+          {
+            to: 'PASIGFERRY_QUINTA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.59571308002594, lng: 120.98137420497147 }, // from me
+              // to quinta
+              { lat: 14.595913181678819, lng: 120.98217563117429 }, // to
+            ],
+          },
+        ],
+      },
+      {
+        id: 4,
+        code: 'PASIGFERRY_QUINTA',
+        name: 'Quinta',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_QUINTA.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Quinta.',
+        // 14.595913181678819, 120.98217563117429
+        coordinates: { lat: 14.595913181678819, lng: 120.98217563117429 }, // Quinta Station
+        edges: [
+          {
+            from: 'PASIGFERRY_QUINTA',
+            to: 'PASIGFERRY_LAWTON',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.595913181678819, lng: 120.98217563117429 }, // from me
+              // 14.59571308002594, 120.98137420497147
+              { lat: 14.59571308002594, lng: 120.98137420497147 }, // to lawton
+            ],
+          },
+          {
+            to: 'PASIGFERRY_PUP',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.595913181678819, lng: 120.98217563117429 }, // from me
+              // 14.595713955773533, 120.98204304419833
+              { lat: 14.595713955773533, lng: 120.98204304419833 }, // sub
+              // 14.593040928818585, 120.98399342800205
+              { lat: 14.593040928818585, lng: 120.98399342800205 }, // sub
+              // 14.591792998179777, 120.98559302862398
+              { lat: 14.591792998179777, lng: 120.98559302862398 }, // sub
+              // 14.591402940662805, 120.9879348893887
+              { lat: 14.591402940662805, lng: 120.9879348893887 }, // sub
+              // 14.591252234340969, 120.9915321132713
+              { lat: 14.591252234340969, lng: 120.9915321132713 }, // sub
+              // 14.591554738030922, 120.9932459680993
+              { lat: 14.591554738030922, lng: 120.9932459680993 }, // sub
+              // 14.592626582465774, 120.99444273646183
+              { lat: 14.592626582465774, lng: 120.99444273646183 }, // sub
+              // 14.596415420783554, 120.99754152307085
+              { lat: 14.596415420783554, lng: 120.99754152307085 }, // sub
+              // 14.596723816990613, 120.99886532392588
+              { lat: 14.596723816990613, lng: 120.99886532392588 }, // sub
+              // 14.595868997052971, 121.00127335705193
+              { lat: 14.595868997052971, lng: 121.00127335705193 }, // sub
+              // 14.596557408835372, 121.00296060117614
+              { lat: 14.596557408835372, lng: 121.00296060117614 }, // sub
+              // 14.5971980848545, 121.00552715568965
+              { lat: 14.5971980848545, lng: 121.00552715568965 }, // sub
+              // 14.596063327425624, 121.00959793474337
+              { lat: 14.596063327425624, lng: 121.00959793474337 }, // sub
+              // 14.59597236055152, 121.01038913497968
+              { lat: 14.59597236055152, lng: 121.01038913497968 }, // sub
+              // to pup
+              { lat: 14.596074726447794, lng: 121.01074815437192 }, // to pup
+            ],
+          },
+        ],
+      },
+      // PUP
+      {
+        id: 5,
+        code: 'PASIGFERRY_PUP',
+        name: 'PUP',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_PUP.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near PUP.',
+        // 14.596074726447794, 121.01074815437192
+        coordinates: { lat: 14.596074726447794, lng: 121.01074815437192 }, // PUP Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_PUP',
+            to: 'PASIGFERRY_QUINTA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.596074726447794, lng: 121.01074815437192 }, // from me
+              // 14.59597236055152, 121.01038913497968
+              { lat: 14.59597236055152, lng: 121.01038913497968 }, // sub
+              // 14.596063327425624, 121.00959793474337
+              { lat: 14.596063327425624, lng: 121.00959793474337 }, // sub
+              // 14.5971980848545, 121.00552715568965
+              { lat: 14.5971980848545, lng: 121.00552715568965 }, // sub
+              // 14.596557408835372, 121.00296060117614
+              { lat: 14.596557408835372, lng: 121.00296060117614 }, // sub
+              // 14.595868997052971, 121.00127335705193
+              { lat: 14.595868997052971, lng: 121.00127335705193 }, // sub
+              // 14.596723816990613, 120.99886532392588
+              { lat: 14.596723816990613, lng: 120.99886532392588 }, // sub
+              // 14.596415420783554, 120.99754152307085
+              { lat: 14.596415420783554, lng: 120.99754152307085 }, // sub
+              // 14.592626582465774, 120.99444273646183
+              { lat: 14.592626582465774, lng: 120.99444273646183 }, // sub
+              // 14.591554738030922, 120.9932459680993
+              { lat: 14.591554738030922, lng: 120.9932459680993 }, // sub
+              // 14.591252234340969, 120.9915321132713
+              { lat: 14.591252234340969, lng: 120.9915321132713 }, // sub
+              // 14.591402940662805, 120.9879348893887
+              { lat: 14.591402940662805, lng: 120.9879348893887 }, // sub
+              // 14.591792998179777, 120.98559302862398
+              { lat: 14.591792998179777, lng: 120.98559302862398 }, // sub
+              // 14.593040928818585, 120.98399342800205
+              { lat: 14.593040928818585, lng: 120.98399342800205 }, // sub
+              // 14.595713955773533, 120.98204304419833
+              { lat: 14.595713955773533, lng: 120.98204304419833 }, // sub
+              // to quinta
+              { lat: 14.595913181678819, lng: 120.98217563117429 }, // to quinta
+            ],
+          },
+          {
+            to: 'PASIGFERRY_STA_ANA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.596074726447794, lng: 121.01074815437192 }, // from me
+              // 14.595522012866592, 121.01078452481147
+              { lat: 14.595522012866592, lng: 121.01078452481147 }, // sub
+              // 14.593112201495456, 121.01530413431585
+              { lat: 14.593112201495456, lng: 121.01530413431585 }, // sub
+              // 14.591895457048361, 121.01613147914685
+              { lat: 14.591895457048361, lng: 121.01613147914685 }, // sub
+              // 14.588240633149725, 121.01109862319068
+              { lat: 14.588240633149725, lng: 121.01109862319068 }, // sub
+              // 14.587677638187127, 121.00827555556033
+              { lat: 14.587677638187127, lng: 121.00827555556033 }, // sub
+              // 14.585651380777568, 121.00694816028975
+              { lat: 14.585651380777568, lng: 121.00694816028975 }, // sub
+              // 14.582972574771944, 121.00773954951393
+              { lat: 14.582972574771944, lng: 121.00773954951393 }, // sub
+              // 14.581988665218155, 121.00987514043045
+              { lat: 14.581988665218155, lng: 121.00987514043045 }, // sub
+              // 14.58234153672801, 121.01119025777645
+              { lat: 14.58234153672801, lng: 121.01119025777645 }, // sub
+              // to sta ana
+              { lat: 14.582344345142713, lng: 121.01161333475272 }, // to sta ana
+            ],
+          },
+        ],
+      },
+      // STA_ANA
+      {
+        id: 6,
+        code: 'PASIGFERRY_STA_ANA',
+        name: 'Sta. Ana',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_STA_ANA.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Sta. Ana.',
+        // 14.582344345142713, 121.01161333475272
+        coordinates: { lat: 14.582344345142713, lng: 121.01161333475272 }, // Sta. Ana Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_STA_ANA',
+            to: 'PASIGFERRY_PUP',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.582344345142713, lng: 121.01161333475272 }, // from me
+              // 14.58234153672801, 121.01119025777645
+              { lat: 14.58234153672801, lng: 121.01119025777645 }, // sub
+              // 14.581988665218155, 121.00987514043045
+              { lat: 14.581988665218155, lng: 121.00987514043045 }, // sub
+              // 14.582972574771944, 121.00773954951393
+              { lat: 14.582972574771944, lng: 121.00773954951393 }, // sub
+              // 14.585651380777568, 121.00694816028975
+              { lat: 14.585651380777568, lng: 121.00694816028975 }, // sub
+              // 14.587677638187127, 121.00827555556033
+              { lat: 14.587677638187127, lng: 121.00827555556033 }, // sub
+              // 14.588240633149725, 121.01109862319068
+              { lat: 14.588240633149725, lng: 121.01109862319068 }, // sub
+              // 14.591895457048361, 121.01613147914685
+              { lat: 14.591895457048361, lng: 121.01613147914685 }, // sub
+              // 14.593112201495456, 121.01530413431585
+              { lat: 14.593112201495456, lng: 121.01530413431585 }, // sub
+              // 14.595522012866592, 121.01078452481147
+              { lat: 14.595522012866592, lng: 121.01078452481147 }, // sub
+              // to pup
+              { lat: 14.596074726447794, lng: 121.01074815437192 }, // to pup
+            ],
+          },
+          {
+            to: 'PASIGFERRY_LAMBINGAN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.582344345142713, lng: 121.01161333475272 }, // from me
+              // 14.582878449626634, 121.01177904318969
+              { lat: 14.582878449626634, lng: 121.01177904318969 }, // sub
+              // 14.585365092314882, 121.01376096534608
+              { lat: 14.585365092314882, lng: 121.01376096534608 }, // sub
+              // 14.586340774001272, 121.01576304397248
+              { lat: 14.586340774001272, lng: 121.01576304397248 }, // sub
+              // 14.58693376549335, 121.01833628980633
+              { lat: 14.58693376549335, lng: 121.01833628980633 },
+              // to lambingan
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // to lambingan
+            ],
+          },
+        ],
+      },
+      // LAMBINGAN
+      {
+        id: 7,
+        code: 'PASIGFERRY_LAMBINGAN',
+        name: 'Lambingan',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_LAMBINGAN.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Lambingan.',
+        // 14.58735325759085, 121.01842249922893
+        coordinates: { lat: 14.58735325759085, lng: 121.01842249922893 }, // Lambingan Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_LAMBINGAN',
+            to: 'PASIGFERRY_STA_ANA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // from me
+              // 14.58693376549335, 121.01833628980633
+              { lat: 14.58693376549335, lng: 121.01833628980633 }, // sub
+              // 14.586340774001272, 121.01576304397248
+              { lat: 14.586340774001272, lng: 121.01576304397248 }, // sub
+              // 14.585365092314882, 121.01376096534608
+              { lat: 14.585365092314882, lng: 121.01376096534608 }, // sub
+              // 14.582878449626634, 121.01177904318969
+              { lat: 14.582878449626634, lng: 121.01177904318969 }, // sub
+              // to sta ana
+              { lat: 14.582344345142713, lng: 121.01161333475272 }, // to sta ana
+            ],
+          },
+          {
+            to: 'PASIGFERRY_CIRCUIT_MAKATI',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // from me
+              // 14.58706872735945, 121.0188397279728
+              { lat: 14.58706872735945, lng: 121.0188397279728 }, // sub
+              // 14.586141127183478, 121.02020254427804
+              { lat: 14.586141127183478, lng: 121.02020254427804 }, // sub
+              // 14.585270063191638, 121.0203143123932
+              { lat: 14.585270063191638, lng: 121.0203143123932 }, // sub
+              // 14.582555185690614, 121.01843439879369
+              { lat: 14.582555185690614, lng: 121.01843439879369 }, // sub
+              // 14.581218375838553, 121.0170894554782
+              { lat: 14.581218375838553, lng: 121.0170894554782 }, // sub
+              // 14.579544094284618, 121.0176176903595
+              { lat: 14.579544094284618, lng: 121.0176176903595 }, // sub
+              // 14.577747250884853, 121.02034155385833
+              { lat: 14.577747250884853, lng: 121.02034155385833 }, // sub
+              // to circuit makati
+              { lat: 14.577153540765293, lng: 121.02045861809407 }, // to circuit makati
+            ],
+          },
+          {
+            // bypass to valenzuela
+            from: 'PASIGFERRY_LAMBINGAN',
+            to: 'PASIGFERRY_VALENZUELA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // from me
+              // 14.58706872735945, 121.0188397279728
+              { lat: 14.58706872735945, lng: 121.0188397279728 }, // sub
+              // 14.586141127183478, 121.02020254427804
+              { lat: 14.586141127183478, lng: 121.02020254427804 }, // sub
+              // 14.585270063191638, 121.0203143123932
+              { lat: 14.585270063191638, lng: 121.0203143123932 }, // sub
+              // 14.582555185690614, 121.01843439879369
+              { lat: 14.582555185690614, lng: 121.01843439879369 }, // sub
+              // 14.581218375838553, 121.0170894554782
+              { lat: 14.581218375838553, lng: 121.0170894554782 }, // sub
+              // 14.579544094284618, 121.0176176903595
+              { lat: 14.579544094284618, lng: 121.0176176903595 }, // sub
+              // 14.577747250884853, 121.02034155385833
+              { lat: 14.577747250884853, lng: 121.02034155385833 }, // sub
+              // 14.577300389502843, 121.02100047052974
+              { lat: 14.577300389502843, lng: 121.02100047052974 }, // sub
+              // 14.574307668584163, 121.02572034292575
+              { lat: 14.574307668584163, lng: 121.02572034292575 }, // sub
+              // to valenzuela
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // to valenzuela
+            ],
+          },
+        ],
+      },
+      // CIRCUIT MAKATI
+      {
+        id: 8,
+        code: 'PASIGFERRY_CIRCUIT_MAKATI',
+        name: 'Circuit Makati',
+        isOperational: false,
+        imageLocal:
+          'assets/images/lines/pasigferry/PASIGFERRY_CIRCUIT_MAKATI.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Circuit Makati.',
+        // 14.577153540765293, 121.02045861809407
+        coordinates: { lat: 14.577153540765293, lng: 121.02045861809407 }, // Circuit Makati Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_CIRCUIT_MAKATI',
+            to: 'PASIGFERRY_LAMBINGAN',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.577153540765293, lng: 121.02045861809407 }, // from me
+              // 14.577747250884853, 121.02034155385833
+              { lat: 14.577747250884853, lng: 121.02034155385833 }, // sub
+              // 14.579544094284618, 121.0176176903595
+              { lat: 14.579544094284618, lng: 121.0176176903595 }, // sub
+              // 14.581218375838553, 121.0170894554782
+              { lat: 14.581218375838553, lng: 121.0170894554782 }, // sub
+              // 14.582555185690614, 121.01843439879369
+              { lat: 14.582555185690614, lng: 121.01843439879369 }, // sub
+              // 14.585270063191638, 121.0203143123932
+              { lat: 14.585270063191638, lng: 121.0203143123932 }, // sub
+              // 14.586141127183478, 121.02020254427804
+              { lat: 14.586141127183478, lng: 121.02020254427804 }, // sub
+              // 14.58706872735945, 121.0188397279728
+              { lat: 14.58706872735945, lng: 121.0188397279728 }, // sub
+              // to lambingan
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // to lambingan
+            ],
+          },
+          {
+            to: 'PASIGFERRY_VALENZUELA',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.577153540765293, lng: 121.02045861809407 }, // from me
+              // 14.577300389502843, 121.02100047052974
+              { lat: 14.577300389502843, lng: 121.02100047052974 }, // sub
+              // 14.574307668584163, 121.02572034292575
+              { lat: 14.574307668584163, lng: 121.02572034292575 }, // sub
+              // to valenzuela
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // to valenzuela
+            ],
+          },
+        ],
+      },
+      // VALENZUELA
+      {
+        id: 9,
+        code: 'PASIGFERRY_VALENZUELA',
+        name: 'Valenzuela',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_VALENZUELA.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Valenzuela.',
+        // 14.573911251533163, 121.02570147828344
+        coordinates: { lat: 14.573911251533163, lng: 121.02570147828344 }, // Valenzuela Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_VALENZUELA',
+            to: 'PASIGFERRY_CIRCUIT_MAKATI',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // from me
+              // 14.574307668584163, 121.02572034292575
+              { lat: 14.574307668584163, lng: 121.02572034292575 }, // sub
+              // 14.577300389502843, 121.02100047052974
+              { lat: 14.577300389502843, lng: 121.02100047052974 }, // sub
+              // to circuit makati
+              { lat: 14.577153540765293, lng: 121.02045861809407 }, // to circuit makati
+            ],
+          },
+          {
+            // reverse bypass to lambingan
+            from: 'PASIGFERRY_VALENZUELA',
+            to: 'PASIGFERRY_LAMBINGAN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // from me
+              // 14.574307668584163, 121.02572034292575
+              { lat: 14.574307668584163, lng: 121.02572034292575 }, // sub
+              // 14.577747250884853, 121.02034155385833
+              { lat: 14.577747250884853, lng: 121.02034155385833 }, // sub
+              // 14.579544094284618, 121.0176176903595
+              { lat: 14.579544094284618, lng: 121.0176176903595 }, // sub
+              // 14.581218375838553, 121.0170894554782
+              { lat: 14.581218375838553, lng: 121.0170894554782 }, // sub
+              // 14.582555185690614, 121.01843439879369
+              { lat: 14.582555185690614, lng: 121.01843439879369 }, // sub
+              // 14.585270063191638, 121.0203143123932
+              { lat: 14.585270063191638, lng: 121.0203143123932 }, // sub
+              // 14.586141127183478, 121.02020254427804
+              { lat: 14.586141127183478, lng: 121.02020254427804 }, // sub
+              // 14.58706872735945, 121.0188397279728
+              { lat: 14.58706872735945, lng: 121.0188397279728 }, // sub
+              // to lambingan
+              { lat: 14.58735325759085, lng: 121.01842249922893 }, // to lambingan
+            ],
+          },
+          {
+            to: 'PASIGFERRY_HULO',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // from me
+              // 14.57406669907511, 121.02615218526257
+              { lat: 14.57406669907511, lng: 121.02615218526257 }, // sub
+              // 14.568032449368006, 121.03319286361942
+              { lat: 14.568032449368006, lng: 121.03319286361942 }, // sub
+              // to hulo
+              { lat: 14.568007927219082, lng: 121.03366577685652 }, // to hulo
+            ],
+          },
+        ],
+      },
+      // HULO
+      {
+        id: 10,
+        code: 'PASIGFERRY_HULO',
+        name: 'Hulo',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_HULO.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Hulo.',
+        // 14.568007927219082, 121.03366577685652
+        coordinates: { lat: 14.568007927219082, lng: 121.03366577685652 }, // Hulo Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_HULO',
+            to: 'PASIGFERRY_VALENZUELA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.568007927219082, lng: 121.03366577685652 }, // from me
+              // 14.568032449368006, 121.03319286361942
+              { lat: 14.568032449368006, lng: 121.03319286361942 }, // sub
+              // 14.57406669907511, 121.02615218526257
+              { lat: 14.57406669907511, lng: 121.02615218526257 }, // sub
+              // to valenzuela
+              { lat: 14.573911251533163, lng: 121.02570147828344 }, // to valenzuela
+            ],
+          },
+          {
+            to: 'PASIGFERRY_GUADALUPE',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.568007927219082, lng: 121.03366577685652 }, // from me
+              // 14.56771865177024, 121.03368266375759
+              { lat: 14.56771865177024, lng: 121.03368266375759 }, // sub
+              // 14.567222204667315, 121.0357300405103
+              { lat: 14.567222204667315, lng: 121.0357300405103 }, // sub
+              // 14.567351463625068, 121.03728233683319
+              { lat: 14.567351463625068, lng: 121.03728233683319 }, // sub
+              // 14.568719796461487, 121.04321013953893
+              { lat: 14.568719796461487, lng: 121.04321013953893 }, // sub
+              // 14.568379232297826, 121.04759181298212
+              { lat: 14.568379232297826, lng: 121.04759181298212 }, // sub
+              // to guadalupe
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // to guadalupe
+            ],
+          },
+        ],
+      },
+      // GUADALUPE
+      {
+        id: 11,
+        code: 'PASIGFERRY_GUADALUPE',
+        name: 'Guadalupe',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_GUADALUPE.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Guadalupe.',
+        // 14.568080870140964, 121.04792888791931
+        coordinates: { lat: 14.568080870140964, lng: 121.04792888791931 }, // Guadalupe Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_GUADALUPE',
+            to: 'PASIGFERRY_HULO',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // from me
+              // 14.568379232297826, 121.04759181298212
+              { lat: 14.568379232297826, lng: 121.04759181298212 }, // sub
+              // 14.568719796461487, 121.04321013953893
+              { lat: 14.568719796461487, lng: 121.04321013953893 }, // sub
+              // 14.567351463625068, 121.03728233683319
+              { lat: 14.567351463625068, lng: 121.03728233683319 }, // sub
+              // 14.567222204667315, 121.0357300405103
+              { lat: 14.567222204667315, lng: 121.0357300405103 }, // sub
+              // 14.56771865177024, 121.03368266375759
+              { lat: 14.56771865177024, lng: 121.03368266375759 }, // sub
+              // to hulo
+              { lat: 14.568007927219082, lng: 121.03366577685652 }, // to hulo
+            ],
+          },
+          {
+            to: 'PASIGFERRY_SAN_JOAQUIN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // from me
+              // 14.568339113264244, 121.04812747780205
+              { lat: 14.568339113264244, lng: 121.04812747780205 }, // sub
+              // 14.568458626231077, 121.05030826779074
+              { lat: 14.568458626231077, lng: 121.05030826779074 }, // sub
+              // 14.566044962155157, 121.05447889176997
+              { lat: 14.566044962155157, lng: 121.05447889176997 }, // sub
+              // 14.56473263547994, 121.05894583785633
+              { lat: 14.56473263547994, lng: 121.05894583785633 }, // sub
+              // 14.561686213447729, 121.06258848742523
+              { lat: 14.561686213447729, lng: 121.06258848742523 }, // sub
+              // 14.560583223797527, 121.06610235275558
+              { lat: 14.560583223797527, lng: 121.06610235275558 }, // sub
+              // 14.557224352353117, 121.06710546331439
+              { lat: 14.557224352353117, lng: 121.06710546331439 }, // sub
+              // 14.554948583313758, 121.07383486166952
+              { lat: 14.554948583313758, lng: 121.07383486166952 }, // sub
+              // to san joaquin
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // to san joaquin
+            ],
+          },
+        ],
+      },
+      // SAN JOAQUIN
+      {
+        id: 12,
+        code: 'PASIGFERRY_SAN_JOAQUIN',
+        name: 'San Joaquin',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_SAN_JOAQUIN.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near San Joaquin.',
+        // 14.554601624603587, 121.07386459488538
+        coordinates: { lat: 14.554601624603587, lng: 121.07386459488538 }, // San Joaquin Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_SAN_JOAQUIN',
+            to: 'PASIGFERRY_GUADALUPE',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // from me
+              // 14.554948583313758, 121.07383486166952
+              { lat: 14.554948583313758, lng: 121.07383486166952 }, // sub
+              // 14.557224352353117, 121.06710546331439
+              { lat: 14.557224352353117, lng: 121.06710546331439 }, // sub
+              // 14.560583223797527, 121.06610235275558
+              { lat: 14.560583223797527, lng: 121.06610235275558 }, // sub
+              // 14.561686213447729, 121.06258848742523
+              { lat: 14.561686213447729, lng: 121.06258848742523 }, // sub
+              // 14.56473263547994, 121.05894583785633
+              { lat: 14.56473263547994, lng: 121.05894583785633 }, // sub
+              // 14.566044962155157, 121.05447889176997
+              { lat: 14.566044962155157, lng: 121.05447889176997 }, // sub
+              // 14.568458626231077, 121.05030826779074
+              { lat: 14.568458626231077, lng: 121.05030826779074 }, // sub
+              // 14.568339113264244, 121.04812747780205
+              { lat: 14.568339113264244, lng: 121.04812747780205 }, // sub
+              // to guadalupe
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // to guadalupe
+            ],
+          },
+          {
+            to: 'PASIGFERRY_BAMBANG',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // from me
+              // 14.554679067643224, 121.0742172085543
+              { lat: 14.554679067643224, lng: 121.0742172085543 }, // sub
+              // 14.55361283715114, 121.07664978100348
+              { lat: 14.55361283715114, lng: 121.07664978100348 }, // sub
+              // 14.5538345648946, 121.07969258015552
+              { lat: 14.5538345648946, lng: 121.07969258015552 }, // sub
+              // 14.553705838114976, 121.08146018023629
+              { lat: 14.553705838114976, lng: 121.08146018023629 }, // sub
+              // to bambang
+              { lat: 14.554074361749496, lng: 121.08153228996012 }, // to bambang
+            ],
+          },
+          {
+            // bypass to kalawaan
+            from: 'PASIGFERRY_SAN_JOAQUIN',
+            to: 'PASIGFERRY_KALAWAAN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // from me
+              // 14.554679067643224, 121.0742172085543
+              { lat: 14.554679067643224, lng: 121.0742172085543 }, // sub
+              // 14.55361283715114, 121.07664978100348
+              { lat: 14.55361283715114, lng: 121.07664978100348 }, // sub
+              // 14.5538345648946, 121.07969258015552
+              { lat: 14.5538345648946, lng: 121.07969258015552 }, // sub
+              // 14.553705838114976, 121.08146018023629
+              { lat: 14.553705838114976, lng: 121.08146018023629 }, // sub
+              // to kalawaan
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // to kalawaan
+            ],
+          },
+        ],
+      },
+      // BAMBANG
+      {
+        id: 13,
+        code: 'PASIGFERRY_BAMBANG',
+        name: 'Bambang',
+        isOperational: false,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_BAMBANG.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Bambang.',
+        // 14.554074361749496, 121.08153228996012
+        coordinates: { lat: 14.554074361749496, lng: 121.08153228996012 }, // Bambang Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_BAMBANG',
+            to: 'PASIGFERRY_SAN_JOAQUIN',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.554074361749496, lng: 121.08153228996012 }, // from me
+              // 14.553705838114976, 121.08146018023629
+              { lat: 14.553705838114976, lng: 121.08146018023629 }, // sub
+              // 14.5538345648946, 121.07969258015552
+              { lat: 14.5538345648946, lng: 121.07969258015552 }, // sub
+              // 14.55361283715114, 121.07664978100348
+              { lat: 14.55361283715114, lng: 121.07664978100348 }, // sub
+              // 14.554679067643224, 121.0742172085543
+              { lat: 14.554679067643224, lng: 121.0742172085543 }, // sub
+              // to san joaquin
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // to san joaquin
+            ],
+          },
+          {
+            from: 'PASIGFERRY_BAMBANG',
+            to: 'PASIGFERRY_KALAWAAN',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.554074361749496, lng: 121.08153228996012 }, // from me
+              // to kalawaan
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // to kalawaan
+            ],
+          },
+        ],
+      },
+      // KALAWAAN
+      {
+        id: 14,
+        code: 'PASIGFERRY_KALAWAAN',
+        name: 'Kalawaan',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_KALAWAAN.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Kalawaan.',
+        // 14.553195481621618, 121.08212417421424
+        coordinates: { lat: 14.553195481621618, lng: 121.08212417421424 }, // Kalawaan Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_KALAWAAN',
+            to: 'PASIGFERRY_BAMBANG',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // from me
+              // to bambang
+              { lat: 14.554074361749496, lng: 121.08153228996012 }, // to bambang
+            ],
+          },
+          {
+            // reverse direction bypass to san joaquin
+            from: 'PASIGFERRY_KALAWAAN',
+            to: 'PASIGFERRY_SAN_JOAQUIN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // from me
+              // 14.553705838114976, 121.08146018023629
+              { lat: 14.553705838114976, lng: 121.08146018023629 }, // sub
+              // 14.5538345648946, 121.07969258015552
+              { lat: 14.5538345648946, lng: 121.07969258015552 }, // sub
+              // 14.55361283715114, 121.07664978100348
+              { lat: 14.55361283715114, lng: 121.07664978100348 }, // sub
+              // 14.554679067643224, 121.0742172085543
+              { lat: 14.554679067643224, lng: 121.0742172085543 }, // sub
+              // to san joaquin
+              { lat: 14.554601624603587, lng: 121.07386459488538 }, // to san joaquin
+            ],
+          },
+          {
+            from: 'PASIGFERRY_KALAWAAN',
+            to: 'PASIGFERRY_PINAGBUHATAN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // from me
+              // 14.553443082901245, 121.0824961147571
+              { lat: 14.553443082901245, lng: 121.0824961147571 }, // sub
+              // 14.553239698342722, 121.0847881995815
+              { lat: 14.553239698342722, lng: 121.0847881995815 }, // sub
+              // 14.553129516111682, 121.08760999151079
+              { lat: 14.553129516111682, lng: 121.08760999151079 }, // sub
+              // 14.552176079885212, 121.0893601288118
+              { lat: 14.552176079885212, lng: 121.0893601288118 }, // sub
+              // 14.552867855742576, 121.0919498493145
+              { lat: 14.552867855742576, lng: 121.0919498493145 }, // sub
+              // 14.552366350709532, 121.09289318783895
+              { lat: 14.552366350709532, lng: 121.09289318783895 }, // sub
+              // 14.548545244123195, 121.09400843141697
+              { lat: 14.548545244123195, lng: 121.09400843141697 }, // sub
+              // 14.54498854209715, 121.09476669503607
+              { lat: 14.54498854209715, lng: 121.09476669503607 }, // sub
+              // 14.54363829004517, 121.09616635148086
+              { lat: 14.54363829004517, lng: 121.09616635148086 }, // sub
+              // 14.54091473232845, 121.09616215517926
+              { lat: 14.54091473232845, lng: 121.09616215517926 }, // sub
+              // 14.539681022445446, 121.09749569177748
+              { lat: 14.539681022445446, lng: 121.09749569177748 }, // sub
+              // 14.537493745951576, 121.09878302938552
+              { lat: 14.537493745951576, lng: 121.09878302938552 }, // sub
+              // 14.535856815516285, 121.10181131994814
+              { lat: 14.535856815516285, lng: 121.10181131994814 }, // sub
+              // to pinagbuhatan
+              { lat: 14.53593767424619, lng: 121.10217411867455 }, // to pinagbuhatan
+            ],
+          },
+        ],
+      },
+      // PINAGBUHATAN
+      {
+        id: 15,
+        code: 'PASIGFERRY_PINAGBUHATAN',
+        name: 'Pinagbuhatan',
+        isOperational: true,
+        imageLocal:
+          'assets/images/lines/pasigferry/PASIGFERRY_PINAGBUHATAN.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Pinagbuhatan.',
+        // 14.53593767424619, 121.10217411867455
+        coordinates: { lat: 14.53593767424619, lng: 121.10217411867455 }, // Pinagbuhatan Station
+        edges: [
+          {
+            // reverse direction
+            from: 'PASIGFERRY_PINAGBUHATAN',
+            to: 'PASIGFERRY_KALAWAAN',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.53593767424619, lng: 121.10217411867455 }, // from me
+              // 14.535856815516285, 121.10181131994814
+              { lat: 14.535856815516285, lng: 121.10181131994814 }, // sub
+              // 14.537493745951576, 121.09878302938552
+              { lat: 14.537493745951576, lng: 121.09878302938552 }, // sub
+              // 14.539681022445446, 121.09749569177748
+              { lat: 14.539681022445446, lng: 121.09749569177748 }, // sub
+              // 14.54091473232845, 121.09616215517926
+              { lat: 14.54091473232845, lng: 121.09616215517926 }, // sub
+              // 14.54363829004517, 121.09616635148086
+              { lat: 14.54363829004517, lng: 121.09616635148086 }, // sub
+              // 14.54498854209715, 121.09476669503607
+              { lat: 14.54498854209715, lng: 121.09476669503607 }, // sub
+              // 14.548545244123195, 121.09400843141697
+              { lat: 14.548545244123195, lng: 121.09400843141697 }, // sub
+              // 14.552366350709532, 121.09289318783895
+              { lat: 14.552366350709532, lng: 121.09289318783895 }, // sub
+              // 14.552867855742576, 121.0919498493145
+              { lat: 14.552867855742576, lng: 121.0919498493145 }, // sub
+              // 14.552176079885212, 121.0893601288118
+              { lat: 14.552176079885212, lng: 121.0893601288118 }, // sub
+              // 14.553129516111682, 121.08760999151079
+              { lat: 14.553129516111682, lng: 121.08760999151079 }, // sub
+              // 14.553239698342722, 121.0847881995815
+              { lat: 14.553239698342722, lng: 121.0847881995815 }, // sub
+              // 14.553443082901245, 121.0824961147571
+              { lat: 14.553443082901245, lng: 121.0824961147571 }, // sub
+              // to kalawaan
+              { lat: 14.553195481621618, lng: 121.08212417421424 }, // to kalawaan
+            ],
+          },
+        ],
+      },
+    ],
+  },
   // Add more transit lines as needed
 ];
 

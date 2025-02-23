@@ -94,6 +94,17 @@
               <ion-label>MRT 7</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <!-- Pasig River Ferry Service -->
+          <ion-menu-toggle auto-hide="true">
+            <ion-item
+              [routerLink]="['/lines/line-viewer/', 'PASIGFERRY']"
+              routerLinkActive="active-item"
+            >
+              <ion-icon slot="start" name="train-outline"></ion-icon>
+              <ion-label>Pasig Ferry</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
         <!-- More -->

@@ -306,7 +306,7 @@ export class MapViewerComponent implements OnInit {
       {
         icon: {
           path: 'M 0,-0.25 0,0.25', // Dash length = (0.5 - (-0.5)) × scale
-          strokeOpacity: 0.69,
+          strokeOpacity: 0.49,
           scale: 6, // Controls dash thickness
         }, // Dashed line symbol
         offset: '0', // Start at the beginning
