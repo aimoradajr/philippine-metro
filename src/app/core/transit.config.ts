@@ -120,6 +120,87 @@ export const TRANSIT_LINES: TransitLine[] = [
     maxFare: 3,
     stations: [
       {
+        id: 0,
+        code: 'LRT1_NORTH_TRIANGLE',
+        name: 'North Triangle Common Station (LRT 1)',
+        shortName: 'North Triangle',
+        isOperational: false,
+        description:
+          'Common station for LRT-1, MRT-3, and MRT-7, located in Quezon City.',
+        // 14.654907212698745, 121.03061845087198
+        coordinates: { lat: 14.654907212698745, lng: 121.03061845087198 }, // North Triangle Station
+        labelOffsetx: 60,
+        labelOffsety: 15,
+        edges: [
+          {
+            from: 'LRT1_NORTH_TRIANGLE',
+            to: 'LRT1_FPJ',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            // travel duration from North Triangle to Balintawak is 5 minutes
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.654907212698745, lng: 121.03061845087198 }, // from me
+              // 14.655518416460406, 121.03014953946366
+              { lat: 14.655518416460406, lng: 121.03014953946366 }, // sub
+              // 14.655673633202678, 121.02987130138196
+              { lat: 14.655673633202678, lng: 121.02987130138196 }, // sub
+              // 14.655835856974873, 121.02937651150218
+              { lat: 14.655835856974873, lng: 121.02937651150218 }, // sub
+              // 14.65740130434706, 121.02203216686243
+              { lat: 14.65740130434706, lng: 121.02203216686243 }, // sub
+              // to next
+              { lat: 14.657615323114445, lng: 121.02094825800144 }, // to next
+            ],
+          },
+          // inter-line: to mrt3
+          {
+            from: 'LRT1_NORTH_TRIANGLE',
+            to: 'MRT3_NORTH_TRIANGLE',
+            weight: 3, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            // walk from LRT-1 North Triangle to MRT-3 North Triangle
+            duration: 3,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Interchange to MRT-3',
+            transferDistance: 'Approximately a 3-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'southbound',
+            path: [
+              // from me
+              { lat: 14.654907212698745, lng: 121.03061845087198 }, // from me
+              // 14.65432411565809, 121.03097284680013
+              { lat: 14.65432411565809, lng: 121.03097284680013 }, // to next
+            ],
+          },
+          // inter-line: to mrt7
+          {
+            from: 'LRT1_NORTH_TRIANGLE',
+            to: 'MRT7_NORTH_TRIANGLE',
+            weight: 3, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            // walk from LRT-1 North Triangle to MRT-7 North Triangle
+            duration: 3,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Interchange to MRT-7',
+            transferDistance: 'Approximately a 3-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'southbound',
+            path: [
+              // from me
+              { lat: 14.654907212698745, lng: 121.03061845087198 }, // from me
+              { lat: 14.65524642912457, lng: 121.03168704337259 }, // North Triangle (MRT7) Common Station
+            ],
+          },
+        ],
+      },
+      {
         id: 1,
         code: 'LRT1_FPJ',
         name: 'Fernando Poe Jr. (formerly Roosevelt)',
@@ -137,6 +218,27 @@ export const TRANSIT_LINES: TransitLine[] = [
         labelOffsetx: -30,
         labelOffsety: -13,
         edges: [
+          {
+            from: 'LRT1_FPJ',
+            to: 'LRT1_NORTH_TRIANGLE',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            // travel duration from FPJ to North Triangle is 5 minutes
+            duration: 5,
+            path: [
+              { lat: 14.657615323114445, lng: 121.02094825800144 }, // from me
+              // 14.65740130434706, 121.02203216686243
+              { lat: 14.65740130434706, lng: 121.02203216686243 }, // sub
+              // 14.655835856974873, 121.02937651150218
+              { lat: 14.655835856974873, lng: 121.02937651150218 }, // sub
+              // 14.655673633202678, 121.02987130138196
+              { lat: 14.655673633202678, lng: 121.02987130138196 }, // sub
+              // 14.655518416460406, 121.03014953946366
+              { lat: 14.655518416460406, lng: 121.03014953946366 }, // sub
+              { lat: 14.654907212698745, lng: 121.03061845087198 }, // to prev
+            ],
+          },
           {
             from: 'LRT1_FPJ',
             to: 'LRT1_BALINTAWAK',
@@ -2837,6 +2939,78 @@ export const TRANSIT_LINES: TransitLine[] = [
     stationInactiveIcon_Min: 'assets/icons/station-inactive-min-mrt3.png',
     stations: [
       {
+        id: 0,
+        code: 'MRT3_NORTH_TRIANGLE',
+        name: 'North Triangle Common Station (MRT 3)',
+        shortName: 'North Triangle',
+        isOperational: false,
+        description:
+          'Common station for LRT-1, MRT-3, and MRT-7, located in Quezon City.',
+        // 14.65432411565809, 121.03097284680013
+        coordinates: { lat: 14.65432411565809, lng: 121.03097284680013 }, // North Triangle Station
+        labelOffsetx: 60,
+        labelOffsety: 15,
+        edges: [
+          {
+            from: 'MRT3_NORTH_TRIANGLE',
+            to: 'MRT3_NORTH_AVENUE',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            // travel duration from North Triangle to Balintawak is 5 minutes
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.65432411565809, lng: 121.03097284680013 }, // from me
+              // to next
+              { lat: 14.652169907896354, lng: 121.03226455190827 }, // to next
+            ],
+          },
+          // inter-line: to lrt1
+          {
+            from: 'MRT3_NORTH_TRIANGLE',
+            to: 'LRT1_NORTH_TRIANGLE',
+            weight: 3, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            // walk from LRT-1 North Triangle to MRT-3 North Triangle
+            duration: 3,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Interchange to LRT-1',
+            transferDistance: 'Approximately a 3-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'northbound',
+            path: [
+              // from me
+              { lat: 14.65432411565809, lng: 121.03097284680013 }, // from me
+              { lat: 14.654907212698745, lng: 121.03061845087198 }, // North Triangle (LRT1) Common Station
+            ],
+          },
+          // inter-line: to mrt7
+          {
+            from: 'MRT3_NORTH_TRIANGLE',
+            to: 'MRT7_NORTH_TRIANGLE',
+            weight: 3, // Approximate walking time in minutes
+            transferType: 'inter-line',
+            // walk from LRT-1 North Triangle to MRT-7 North Triangle
+            duration: 3,
+            transitMode: 'walk',
+            isOperational: false,
+            transferDescription: 'Interchange to MRT-7',
+            transferDistance: 'Approximately a 3-minute walk',
+            accessibility: 'Elevators and ramps are available',
+            additionalCost: 'none',
+            direction: 'southbound',
+            path: [
+              // from me
+              { lat: 14.65432411565809, lng: 121.03097284680013 }, // from me
+              { lat: 14.65524642912457, lng: 121.03168704337259 }, // North Triangle (MRT7) Common Station
+            ],
+          },
+        ],
+      },
+      {
         id: 1,
         code: 'MRT3_NORTH_AVENUE',
         name: 'North Avenue',
@@ -2851,6 +3025,19 @@ export const TRANSIT_LINES: TransitLine[] = [
         // 14.652169907896354, 121.03226455190827
         coordinates: { lat: 14.652169907896354, lng: 121.03226455190827 }, // North Avenue Station
         edges: [
+          {
+            from: 'MRT3_NORTH_AVENUE',
+            to: 'MRT3_NORTH_TRIANGLE',
+            weight: 5,
+            isOperational: false,
+            transferType: 'inter-station',
+            // travel duration from North Avenue to North Triangle is 5 minutes
+            duration: 5,
+            path: [
+              { lat: 14.652169907896354, lng: 121.03226455190827 }, // from me
+              { lat: 14.65432411565809, lng: 121.03097284680013 }, // to prev
+            ],
+          },
           {
             to: 'MRT3_QUEZON_AVENUE',
             weight: 5,
@@ -3532,7 +3719,7 @@ export const TRANSIT_LINES: TransitLine[] = [
       {
         id: 1,
         code: 'MRT7_NORTH_TRIANGLE',
-        name: 'North Triangle Common Station',
+        name: 'North Triangle Common Station (MRT 7)',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_NORTH_TRIANGLE.jpg',
         image: '',
@@ -3631,8 +3818,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'University Avenue',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_UNIVERSITY_AVENUE.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/d/d7/MRT-7_Construction_101417.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:MRT-7_Construction_101417.jpg">Judah fourteen</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description:
           'Located near the University of the Philippines Diliman campus.',
         // 14.654985458150504, 121.05466565187392
@@ -3681,8 +3870,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Tandang Sora',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_TANDANG_SORA.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/c5/Commonwealth_Avenue_Quezon_City_Highway_13.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Commonwealth_Avenue_Quezon_City_Highway_13.jpg">Video13</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Tandang Sora Avenue.',
         // 14.663368948411401, 121.06742497270234
         coordinates: { lat: 14.663368948411401, lng: 121.06742497270234 }, // Tandang Sora Station
@@ -3742,8 +3933,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Don Antonio',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_DON_ANTONIO.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1c/Don_Antonio_Station_UC_%282-6-23%29.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Don_Antonio_Station_UC_(2-6-23).jpg">LMgamer36</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Don Antonio Heights.',
         // 14.676977318755544, 121.08266724669903
         coordinates: { lat: 14.676977318755544, lng: 121.08266724669903 }, // Don Antonio Station
@@ -3806,8 +3999,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Batasan',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_BATASAN.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/7/75/Batasan_station_Road_Commonwealth_01.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Batasan_station_Road_Commonwealth_01.jpg">Video13</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near the Batasan Pambansa Complex.',
         // 14.68506854129369, 121.08630911732064
         coordinates: { lat: 14.68506854129369, lng: 121.08630911732064 }, // Batasan Station
@@ -3870,8 +4065,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Manggahan',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_MANGGAHAN.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/9/9f/Barangay_Commonwealth%2C_Quezon_City_Highway_37.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Barangay_Commonwealth,_Quezon_City_Highway_37.jpg">Video13</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Manggahan Floodway.',
         // 14.697373103254039, 121.08733303190266
         coordinates: { lat: 14.697373103254039, lng: 121.08733303190266 }, // Manggahan Station
@@ -3958,8 +4155,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Dona Carmen',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_DONA_CARMEN.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/1c/Commonwealth_Avenue%2C_Greater_Fairview_17.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Commonwealth_Avenue,_Greater_Fairview_17.jpg">Gdfrdymldo1999</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Dona Carmen Subdivision.',
         // 14.705071490546633, 121.07803713708809
         coordinates: { lat: 14.705071490546633, lng: 121.07803713708809 }, // Dona Carmen Station
@@ -4047,8 +4246,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Regalado Avenue',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_REGALADO_AVENUE.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/8/81/Fairview%2C_Novaliches%2C_Quezon_City_29.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Fairview,_Novaliches,_Quezon_City_29.jpg">Gdfrdymldo1999</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Regalado Avenue.',
         // 14.706433112334865, 121.06785326260419
         coordinates: { lat: 14.706433112334865, lng: 121.06785326260419 }, // Regalado Avenue Station
@@ -4134,8 +4335,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Mindanao Avenue',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_MINDANAO_AVENUE.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/a/af/Barangay_North_Fairview%2C_Novaliches%2C_Quezon_City_07.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Barangay_North_Fairview,_Novaliches,_Quezon_City_07.jpg">Gdfrdymldo1999</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Mindanao Avenue.',
         // 14.733146592361667, 121.06121583510031
         coordinates: { lat: 14.733146592361667, lng: 121.06121583510031 }, // Mindanao Avenue Station
@@ -4368,8 +4571,10 @@ export const TRANSIT_LINES: TransitLine[] = [
         name: 'Sacred Heart',
         isOperational: false,
         imageLocal: 'assets/images/lines/mrt7/MRT7_SACRED_HEARD.jpg',
-        image: '',
-        imageAttributionHtml: '',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/0/08/Construction_of_Sacred_Heart_stations_04.jpg',
+        imageAttributionHtml:
+          '<a href="https://commons.wikimedia.org/wiki/File:Construction_of_Sacred_Heart_stations_04.jpg">Gdfrdymldo1999</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons',
         description: 'Located near Sacred Heart.',
         // 14.750121113741084, 121.08370681086429
         coordinates: { lat: 14.750121113741084, lng: 121.08370681086429 }, // Sacred Heart Station
