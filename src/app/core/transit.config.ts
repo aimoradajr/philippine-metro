@@ -1,5 +1,6 @@
 export interface TransitLine {
   name: string;
+  longName?: string;
   code: string;
   stations: Station[];
   color?: string;
@@ -3482,7 +3483,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           // inter-line: walk to ferry
           {
             from: 'MRT3_GUADALUPE',
-            to: 'PASIGFERRY_GUADALUPE',
+            to: 'PASIGFERRY1_GUADALUPE',
             // Approximate walking time in minutes is 10 mins
             weight: 10,
             transferType: 'inter-line',
@@ -5025,28 +5026,30 @@ export const TRANSIT_LINES: TransitLine[] = [
       },
     ],
   },
-  // PASIG RIVER FERRY SERVICE
+  // PASIG RIVER FERRY SERVICE LINE1
   {
-    name: 'Pasig River Ferry Service',
-    code: 'PASIGFERRY',
+    name: 'Pasig Ferry 1',
+    longName: 'Pasig River Ferry Service - Line 1',
+    code: 'PASIGFERRY1',
     color: 'teal',
     bgColor: 'teal',
     textColor: 'white',
-    stationActiveIcon: 'assets/icons/pasigferry/station-active-pasigferry.png',
+    stationActiveIcon:
+      'assets/icons/pasigferry1/station-active-pasigferry1.png',
     stationInactiveIcon:
-      'assets/icons/pasigferry/station-inactive-pasigferry.png',
+      'assets/icons/pasigferry1/station-inactive-pasigferry1.png',
     stationActiveIcon_Min:
-      'assets/icons/pasigferry/station-active-min-pasigferry.png',
+      'assets/icons/pasigferry1/station-active-min-pasigferry1.png',
     stationInactiveIcon_Min:
-      'assets/icons/pasigferry/station-inactive-min-pasigferry.png',
+      'assets/icons/pasigferry1/station-inactive-min-pasigferry1.png',
     stations: [
       {
         id: 1,
-        code: 'PASIGFERRY_PLAZA_MEXICO',
+        code: 'PASIGFERRY1_PLAZA_MEXICO',
         name: 'Plaza Mexico',
         isOperational: false,
         imageLocal:
-          'assets/images/lines/pasigferry/PASIGFERRY_PLAZA_MEXICO.jpg',
+          'assets/images/lines/pasigferry1/PASIGFERRY1_PLAZA_MEXICO.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Plaza Mexico.',
@@ -5054,7 +5057,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.594781189618825, lng: 120.97517159755581 }, // Plaza Mexico Station
         edges: [
           {
-            to: 'PASIGFERRY_ESCOLTA',
+            to: 'PASIGFERRY1_ESCOLTA',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5078,10 +5081,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       },
       {
         id: 2,
-        code: 'PASIGFERRY_ESCOLTA',
+        code: 'PASIGFERRY1_ESCOLTA',
         name: 'Escolta',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_ESCOLTA.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_ESCOLTA.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Escolta.',
@@ -5090,8 +5093,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_ESCOLTA',
-            to: 'PASIGFERRY_PLAZA_MEXICO',
+            from: 'PASIGFERRY1_ESCOLTA',
+            to: 'PASIGFERRY1_PLAZA_MEXICO',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5112,7 +5115,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_LAWTON',
+            to: 'PASIGFERRY1_LAWTON',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5138,10 +5141,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       },
       {
         id: 3,
-        code: 'PASIGFERRY_LAWTON',
+        code: 'PASIGFERRY1_LAWTON',
         name: 'Lawton',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_LAWTON.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_LAWTON.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Lawton.',
@@ -5149,8 +5152,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.59571308002594, lng: 120.98137420497147 }, // Lawton Station
         edges: [
           {
-            from: 'PASIGFERRY_LAWTON',
-            to: 'PASIGFERRY_ESCOLTA',
+            from: 'PASIGFERRY1_LAWTON',
+            to: 'PASIGFERRY1_ESCOLTA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5173,7 +5176,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_QUINTA',
+            to: 'PASIGFERRY1_QUINTA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5189,10 +5192,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       },
       {
         id: 4,
-        code: 'PASIGFERRY_QUINTA',
+        code: 'PASIGFERRY1_QUINTA',
         name: 'Quinta',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_QUINTA.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_QUINTA.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Quinta.',
@@ -5200,8 +5203,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         coordinates: { lat: 14.595913181678819, lng: 120.98217563117429 }, // Quinta Station
         edges: [
           {
-            from: 'PASIGFERRY_QUINTA',
-            to: 'PASIGFERRY_LAWTON',
+            from: 'PASIGFERRY1_QUINTA',
+            to: 'PASIGFERRY1_LAWTON',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5214,7 +5217,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_PUP',
+            to: 'PASIGFERRY1_PUP',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5259,10 +5262,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // PUP
       {
         id: 5,
-        code: 'PASIGFERRY_PUP',
+        code: 'PASIGFERRY1_PUP',
         name: 'PUP',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_PUP.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_PUP.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near PUP.',
@@ -5271,8 +5274,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_PUP',
-            to: 'PASIGFERRY_QUINTA',
+            from: 'PASIGFERRY1_PUP',
+            to: 'PASIGFERRY1_QUINTA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5313,7 +5316,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_STA_ANA',
+            to: 'PASIGFERRY1_STA_ANA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5348,10 +5351,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // STA_ANA
       {
         id: 6,
-        code: 'PASIGFERRY_STA_ANA',
+        code: 'PASIGFERRY1_STA_ANA',
         name: 'Sta. Ana',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_STA_ANA.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_STA_ANA.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Sta. Ana.',
@@ -5360,8 +5363,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_STA_ANA',
-            to: 'PASIGFERRY_PUP',
+            from: 'PASIGFERRY1_STA_ANA',
+            to: 'PASIGFERRY1_PUP',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5392,7 +5395,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_LAMBINGAN',
+            to: 'PASIGFERRY1_LAMBINGAN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5417,10 +5420,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // LAMBINGAN
       {
         id: 7,
-        code: 'PASIGFERRY_LAMBINGAN',
+        code: 'PASIGFERRY1_LAMBINGAN',
         name: 'Lambingan',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_LAMBINGAN.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_LAMBINGAN.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Lambingan.',
@@ -5429,8 +5432,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_LAMBINGAN',
-            to: 'PASIGFERRY_STA_ANA',
+            from: 'PASIGFERRY1_LAMBINGAN',
+            to: 'PASIGFERRY1_STA_ANA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5451,7 +5454,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_CIRCUIT_MAKATI',
+            to: 'PASIGFERRY1_CIRCUIT_MAKATI',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5479,8 +5482,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
           {
             // bypass to valenzuela
-            from: 'PASIGFERRY_LAMBINGAN',
-            to: 'PASIGFERRY_VALENZUELA',
+            from: 'PASIGFERRY1_LAMBINGAN',
+            to: 'PASIGFERRY1_VALENZUELA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5515,11 +5518,11 @@ export const TRANSIT_LINES: TransitLine[] = [
       // CIRCUIT MAKATI
       {
         id: 8,
-        code: 'PASIGFERRY_CIRCUIT_MAKATI',
+        code: 'PASIGFERRY1_CIRCUIT_MAKATI',
         name: 'Circuit Makati',
         isOperational: false,
         imageLocal:
-          'assets/images/lines/pasigferry/PASIGFERRY_CIRCUIT_MAKATI.jpg',
+          'assets/images/lines/pasigferry1/PASIGFERRY1_CIRCUIT_MAKATI.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Circuit Makati.',
@@ -5528,8 +5531,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_CIRCUIT_MAKATI',
-            to: 'PASIGFERRY_LAMBINGAN',
+            from: 'PASIGFERRY1_CIRCUIT_MAKATI',
+            to: 'PASIGFERRY1_LAMBINGAN',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5556,7 +5559,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_VALENZUELA',
+            to: 'PASIGFERRY1_VALENZUELA',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5577,10 +5580,11 @@ export const TRANSIT_LINES: TransitLine[] = [
       // VALENZUELA
       {
         id: 9,
-        code: 'PASIGFERRY_VALENZUELA',
+        code: 'PASIGFERRY1_VALENZUELA',
         name: 'Valenzuela',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_VALENZUELA.jpg',
+        imageLocal:
+          'assets/images/lines/pasigferry1/PASIGFERRY1_VALENZUELA.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Valenzuela.',
@@ -5589,8 +5593,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_VALENZUELA',
-            to: 'PASIGFERRY_CIRCUIT_MAKATI',
+            from: 'PASIGFERRY1_VALENZUELA',
+            to: 'PASIGFERRY1_CIRCUIT_MAKATI',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5608,8 +5612,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
           {
             // reverse bypass to lambingan
-            from: 'PASIGFERRY_VALENZUELA',
-            to: 'PASIGFERRY_LAMBINGAN',
+            from: 'PASIGFERRY1_VALENZUELA',
+            to: 'PASIGFERRY1_LAMBINGAN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5638,7 +5642,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_HULO',
+            to: 'PASIGFERRY1_HULO',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5659,10 +5663,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // HULO
       {
         id: 10,
-        code: 'PASIGFERRY_HULO',
+        code: 'PASIGFERRY1_HULO',
         name: 'Hulo',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_HULO.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_HULO.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Hulo.',
@@ -5671,8 +5675,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_HULO',
-            to: 'PASIGFERRY_VALENZUELA',
+            from: 'PASIGFERRY1_HULO',
+            to: 'PASIGFERRY1_VALENZUELA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5689,7 +5693,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_GUADALUPE',
+            to: 'PASIGFERRY1_GUADALUPE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5716,10 +5720,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // GUADALUPE
       {
         id: 11,
-        code: 'PASIGFERRY_GUADALUPE',
+        code: 'PASIGFERRY1_GUADALUPE',
         name: 'Guadalupe',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_GUADALUPE.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_GUADALUPE.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Guadalupe.',
@@ -5728,8 +5732,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_GUADALUPE',
-            to: 'PASIGFERRY_HULO',
+            from: 'PASIGFERRY1_GUADALUPE',
+            to: 'PASIGFERRY1_HULO',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5752,7 +5756,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_SAN_JOAQUIN',
+            to: 'PASIGFERRY1_SAN_JOAQUIN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5782,7 +5786,7 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
           // inter-line: walk to mrt3
           {
-            from: 'PASIGFERRY_GUADALUPE',
+            from: 'PASIGFERRY1_GUADALUPE',
             to: 'MRT3_GUADALUPE',
             // Approximate walking time in minutes is 10 mins
             weight: 10,
@@ -5829,15 +5833,37 @@ export const TRANSIT_LINES: TransitLine[] = [
               { lat: 14.566672857041965, lng: 121.04542599246548 }, // to mrt3 guadalupe
             ],
           },
+          {
+            // inter-line to PASIGFERRY2_GUADALUPE
+            from: 'PASIGFERRY1_GUADALUPE',
+            to: 'PASIGFERRY2_GUADALUPE',
+            weight: 1,
+            isOperational: true,
+            transferType: 'inter-line',
+            duration: 1,
+            transitMode: 'walk',
+            transferDescription: 'switch ferry lines in the station',
+            transferDistance: 'none',
+            accessibility: 'none',
+            additionalCost: 'none',
+            direction: 'none',
+            path: [
+              // from me
+              { lat: 14.568080870140964, lng: 121.04792888791931 },
+              // to PASIGFERRY2_GUADALUPE
+              { lat: 14.56805040041817, lng: 121.04798658500309 }, // to PASIGFERRY2_GUADALUPE
+            ],
+          },
         ],
       },
       // SAN JOAQUIN
       {
         id: 12,
-        code: 'PASIGFERRY_SAN_JOAQUIN',
+        code: 'PASIGFERRY1_SAN_JOAQUIN',
         name: 'San Joaquin',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_SAN_JOAQUIN.jpg',
+        imageLocal:
+          'assets/images/lines/pasigferry1/PASIGFERRY1_SAN_JOAQUIN.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near San Joaquin.',
@@ -5846,8 +5872,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_SAN_JOAQUIN',
-            to: 'PASIGFERRY_GUADALUPE',
+            from: 'PASIGFERRY1_SAN_JOAQUIN',
+            to: 'PASIGFERRY1_GUADALUPE',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5876,7 +5902,7 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            to: 'PASIGFERRY_BAMBANG',
+            to: 'PASIGFERRY1_BAMBANG',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5898,8 +5924,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
           {
             // bypass to kalawaan
-            from: 'PASIGFERRY_SAN_JOAQUIN',
-            to: 'PASIGFERRY_KALAWAAN',
+            from: 'PASIGFERRY1_SAN_JOAQUIN',
+            to: 'PASIGFERRY1_KALAWAAN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -5924,10 +5950,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // BAMBANG
       {
         id: 13,
-        code: 'PASIGFERRY_BAMBANG',
+        code: 'PASIGFERRY1_BAMBANG',
         name: 'Bambang',
         isOperational: false,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_BAMBANG.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_BAMBANG.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Bambang.',
@@ -5936,8 +5962,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_BAMBANG',
-            to: 'PASIGFERRY_SAN_JOAQUIN',
+            from: 'PASIGFERRY1_BAMBANG',
+            to: 'PASIGFERRY1_SAN_JOAQUIN',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5958,8 +5984,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            from: 'PASIGFERRY_BAMBANG',
-            to: 'PASIGFERRY_KALAWAAN',
+            from: 'PASIGFERRY1_BAMBANG',
+            to: 'PASIGFERRY1_KALAWAAN',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -5976,10 +6002,10 @@ export const TRANSIT_LINES: TransitLine[] = [
       // KALAWAAN
       {
         id: 14,
-        code: 'PASIGFERRY_KALAWAAN',
+        code: 'PASIGFERRY1_KALAWAAN',
         name: 'Kalawaan',
         isOperational: true,
-        imageLocal: 'assets/images/lines/pasigferry/PASIGFERRY_KALAWAAN.jpg',
+        imageLocal: 'assets/images/lines/pasigferry1/PASIGFERRY1_KALAWAAN.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Kalawaan.',
@@ -5988,8 +6014,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_KALAWAAN',
-            to: 'PASIGFERRY_BAMBANG',
+            from: 'PASIGFERRY1_KALAWAAN',
+            to: 'PASIGFERRY1_BAMBANG',
             weight: 5,
             isOperational: false,
             transferType: 'inter-station',
@@ -6003,8 +6029,8 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
           {
             // reverse direction bypass to san joaquin
-            from: 'PASIGFERRY_KALAWAAN',
-            to: 'PASIGFERRY_SAN_JOAQUIN',
+            from: 'PASIGFERRY1_KALAWAAN',
+            to: 'PASIGFERRY1_SAN_JOAQUIN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -6025,8 +6051,8 @@ export const TRANSIT_LINES: TransitLine[] = [
             ],
           },
           {
-            from: 'PASIGFERRY_KALAWAAN',
-            to: 'PASIGFERRY_PINAGBUHATAN',
+            from: 'PASIGFERRY1_KALAWAAN',
+            to: 'PASIGFERRY1_PINAGBUHATAN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -6069,11 +6095,11 @@ export const TRANSIT_LINES: TransitLine[] = [
       // PINAGBUHATAN
       {
         id: 15,
-        code: 'PASIGFERRY_PINAGBUHATAN',
+        code: 'PASIGFERRY1_PINAGBUHATAN',
         name: 'Pinagbuhatan',
         isOperational: true,
         imageLocal:
-          'assets/images/lines/pasigferry/PASIGFERRY_PINAGBUHATAN.jpg',
+          'assets/images/lines/pasigferry1/PASIGFERRY1_PINAGBUHATAN.jpg',
         image: '',
         imageAttributionHtml: '',
         description: 'Located near Pinagbuhatan.',
@@ -6082,8 +6108,8 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             // reverse direction
-            from: 'PASIGFERRY_PINAGBUHATAN',
-            to: 'PASIGFERRY_KALAWAAN',
+            from: 'PASIGFERRY1_PINAGBUHATAN',
+            to: 'PASIGFERRY1_KALAWAAN',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
@@ -6123,6 +6149,245 @@ export const TRANSIT_LINES: TransitLine[] = [
           },
         ],
       },
+    ],
+  },
+  // PASIG RIVER FERRY SERVICE LINE2
+  {
+    name: 'Pasig Ferry 2',
+    longName: 'Pasig River Ferry Service - Line 2',
+    code: 'PASIGFERRY2',
+    color: 'teal',
+    bgColor: 'teal',
+    textColor: 'white',
+    stationActiveIcon:
+      'assets/icons/pasigferry2/station-active-pasigferry2.png',
+    stationInactiveIcon:
+      'assets/icons/pasigferry2/station-inactive-pasigferry2.png',
+    stationActiveIcon_Min:
+      'assets/icons/pasigferry2/station-active-min-pasigferry2.png',
+    stationInactiveIcon_Min:
+      'assets/icons/pasigferry2/station-inactive-min-pasigferry2.png',
+    stations: [
+      // GUADALUPE
+      {
+        id: 1,
+        code: 'PASIGFERRY2_GUADALUPE',
+        name: 'Guadalupe',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry2/PASIGFERRY2_GUADALUPE.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Guadalupe.',
+        // 14.56805040041817, 121.04798658500309
+        coordinates: { lat: 14.56805040041817, lng: 121.04798658500309 }, // Guadalupe Station
+        edges: [
+          {
+            // inter-line to PASIGFERRY1_GUADALUPE
+            from: 'PASIGFERRY2_GUADALUPE',
+            to: 'PASIGFERRY1_GUADALUPE',
+            weight: 1,
+            isOperational: true,
+            transferType: 'inter-line',
+            duration: 1,
+            transitMode: 'walk',
+            transferDescription: 'switch ferry lines in the station',
+            transferDistance: 'none',
+            accessibility: 'none',
+            additionalCost: 'none',
+            direction: 'none',
+            path: [
+              // from me
+              { lat: 14.56805040041817, lng: 121.04798658500309 }, // from me
+              // to PASIGFERRY1_GUADALUPE
+              { lat: 14.568080870140964, lng: 121.04792888791931 }, // to PASIGFERRY1_GUADALUPE
+            ],
+          },
+          {
+            to: 'PASIGFERRY2_MAYBUNGA',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // from me
+              { lat: 14.56805040041817, lng: 121.04798658500309 }, // from me
+              // 14.568228815665003, 121.04800969669098
+              { lat: 14.568228815665003, lng: 121.04800969669098 }, // sub
+              // 14.568365453841505, 121.04823874996902
+              { lat: 14.568365453841505, lng: 121.04823874996902 }, // sub
+              // 14.56847368889803, 121.04869168727234
+              { lat: 14.56847368889803, lng: 121.04869168727234 }, // sub
+              // 14.56853526800186, 121.04949380635729
+              { lat: 14.56853526800186, lng: 121.04949380635729 }, // sub
+              // 14.568379434838032, 121.05061845751274
+              { lat: 14.568379434838032, lng: 121.05061845751274 }, // sub
+              // 14.567746271116587, 121.05189014380741
+              { lat: 14.567746271116587, lng: 121.05189014380741 }, // sub
+              // 14.565947493088537, 121.05484181634972
+              { lat: 14.565947493088537, lng: 121.05484181634972 }, // sub
+              // 14.565092044693124, 121.05837738421391
+              { lat: 14.565092044693124, lng: 121.05837738421391 }, // sub
+              // 14.564084635760514, 121.06009494031504
+              { lat: 14.564084635760514, lng: 121.06009494031504 }, // sub
+              // 14.561859664373811, 121.06250867923742
+              { lat: 14.561859664373811, lng: 121.06250867923742 }, // sub
+              // 14.561537064708505, 121.06306038681534
+              { lat: 14.561537064708505, lng: 121.06306038681534 }, // sub
+              // 14.560880689025247, 121.06562353285089
+              { lat: 14.560880689025247, lng: 121.06562353285089 }, // sub
+              // 14.560326943005924, 121.0664590587988
+              { lat: 14.560326943005924, lng: 121.0664590587988 }, // sub
+              // 14.558659228773937, 121.06737627341712
+              { lat: 14.558659228773937, lng: 121.06737627341712 }, // sub
+              // 14.558235906083176, 121.06952638583144
+              { lat: 14.558235906083176, lng: 121.06952638583144 }, // sub
+              // 14.559435863338564, 121.07173939283547
+              { lat: 14.559435863338564, lng: 121.07173939283547 }, // sub
+              // 14.560883330500518, 121.07259028307777
+              { lat: 14.560883330500518, lng: 121.07259028307777 }, // sub
+              // 14.56278993446142, 121.07307227397654
+              { lat: 14.56278993446142, lng: 121.07307227397654 }, // sub
+              // 14.568159949830925, 121.07378533329005
+              { lat: 14.568159949830925, lng: 121.07378533329005 }, // sub
+              // 14.572845327115163, 121.07514740422322
+              { lat: 14.572845327115163, lng: 121.07514740422322 }, // sub
+              // 14.57513201751074, 121.0769432217343
+              { lat: 14.57513201751074, lng: 121.0769432217343 }, // sub
+              // 14.577345148272574, 121.07964860713393
+              { lat: 14.577345148272574, lng: 121.07964860713393 }, // sub
+              // 14.578518706157249, 121.08077085838514
+              { lat: 14.578518706157249, lng: 121.08077085838514 }, // sub
+              // 14.578597110425857, 121.08098945657999
+              { lat: 14.578597110425857, lng: 121.08098945657999 }, // sub
+              // 14.578646641944475, 121.08119080955002
+              { lat: 14.578646641944475, lng: 121.08119080955002 }, // to maybunga
+            ],
+          },
+        ],
+      },
+      // Caniogan (defunct)
+      // Maybunga
+      {
+        id: 3,
+        code: 'PASIGFERRY2_MAYBUNGA',
+        name: 'Maybunga',
+        isOperational: true,
+        imageLocal: 'assets/images/lines/pasigferry2/PASIGFERRY2_MAYBUNGA.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Maybunga.',
+        // 14.578646641944475, 121.08119080955002
+        coordinates: { lat: 14.578646641944475, lng: 121.08119080955002 }, // Maybunga Station
+        edges: [
+          {
+            to: 'PASIGFERRY2_GUADALUPE',
+            weight: 5,
+            isOperational: true,
+            transferType: 'inter-station',
+            duration: 5,
+            path: [
+              // reverse path
+              // 14.578646641944475, 121.08119080955002
+              { lat: 14.578646641944475, lng: 121.08119080955002 }, // from me
+              // 14.578597110425857, 121.08098945657999
+              { lat: 14.578597110425857, lng: 121.08098945657999 }, // sub
+              // 14.578518706157249, 121.08077085838514
+              { lat: 14.578518706157249, lng: 121.08077085838514 }, // sub
+              // 14.577345148272574, 121.07964860713393
+              { lat: 14.577345148272574, lng: 121.07964860713393 }, // sub
+              // 14.57513201751074, 121.0769432217343
+              { lat: 14.57513201751074, lng: 121.0769432217343 }, // sub
+              // 14.572845327115163, 121.07514740422322
+              { lat: 14.572845327115163, lng: 121.07514740422322 }, // sub
+              // 14.568159949830925, 121.07378533329005
+              { lat: 14.568159949830925, lng: 121.07378533329005 }, // sub
+              // 14.56278993446142, 121.07307227397654
+              { lat: 14.56278993446142, lng: 121.07307227397654 }, // sub
+              // 14.560883330500518, 121.07259028307777
+              { lat: 14.560883330500518, lng: 121.07259028307777 }, // sub
+              // 14.559435863338564, 121.07173939283547
+              { lat: 14.559435863338564, lng: 121.07173939283547 }, // sub
+              // 14.558235906083176, 121.06952638583144
+              { lat: 14.558235906083176, lng: 121.06952638583144 }, // sub
+              // 14.558659228773937, 121.06737627341712
+              { lat: 14.558659228773937, lng: 121.06737627341712 }, // sub
+              // 14.560326943005924, 121.0664590587988
+              { lat: 14.560326943005924, lng: 121.0664590587988 }, // sub
+              // 14.560880689025247, 121.06562353285089
+              { lat: 14.560880689025247, lng: 121.06562353285089 }, // sub
+              // 14.561537064708505, 121.06306038681534
+              { lat: 14.561537064708505, lng: 121.06306038681534 }, // sub
+              // 14.561859664373811, 121.06250867923742
+              { lat: 14.561859664373811, lng: 121.06250867923742 }, // sub
+              // 14.564084635760514, 121.06009494031504
+              { lat: 14.564084635760514, lng: 121.06009494031504 }, // sub
+              // 14.565092044693124, 121.05837738421391
+              { lat: 14.565092044693124, lng: 121.05837738421391 }, // sub
+              // 14.565947493088537, 121.05484181634972
+              { lat: 14.565947493088537, lng: 121.05484181634972 }, // sub
+              // 14.567746271116587, 121.05189014380741
+              { lat: 14.567746271116587, lng: 121.05189014380741 }, // sub
+              // 14.568379434838032, 121.05061845751274
+              { lat: 14.568379434838032, lng: 121.05061845751274 }, // sub
+              // 14.56853526800186, 121.04949380635729
+              { lat: 14.56853526800186, lng: 121.04949380635729 }, // sub
+              // 14.56847368889803, 121.04869168727234
+              { lat: 14.56847368889803, lng: 121.04869168727234 }, // sub
+              // 14.568365453841505, 121.04823874996902
+              { lat: 14.568365453841505, lng: 121.04823874996902 }, // sub
+              // 14.568228815665003, 121.04800969669098
+              { lat: 14.568228815665003, lng: 121.04800969669098 }, // sub
+              { lat: 14.56805040041817, lng: 121.04798658500309 }, // to prev
+            ],
+          },
+        ],
+      },
+      // Bridgetowne
+      {
+        id: 4,
+        code: 'PASIGFERRY2_BRIDGETOWNE',
+        name: 'Bridgetowne',
+        isOperational: false,
+        imageLocal:
+          'assets/images/lines/pasigferry2/PASIGFERRY2_BRIDGETOWNE.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Bridgetowne.',
+        // 14.592882895741923, 121.08282887253276
+        coordinates: { lat: 14.592882895741923, lng: 121.08282887253276 }, // Bridgetowne Station
+        edges: [],
+      },
+      // Eastwood (defunct)
+      {
+        id: 5,
+        code: 'PASIGFERRY2_EASTWOOD',
+        name: 'Eastwood',
+        isOperational: false,
+        imageLocal: 'assets/images/lines/pasigferry2/PASIGFERRY2_EASTWOOD.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Eastwood.',
+        // 14.61055799823564, 121.08193447429073
+        coordinates: { lat: 14.61055799823564, lng: 121.08193447429073 }, // Eastwood Station
+        edges: [],
+      },
+      // Marcos Bridge (defunct)
+      // Riverbanks
+      {
+        id: 7,
+        code: 'PASIGFERRY2_RIVERBANKS',
+        name: 'Riverbanks',
+        isOperational: false,
+        imageLocal:
+          'assets/images/lines/pasigferry2/PASIGFERRY2_RIVERBANKS.jpg',
+        image: '',
+        imageAttributionHtml: '',
+        description: 'Located near Riverbanks.',
+        // 14.628098275344396, 121.08222118620708
+        coordinates: { lat: 14.628098275344396, lng: 121.08222118620708 }, // Riverbanks Station
+        edges: [],
+      },
+      // STA ELENA (defunct)
     ],
   },
   // Add more transit lines as needed
