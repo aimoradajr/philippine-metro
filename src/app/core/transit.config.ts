@@ -5100,7 +5100,7 @@ export const TRANSIT_LINES: TransitLine[] = [
         edges: [
           {
             from: 'PASIGFERRY_LAWTON',
-            to: 'ESCOLTA',
+            to: 'PASIGFERRY_ESCOLTA',
             weight: 5,
             isOperational: true,
             transferType: 'inter-station',
